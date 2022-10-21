@@ -1,37 +1,58 @@
 import pygame
+from settings import *
 
-class Jogador:
-    def init(self, x, y, cor, tamanho: list, pilha: list):
-        self.x = x
-        self.y = y
-        self.cor = cor
-        self.tamanho = tamanho
-        self.pilha = pilha
-        
-    def desenhar(self, tela):
-        pygame.draw.rect(tela, self.cor, (self.x, self.y, self.tamanho[0], self.tamanho[1]))
+class Jogador(pygame.sprite.Sprite):
+    def __init__(self, pos, groups, obstacle_sprites):
+        super().__init__(groups)
+        self.image = pygame.image.load('tiles/player.png').convert_alpha()
+        self.rect = self.image.get_rect(topleft = pos)
+        self.direction = pygame.math.Vector2()
+        self.speed = 5
+        self.obstacle_sprites = obstacle_sprites
 
-    def movimentar(self):
+    def input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            self.x -= 0.5
-        if keys[pygame.K_RIGHT]:
-            self.x += 0.5
         if keys[pygame.K_UP]:
-            self.y -= 0.5
-        if keys[pygame.K_DOWN]:
-            self.y += 0.5
-        #Movimentação do jogador está diferente na diagonal do que na horizontal e vertical (0.5 e 0.7)
-        if keys[pygame.K_LEFT] and keys[pygame.K_UP]:
-            #Ainda está muito rápido
-            self.x -= 0.05
-            self.y -= 0.05
-        if keys[pygame.K_LEFT] and keys[pygame.K_DOWN]:
-            self.x -= 0.05
-            self.y += 0.05
-        if keys[pygame.K_RIGHT] and keys[pygame.K_UP]:
-            self.x += 0.05
-            self.y -= 0.05
-        if keys[pygame.K_RIGHT] and keys[pygame.K_DOWN]:
-            self.x += 0.05
-            self.y += 0.05
+            self.direction.y = -1
+        elif keys[pygame.K_DOWN]:
+            self.direction.y = 1
+        else:
+            self.direction.y = 0
+        if keys[pygame.K_RIGHT]:
+            self.direction.x = 1
+        elif keys[pygame.K_LEFT]:
+            self.direction.x = -1
+        else:
+            self.direction.x = 0
+    
+    def move(self, speed):
+        if self.direction.magnitude() != 0:
+            self.direction.normalize()
+        self.rect.x += self.direction.x * speed
+        self.collision('horizontal')
+        self.rect.y += self.direction.y * speed
+
+        #self.react.center += self.direction * speed
+
+    def update(self):
+        self.input()
+        self.move(self.speed)
+    
+    def collision(self, direction):
+        if direction == 'horizontal':
+            for sprite in self.obstacle_sprites:
+                if sprite.rect.colliderect(self.rect):
+                    if self.direction.x > 0: # Se mover para a direita
+                        self.rect.right = sprite.rect.left
+                    if self.direction.x < 0: # Se mover para a esquerda
+                        self.rect.left = sprite.rect.right
+
+        if direction == 'vertical':
+            for sprite in self.obstacle_sprites:
+                if sprite.rect.colliderect(self.rect):
+                    if self.direction.y > 0: # Se mover para baixo
+                        self.rect.bottom = sprite.rect.top
+                    if self.direction.y < 0: # Se mover para cima
+                        self.rect.top = sprite.rect.bottom
+                
+    
