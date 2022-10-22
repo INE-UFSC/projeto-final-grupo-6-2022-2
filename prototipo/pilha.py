@@ -3,7 +3,7 @@ import pygame
 class Pilha:
     def __init__(self, nivel, acabou = False, usando = False, tempo_restante = 10, tamanho = [100, 20], x = 0, y = 0):
         super(Pilha, self).__init__()
-        self.image = pygame.image.load("sprites/pilha.png").convert_alpha()
+        self.image = pygame.image.load("prototipo/tiles/pilha.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.nivel = nivel
