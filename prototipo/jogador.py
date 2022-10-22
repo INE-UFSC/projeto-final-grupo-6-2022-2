@@ -30,6 +30,25 @@ class Jogador(pygame.sprite.Sprite):
             self.direction.x = -1
         else:
             self.direction.x = 0
+        
+        if keys[pygame.K_1]:
+            self.__inventory.use_item(1)
+        if keys[pygame.K_2]:
+            self.__inventory.use_item(2)
+        if keys[pygame.K_3]:
+            self.__inventory.use_item(3)
+        if keys[pygame.K_4]:
+            self.__inventory.use_item(4)
+        if keys[pygame.K_5]:
+            self.__inventory.use_item(5)
+        if keys[pygame.K_6]:
+            self.__inventory.use_item(6)
+        if keys[pygame.K_7]:
+            self.__inventory.use_item(7)
+        if keys[pygame.K_8]:
+            self.__inventory.use_item(8)
+        if keys[pygame.K_9]:
+            self.__inventory.use_item(9)
     
     def move(self, speed):
         if self.direction.magnitude() != 0:
@@ -60,7 +79,8 @@ class Jogador(pygame.sprite.Sprite):
                     add = self.__inventory.add_item(item)
                     if add:
                         item.exclui()
-        
+                        print(self.__inventory.getItemList())
+
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
@@ -73,5 +93,6 @@ class Jogador(pygame.sprite.Sprite):
                 if item.hitbox.colliderect(self.hitbox):
                     add = self.__inventory.add_item(item)
                     if add:
+                        print(self.__inventory.getItemList())
                         item.exclui()
     
