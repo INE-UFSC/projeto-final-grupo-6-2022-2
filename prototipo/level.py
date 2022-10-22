@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from tile import Tile
 from jogador import Jogador
+from item import *
 
 class Level:
     def __init__(self):
@@ -11,6 +12,7 @@ class Level:
         # Cria grupos de sprites
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+        self.itens_sprites = []
         self.create_map()
     
     def create_map(self):
@@ -20,9 +22,13 @@ class Level:
                 y = row_index * TILESIZE
                 if col == 'x':
                     Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
+                elif col == 'b':
+                    self.itens_sprites.append(Item(x,y, 'prototipo/tiles/pilha.png', [self.visible_sprites]))
                 elif col == 'p':
-                    self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites)
-
+                    self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
+                
+                
+                    
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.visible_sprites.custom_draw(self.jogador)
@@ -46,4 +52,3 @@ class YSortCameraGroup(pygame.sprite.Group):
         for sprite in self.sprites():
             offset_pos = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_pos)
-
