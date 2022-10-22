@@ -18,6 +18,3 @@ class Inventory:
                 self.__item_list.insert(pos, item)
                 return True
         return False
-    
-item = [None]*9
-print(item)
