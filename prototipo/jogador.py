@@ -71,7 +71,7 @@ class Jogador(pygame.sprite.Sprite):
             
             for item in self.itens_sprites:
                 if item.hitbox.colliderect(self.hitbox):
-                    self.__inventory.add_item(item)
+                    add = self.__inventory.add_item(item)
                 if add:
                         item.exclui()
     

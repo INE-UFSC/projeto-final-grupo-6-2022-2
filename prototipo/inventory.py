@@ -17,3 +17,6 @@ class Inventory:
             if item == None:
                 self.__item_list.insert(pos, item)
         return True
+    
+item = [None]*9
+print(item)
