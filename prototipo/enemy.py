@@ -9,7 +9,10 @@ class Enemy(Character):
         self.__awake = False
 
     @abstractmethod
-    def spawn(self):
+    def spawn(self, pos):
         pass
 
-
+    @abstractmethod
+    def reactToLight(self, light_pos):
+        pass
+    
