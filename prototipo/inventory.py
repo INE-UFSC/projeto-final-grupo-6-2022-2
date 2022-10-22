@@ -11,9 +11,7 @@ class Inventory:
     def use_item(self, id):
         if isinstance(self.__item_list[id-1], Item):
             self.__item_list[id-1].usar()
-            print(self.__item_list)
             self.__item_list[id-1] = None
-            print(self.__item_list)
     
     def add_item(self, item):
         for pos, espaco in enumerate(self.__item_list):

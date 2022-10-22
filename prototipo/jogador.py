@@ -79,7 +79,6 @@ class Jogador(pygame.sprite.Sprite):
                     add = self.__inventory.add_item(item)
                     if add:
                         item.exclui()
-                        print(self.__inventory.getItemList())
 
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
@@ -93,6 +92,5 @@ class Jogador(pygame.sprite.Sprite):
                 if item.hitbox.colliderect(self.hitbox):
                     add = self.__inventory.add_item(item)
                     if add:
-                        print(self.__inventory.getItemList())
                         item.exclui()
     
