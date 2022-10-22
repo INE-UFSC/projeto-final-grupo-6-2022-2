@@ -15,6 +15,6 @@ class Inventory:
     def add_item(self, item):
         for pos,item in enumerate(self.__item_list):
             if item == None:
-                self.__item_list.insert(pos, item)
+                self.__item_list[pos] = item
                 return True
         return False
