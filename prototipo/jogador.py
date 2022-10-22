@@ -31,6 +31,8 @@ class Jogador(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * speed
         self.collision('horizontal')
         self.rect.y += self.direction.y * speed
+        self.collision('vertical')
+        
 
         #self.react.center += self.direction * speed
 
