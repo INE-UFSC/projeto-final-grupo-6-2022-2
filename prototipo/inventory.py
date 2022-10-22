@@ -3,7 +3,7 @@ from item import Item
 
 class Inventory:
     def __init__(self):
-        self.__item_list = []
+        self.__item_list = [None]*9
     
     def getItemList(self):
         return self.__item_list
@@ -16,7 +16,8 @@ class Inventory:
         for pos,item in enumerate(self.__item_list):
             if item == None:
                 self.__item_list.insert(pos, item)
-        return True
+                return True
+        return False
     
 item = [None]*9
 print(item)
