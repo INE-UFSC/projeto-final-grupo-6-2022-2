@@ -1,4 +1,5 @@
 import pygame
+from inventory import Inventory
 from settings import *
 
 class Jogador(pygame.sprite.Sprite):
@@ -13,6 +14,8 @@ class Jogador(pygame.sprite.Sprite):
         self.obstacle_sprites = obstacle_sprites
         self.itens_sprites = itens_sprites
 
+        self.__inventory = Inventory()
+        
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
@@ -54,7 +57,9 @@ class Jogador(pygame.sprite.Sprite):
             
             for item in self.itens_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
-                    item.usar(self)
+                    add = self.__inventory.add_item(item)
+                    if add:
+                        item.exclui()
         
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
@@ -66,6 +71,7 @@ class Jogador(pygame.sprite.Sprite):
             
             for item in self.itens_sprites:
                 if item.hitbox.colliderect(self.hitbox):
-                    item.usar(self)
-                
+                    self.__inventory.add_item(item)
+                if add:
+                        item.exclui()
     

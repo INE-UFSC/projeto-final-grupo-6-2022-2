@@ -22,8 +22,6 @@ class Level:
                 y = row_index * TILESIZE
                 if col == 'x':
                     Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
-                elif col == 'b':
-                    self.itens_sprites.append(Item(x,y, 'prototipo/tiles/pilha.png', [self.visible_sprites]))
                 elif col == 'p':
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
                 
