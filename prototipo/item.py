@@ -13,9 +13,9 @@ class Item(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0,0)
         self.posicao = [self.x, self.y]
     
-    def usar(self, jogador):
+    def usar(self):
         #Só teste. Essa funcão aqui deve ser um abstract method
-        jogador.pilha = Pilha(100, False, False, 10, [100, 20], 0, 0)
+        print("usado")
         self.kill()
         
     def exclui(self):
