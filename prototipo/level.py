@@ -14,7 +14,7 @@ class Level:
         self.obstacle_sprites = pygame.sprite.Group()
         self.itens_sprites = []
         self.create_map()
-    
+
     def create_map(self):
         for row_index, row in enumerate(WORLD_MAP):
             for col_index, col in enumerate(row):
@@ -24,9 +24,9 @@ class Level:
                     Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
                 elif col == 'p':
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
-                
-                
-                    
+                elif col == 'b':
+                    self.itens_sprites.append(Item(x,y,'prototipo/tiles/pilha.png', [self.visible_sprites]))
+        
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.visible_sprites.custom_draw(self.jogador)
@@ -41,7 +41,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.half_height = self.display_surface.get_size()[1] / 2
         self.offset = pygame.math.Vector2()
 
-    
+
     def custom_draw(self, jogador):
         # Pegando offset
         self.offset.x = jogador.rect.centerx - self.half_width
