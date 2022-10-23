@@ -1,9 +1,18 @@
 import pygame
 from item import Item
 
-class Inventory:
+class Inventory():
     def __init__(self):
         self.__item_list = [None]*9
+    
+    def draw(self):
+        surface = pygame.display.get_surface()
+        self.image = pygame.image.load('prototipo/tiles/inventário.png').convert_alpha()
+        surface.blit(self.image, (500,650))
+        
+        for pos,item in enumerate(self.__item_list):
+            if isinstance(item, Item):
+                item.draw(500, 650, pos, surface)
     
     def getItemList(self):
         return self.__item_list

@@ -19,4 +19,8 @@ class Item(pygame.sprite.Sprite):
         self.kill()
         
     def exclui(self):
+        
         self.kill()
+
+    def draw(self, x, y, pos, surface):
+        surface.blit(self.image, (50*pos+x, y))

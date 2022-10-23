@@ -15,7 +15,10 @@ class Jogador(pygame.sprite.Sprite):
         self.itens_sprites = itens_sprites
 
         self.__inventory = Inventory()
-        
+    
+    def getInventory(self):
+        return self.__inventory
+
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
