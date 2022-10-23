@@ -1,5 +1,6 @@
 import pygame
 
+#Deve ser uma classe Abstrata
 class Item(pygame.sprite.Sprite):
     def  __init__(self, x, y, sprite,grupo):
         pygame.sprite.Sprite.__init__(self)

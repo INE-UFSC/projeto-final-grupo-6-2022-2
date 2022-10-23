@@ -4,6 +4,7 @@ from tile import Tile
 from jogador import Jogador
 from item import *
 from key import Key
+from door import Door
 
 
 class Level:
@@ -11,15 +12,16 @@ class Level:
         
         # Pegar a tela
         self.selected_room = 0
+        self.key = ''
         self.rooms = [ROOM1, ROOM2]
-        self.visible_sprites = YSortCameraGroup()
-        self.obstacle_sprites = pygame.sprite.Group()
-        self.itens_sprites = []
         self.display_surface = pygame.display.get_surface()
         self.create_map()
         # Cria grupos de sprites
 
     def create_map(self):
+        self.visible_sprites = YSortCameraGroup()
+        self.obstacle_sprites = pygame.sprite.Group()
+        self.itens_sprites = []
         for row_index, row in enumerate(self.rooms[self.selected_room]):
             for col_index, col in enumerate(row):
                 x = col_index * TILESIZE
@@ -31,9 +33,11 @@ class Level:
                 elif col == 'b':
                     self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
                 elif col == 'l':
-                    self.itens_sprites.append(Item(x,y,'tiles/porta.png', [self.visible_sprites]))
+                    Door((x,y),[self.visible_sprites,self.obstacle_sprites], 'porta')
                 elif col == 'k':
-                    self.itens_sprites.append(Key(x,y,'tiles/key.png', [self.visible_sprites]))
+                    key = Key(x,y,'tiles/key.png', [self.visible_sprites])
+                    self.itens_sprites.append(key)
+                    self.key = key
         
                     
     def run(self):
@@ -41,6 +45,24 @@ class Level:
         self.visible_sprites.custom_draw(self.jogador)
         self.jogador.draw()
         self.visible_sprites.update()
+        self.chave()
+        
+        
+    def chave(self):
+        inventario = self.jogador.getInventory().getItemList()
+        if self.key in inventario:
+            print("tem chave")
+            inventario.remove(self.key)
+            self.key = ''
+            print("Agora não tem mais")
+            """for item in self.obstacle_sprites:
+                if item is Door:
+                    print('sim, é uma porta')
+                    item.kill()
+                    self.obstacle_sprites.remove(item)
+                    self.visible_sprites.remove(item)"""
+            self.selected_room += 1
+            self.create_map()
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
