@@ -7,11 +7,11 @@ class Inventory():
     
     def draw(self, surface):
         self.image = pygame.image.load('tiles/inventário.png').convert_alpha()
-        surface.blit(self.image, (500,650))
+        surface.blit(self.image, (375,650))
         
         for pos,item in enumerate(self.__item_list):
             if isinstance(item, Item):
-                item.draw(500, 650, pos, surface)
+                item.draw(375, 650, pos, surface)
     
     def getItemList(self):
         return self.__item_list
