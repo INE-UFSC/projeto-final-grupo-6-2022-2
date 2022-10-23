@@ -6,7 +6,7 @@ class Inventory():
         self.__item_list = [None]*9
     
     def draw(self, surface):
-        self.image = pygame.image.load('prototipo/tiles/inventário.png').convert_alpha()
+        self.image = pygame.image.load('tiles/inventário.png').convert_alpha()
         surface.blit(self.image, (500,650))
         
         for pos,item in enumerate(self.__item_list):

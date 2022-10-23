@@ -9,15 +9,17 @@ class Level:
     def __init__(self):
         
         # Pegar a tela
-        self.display_surface = pygame.display.get_surface()
-        # Cria grupos de sprites
+        self.selected_room = 0
+        self.rooms = [ROOM1, ROOM2]
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
         self.itens_sprites = []
+        self.display_surface = pygame.display.get_surface()
         self.create_map()
+        # Cria grupos de sprites
 
     def create_map(self):
-        for row_index, row in enumerate(WORLD_MAP):
+        for row_index, row in enumerate(self.rooms[self.selected_room]):
             for col_index, col in enumerate(row):
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
@@ -26,7 +28,7 @@ class Level:
                 elif col == 'p':
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
                 elif col == 'b':
-                    self.itens_sprites.append(Item(x,y,'prototipo/tiles/pilha.png', [self.visible_sprites]))
+                    self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
         
     def run(self):
         # Atualizar e desenhar sprites/jogo

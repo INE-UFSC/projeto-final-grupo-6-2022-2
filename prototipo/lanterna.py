@@ -12,7 +12,7 @@ class Lanterna:
         self.status = status
         self.pilha = pilha
         self.tempo_ligada = tempo_ligada
-        self.image = pygame.image.load('prototipo/tiles/lanterna.png')
+        self.image = pygame.image.load('tiles/lanterna.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.hitbox = self.rect.inflate(0,-26)
      
