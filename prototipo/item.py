@@ -1,5 +1,4 @@
 import pygame
-from pilha import Pilha
 
 class Item(pygame.sprite.Sprite):
     def  __init__(self, x, y, sprite,grupo):
@@ -23,4 +22,4 @@ class Item(pygame.sprite.Sprite):
         self.kill()
 
     def draw(self, x, y, pos, surface):
-        surface.blit(self.image, (50*pos+x, y))
+        surface.blit(self.image, (40*pos+x, y-7))

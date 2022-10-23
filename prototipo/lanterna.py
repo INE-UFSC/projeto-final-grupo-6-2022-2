@@ -4,7 +4,7 @@ from pilha import Pilha
 
 
 class Lanterna:
-    def __init__(self, x, y, cor, tamanho, status = False, pilha = Pilha(100), tempo_ligada = 0):
+    def __init__(self, x, y, cor, tamanho, group, status = False, pilha = None, tempo_ligada = 0):
         self.x = x
         self.y = y
         self.cor = cor
@@ -12,10 +12,11 @@ class Lanterna:
         self.status = status
         self.pilha = pilha
         self.tempo_ligada = tempo_ligada
-        
+        self.image = pygame.image.load('prototipo/tiles/lanterna.png')
+        self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.hitbox = self.rect.inflate(0,-26)
      
-    def lanterna(self, tela):
-        if self.status:
-            pygame.draw.rect(tela, self.cor, (jogador.x, jogador.y, self.tamanho[0], self.tamanho[1]))
+    def draw(self, pos, tela):
+        pygame.draw.rect(tela, self.cor, (pos[0], pos[1], self.tamanho[0], self.tamanho[1]))
 
 

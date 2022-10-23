@@ -5,8 +5,7 @@ class Inventory():
     def __init__(self):
         self.__item_list = [None]*9
     
-    def draw(self):
-        surface = pygame.display.get_surface()
+    def draw(self, surface):
         self.image = pygame.image.load('prototipo/tiles/inventário.png').convert_alpha()
         surface.blit(self.image, (500,650))
         

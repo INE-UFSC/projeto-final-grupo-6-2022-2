@@ -1,5 +1,6 @@
 import pygame
 from inventory import Inventory
+from lanterna import Lanterna
 from settings import *
 
 class Jogador(pygame.sprite.Sprite):
@@ -15,7 +16,8 @@ class Jogador(pygame.sprite.Sprite):
         self.itens_sprites = itens_sprites
 
         self.__inventory = Inventory()
-    
+        #self.__lanterna = Lanterna()
+
     def getInventory(self):
         return self.__inventory
 
@@ -62,7 +64,10 @@ class Jogador(pygame.sprite.Sprite):
         self.collision('vertical')
         self.rect.center = self.hitbox.center
 
-        
+    def draw(self):
+        surface = pygame.display.get_surface()
+        self.__inventory.draw(surface)
+        #self.__lanterna.draw(self.hitbox, surface)
 
     def update(self):
         self.input()
