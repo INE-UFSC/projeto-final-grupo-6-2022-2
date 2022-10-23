@@ -29,7 +29,10 @@ class Level:
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
                 elif col == 'b':
                     self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
+                elif col == 'l':
+                    self.itens_sprites.append(Item(x,y,'tiles/porta.png', [self.visible_sprites]))
         
+                    
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.visible_sprites.custom_draw(self.jogador)
