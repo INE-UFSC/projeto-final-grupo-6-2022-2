@@ -3,6 +3,7 @@ from settings import *
 from tile import Tile
 from jogador import Jogador
 from item import *
+from key import Key
 
 
 class Level:
@@ -24,13 +25,15 @@ class Level:
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col == 'x':
-                    Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
+                    Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'rock')
                 elif col == 'p':
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
                 elif col == 'b':
                     self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
                 elif col == 'l':
                     self.itens_sprites.append(Item(x,y,'tiles/porta.png', [self.visible_sprites]))
+                elif col == 'k':
+                    self.itens_sprites.append(Key(x,y,'tiles/key.png', [self.visible_sprites]))
         
                     
     def run(self):
