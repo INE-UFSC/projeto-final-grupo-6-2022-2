@@ -1,6 +1,7 @@
 import pygame
-from tile import Tile
+from item import Item
 
-class Door(Tile):
-    def __init__(self, pos, groups, tipo):
-        super().__init__(pos, groups, tipo)
+class Door(Item):
+    def  __init__(self, x, y, sprite,grupo):
+        super().__init__(x, y, sprite, grupo)
+    

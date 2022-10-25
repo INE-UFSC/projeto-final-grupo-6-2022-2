@@ -33,7 +33,9 @@ class Level:
                 elif col == 'b':
                     self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
                 elif col == 'l':
-                    Door((x,y),[self.visible_sprites,self.obstacle_sprites], 'porta')
+                    door = Door(x,y, 'tiles/porta.png', [self.visible_sprites,self.obstacle_sprites])
+                    self.door = door
+                    self.itens_sprites.append(door)
                 elif col == 'k':
                     key = Key(x,y,'tiles/key.png', [self.visible_sprites])
                     self.itens_sprites.append(key)
@@ -53,16 +55,13 @@ class Level:
         if self.key in inventario:
             print("tem chave")
             inventario.remove(self.key)
+            self.obstacle_sprites.remove(self.door)
             self.key = ''
-            print("Agora não tem mais")
-            """for item in self.obstacle_sprites:
-                if item is Door:
-                    print('sim, é uma porta')
-                    item.kill()
-                    self.obstacle_sprites.remove(item)
-                    self.visible_sprites.remove(item)"""
+        if self.door in inventario:
+            inventario.remove(self.door)
             self.selected_room += 1
             self.create_map()
+            
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
