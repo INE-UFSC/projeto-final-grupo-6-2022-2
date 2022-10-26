@@ -107,16 +107,6 @@ class Jogador(pygame.sprite.Sprite):
             if 'attack' in self.status:
                 self.status = self.status.replace('_attack','')
 
-    #classe Character(ABC)e
-    def move(self, speed):
-        if self.direction.magnitude() != 0:
-            self.direction.normalize()
-        self.hitbox.x += self.direction.x * speed
-        self.collision('horizontal')
-        self.hitbox.y += self.direction.y * speed
-        self.collision('vertical')
-        self.rect.center = self.hitbox.center
-
     def draw(self):
         surface = pygame.display.get_surface()
         self.__inventory.draw(surface)
