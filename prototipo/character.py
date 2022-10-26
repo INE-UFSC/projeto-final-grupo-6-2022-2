@@ -3,7 +3,7 @@ from math import sqrt
 import pygame
 
 
-class Character(ABC):
+class Character(ABC, pygame.sprite.Sprite):
 
     def __init__(self, health: int, pos: tuple, speed: int, sprite: str):
         self.__health = health
@@ -16,6 +16,15 @@ class Character(ABC):
         self.rect = self.image.get_rect(topleft = pos)
         # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
         self.hitbox = self.rect.inflate(0,-26)
+
+    def move(self, speed):
+        if self.direction.magnitude() != 0:
+            self.direction.normalize()
+        self.hitbox.x += self.direction.x * speed
+        self.collision('horizontal')
+        self.hitbox.y += self.direction.y * speed
+        self.collision('vertical')
+        self.rect.center = self.hitbox.center
 
     def getPos(self):
         return (self.__posx, self.__posy)
@@ -40,4 +49,8 @@ class Character(ABC):
 
     @abstractmethod
     def attack(self, receiver):
+        pass
+
+    @abstractmethod
+    def collision(self, direction):
         pass
