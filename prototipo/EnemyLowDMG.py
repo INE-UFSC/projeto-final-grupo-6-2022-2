@@ -28,25 +28,27 @@ class EnemyLowDMG(Enemy, pygame.sprite.Sprite):
         diffx = posx - self.__posx
         diffy = posy - self.__posy
         dist = sqrt(diffx**2 + diffy**2)
-    # DECISAO EM Y:
-        if diffy > 0:
-            self.direction.x = 1
-            self.status = 'down'
-        elif diffx == 0:
-            self.direction.x = 0
-        else:
-            self.direction.x = -1
-            self.status = 'up'
-    # DECISAO EM X:
-        if diffx > 0:
-            self.direction.x = 1
-            self.status = 'right'
-        elif diffx == 0:
-            self.direction.x = 0
-        else:
-            self.direction.x = -1
-            self.status = 'left'
-    # DETECCAO DO AUTO_ATAQUE:
-        if dist < self.__range:
-            self.attack(player)
+        # RANGE DA VISAO DO INIMIGO:
+        if dist < 100:
+        # DECISAO EM Y:
+            if diffy > 0:
+                self.direction.x = 1
+                self.status = 'down'
+            elif diffx == 0:
+                self.direction.x = 0
+            else:
+                self.direction.x = -1
+                self.status = 'up'
+        # DECISAO EM X:
+            if diffx > 0:
+                self.direction.x = 1
+                self.status = 'right'
+            elif diffx == 0:
+                self.direction.x = 0
+            else:
+                self.direction.x = -1
+                self.status = 'left'
+        # DETECCAO DO AUTO_ATAQUE:
+            if dist < self.__range:
+                self.attack(player)
     
