@@ -1,16 +1,17 @@
-from character import Character
+from enemy import Enemy
+from abc import ABC
 import pygame
 from math import sqrt
 
 
-class EnemyLowDMG(Character, pygame.sprite.Sprite):
+class EnemyLowDMG(Enemy, pygame.sprite.Sprite):
 
     # CONFERIR NECESSIDADE:
     __enemy_counter = 0
 
     # balancear os valores de vida e velocidade:
     def __init__(self, pos, sprite):
-        super().__init__(100, pos, 4, sprite)
+        super().__init__(100, pos, 4, sprite, 20)
         self.__range = 5
 
     # CONFERIR NECESSIDADE:
