@@ -107,6 +107,7 @@ class Jogador(pygame.sprite.Sprite):
             if 'attack' in self.status:
                 self.status = self.status.replace('_attack','')
 
+    #classe Character(ABC)e
     def move(self, speed):
         if self.direction.magnitude() != 0:
             self.direction.normalize()
@@ -121,6 +122,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__inventory.draw(surface)
         #self.__lanterna.draw(self.hitbox, surface)
 
+    #classe Character(ABC)
     def animate(self):
         animation = self.animations[self.status]
         #Loop de animação por frame
@@ -140,6 +142,7 @@ class Jogador(pygame.sprite.Sprite):
         self.animate()
         self.move(self.speed)
     
+    #classe Character(ABC)
     def collision(self, direction):
         if direction == 'horizontal':
             for sprite in self.obstacle_sprites:                
