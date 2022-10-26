@@ -4,9 +4,10 @@ from abc import abstractmethod
 
 class Enemy(Character):
 
-    def __init__(self, size: int, health: int, pos: tuple, speed: int, sprite: str, damage: int):
-        super().__init__(size, health, pos, speed, sprite)
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int):
+        super().__init__(health, pos, speed, sprite)
         self.__awake = False
+        self.__damage = damage
 
     @abstractmethod
     def spawn(self, pos):
