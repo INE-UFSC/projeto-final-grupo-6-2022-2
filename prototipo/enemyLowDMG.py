@@ -19,10 +19,11 @@ class EnemyLowDMG(Enemy, pygame.sprite.Sprite):
     def spawn(cls):
         cls.__enemy_counter += 1
 
+    # INACABADO:
     def die(self):
         self.kill()
 
-    # INACABADO
+    # INACABADO:
     def reactToLight(self, player):
         posx, posy = player.getPos()
         diffx = posx - self.__posx
