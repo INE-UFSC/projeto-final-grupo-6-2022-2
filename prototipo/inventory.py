@@ -1,17 +1,22 @@
 import pygame
 from item import Item
+from settings import HEIGTH, WIDTH
+import settings
 
 class Inventory():
     def __init__(self):
         self.__item_list = [None]*9
+        self.image = pygame.image.load('tiles/inventário.png').convert_alpha()
+        self.rect = self.image.get_rect()
+        self.x = (WIDTH-self.rect[2])/2
+        self.y = HEIGTH-70
     
     def draw(self, surface):
-        self.image = pygame.image.load('tiles/inventário.png').convert_alpha()
-        surface.blit(self.image, (375,650))
-        
+        surface.blit(self.image, (self.x, self.y))
+        valor = self.rect[2]/9
         for pos,item in enumerate(self.__item_list):
             if isinstance(item, Item):
-                item.draw(375, 650, pos, surface)
+                item.draw(self.x, self.y, valor, pos, surface)
     
     def getItemList(self):
         return self.__item_list

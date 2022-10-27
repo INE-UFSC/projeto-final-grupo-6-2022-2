@@ -22,5 +22,5 @@ class Item(pygame.sprite.Sprite):
         
         self.kill()
 
-    def draw(self, x, y, pos, surface):
-        surface.blit(self.image, (59*pos+x, y-4))
+    def draw(self, x, y, valor, pos, surface):
+        surface.blit(self.image, (valor*pos+x, y-4))
