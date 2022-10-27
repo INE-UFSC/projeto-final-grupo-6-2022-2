@@ -1,13 +1,13 @@
 import pygame
 from inventory import Inventory
 from lanterna import Lanterna
+from character import Character
 from settings import *
 from support import import_folder
 
-class Jogador(pygame.sprite.Sprite):
+class Jogador(Character):
     def __init__(self, pos, groups, obstacle_sprites, itens_sprites):
-        super().__init__(groups)
-        self.image = pygame.image.load('tiles/player.png').convert_alpha()
+        super().__init__(30,pos, 5, 'tiles/player.png', groups)
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
         # Grapihcs setup
@@ -16,7 +16,6 @@ class Jogador(pygame.sprite.Sprite):
         self.frame_index = 0
         self.animation_speed = 0.15
         self.direction = pygame.math.Vector2()
-        self.speed = 5
         self.obstacle_sprites = obstacle_sprites
         # Movimento
         self.attacking = False
@@ -130,7 +129,7 @@ class Jogador(pygame.sprite.Sprite):
         self.cooldowns()
         self.get_status()
         self.animate()
-        self.move(self.speed)
+        self.move(self.getSpeed())
     
     #classe Character(ABC)
     def collision(self, direction):
@@ -170,3 +169,10 @@ class Jogador(pygame.sprite.Sprite):
         if self.attacking:
             if current_time - self.attack_time > self.attack_cooldown:
                 self.attacking = False
+                
+    def attack(self):
+        pass
+    
+    def die(self):
+        pass
+

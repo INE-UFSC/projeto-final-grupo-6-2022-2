@@ -5,7 +5,8 @@ import pygame
 
 class Character(ABC, pygame.sprite.Sprite):
 
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str):
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, groups):
+        super().__init__(groups)
         self.__health = health
         self.__speed = speed
         self.__diagonal_speed = speed/sqrt(2)
@@ -26,6 +27,9 @@ class Character(ABC, pygame.sprite.Sprite):
         self.collision('vertical')
         self.rect.center = self.hitbox.center
 
+    def getSpeed(self):
+        return self.__speed
+    
     def getPos(self):
         return (self.__posx, self.__posy)
 
@@ -38,10 +42,6 @@ class Character(ABC, pygame.sprite.Sprite):
                 self.die()
             else:
                 self.__health -= damage
-
-    @abstractmethod
-    def move(self):
-        pass
 
     @abstractmethod
     def die(self):
