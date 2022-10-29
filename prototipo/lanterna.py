@@ -5,8 +5,8 @@ from pilha import Pilha
 
 class Lanterna:
     def __init__(self, x, y, cor, tamanho, group, status = False, pilha = None, tempo_ligada = 0):
-        self.x = x
-        self.y = y
+        self.__x = x
+        self.__y = y
         self.cor = cor
         self.tamanho = tamanho
         self.__status = status
@@ -16,7 +16,10 @@ class Lanterna:
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.hitbox = self.rect.inflate(0,-26)
      
-     
+    def setPos(self, x, y):
+        self.__x = x
+        self.__y = y
+    
     def getStatus(self):
         return self.__status
 
