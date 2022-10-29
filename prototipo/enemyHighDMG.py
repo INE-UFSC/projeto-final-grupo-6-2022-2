@@ -20,7 +20,7 @@ class EnemyHighDMG(Enemy):
         diffy = posy - self.__posy
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
-        if (dist < 20) and player.lanterna.getStatus():
+        if (dist < 20) and player.getLight().getStatus():
         # DECISAO EM Y:
             if diffy >= 0:
                 self.direction.x = -1

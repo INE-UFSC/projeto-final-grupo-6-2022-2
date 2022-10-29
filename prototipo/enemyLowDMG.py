@@ -30,7 +30,7 @@ class EnemyLowDMG(Enemy):
         diffy = posy - self.__posy
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA VISAO DO INIMIGO:
-        if dist < 100 and player.light.getStatus():
+        if dist < 100 and player.getLight().getStatus():
         # DECISAO EM Y:
             if diffy > 0:
                 self.direction.x = 1

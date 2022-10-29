@@ -169,6 +169,9 @@ class Jogador(Character):
         if self.attacking:
             if current_time - self.attack_time > self.attack_cooldown:
                 self.attacking = False
+
+    def getLight(self):
+        return self.__light
                 
     def attack(self):
         pass
