@@ -5,8 +5,8 @@ from math import sqrt
 
 class EnemyHighDMG(Enemy):
 
-    def __init__(self, pos, sprite):
-        super().__init__(500, pos, 3, sprite, 100)
+    def __init__(self, pos, sprite, groups):
+        super().__init__(500, pos, 3, sprite, 100, groups)
         self.__range = 5
 
     # INACABADO:

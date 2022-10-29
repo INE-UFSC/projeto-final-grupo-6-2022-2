@@ -10,8 +10,8 @@ class EnemyLowDMG(Enemy):
     __enemy_counter = 0
 
     # balancear os valores de vida e velocidade:
-    def __init__(self, pos, sprite):
-        super().__init__(100, pos, 4, sprite, 20)
+    def __init__(self, pos, sprite, groups):
+        super().__init__(100, pos, 4, sprite, 20, groups)
         self.__range = 5
 
     # CONFERIR NECESSIDADE:
