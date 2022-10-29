@@ -9,13 +9,20 @@ class Lanterna:
         self.y = y
         self.cor = cor
         self.tamanho = tamanho
-        self.status = status
+        self.__status = status
         self.pilha = pilha
         self.tempo_ligada = tempo_ligada
         self.image = pygame.image.load('tiles/lanterna.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.hitbox = self.rect.inflate(0,-26)
      
+     
+    def getStatus(self):
+        return self.__status
+
+    def setStatus(self, status: bool):
+        self.__status = status
+    
     def draw(self, pos, tela):
         pygame.draw.rect(tela, self.cor, (pos[0], pos[1], self.tamanho[0], self.tamanho[1]))
 
