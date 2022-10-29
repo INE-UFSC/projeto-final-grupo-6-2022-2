@@ -25,7 +25,7 @@ class Jogador(Character):
         self.itens_sprites = itens_sprites
 
         self.__inventory = Inventory()
-        #self.__lanterna = Lanterna()
+        self.__light = Lanterna()
 
 
     def import_player_assets(self):
