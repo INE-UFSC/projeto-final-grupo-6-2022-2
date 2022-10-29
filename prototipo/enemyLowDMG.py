@@ -4,7 +4,7 @@ import pygame
 from math import sqrt
 
 
-class EnemyLowDMG(Enemy, pygame.sprite.Sprite):
+class EnemyLowDMG(Enemy):
 
     # CONFERIR NECESSIDADE:
     __enemy_counter = 0
