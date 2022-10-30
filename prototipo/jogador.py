@@ -26,6 +26,10 @@ class Jogador(Character):
 
         self.__inventory = Inventory()
         self.__light = Lanterna()
+        self.__damage = 100
+
+    def attack(self, enemy):
+        enemy.receiveDamage(self.__damage)
 
 
     def import_player_assets(self):
@@ -172,10 +176,7 @@ class Jogador(Character):
 
     def getLight(self):
         return self.__light
-                
-    def attack(self):
-        pass
     
     def die(self):
         pass
-
+    
