@@ -9,6 +9,9 @@ class Enemy(Character):
         self.__awake = False
         self.__damage = damage
 
+    def attack(self, player):
+        player.receiveDamage(self.__damage)
+
     @abstractmethod
     def spawn(self, pos):
         pass
