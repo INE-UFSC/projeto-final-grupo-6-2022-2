@@ -21,6 +21,7 @@ class EnemyHighDMG(Enemy):
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
         if (dist < 20) and player.getLight().getStatus():
+            self.__awake = True
         # DECISAO EM Y:
             if diffy >= 0:
                 self.direction.x = -1
@@ -36,8 +37,8 @@ class EnemyHighDMG(Enemy):
                 self.direction.x = 1
                 self.status = 'right'
         # FORA DO RANGE DA LANTERNA:
-        else:
-            if dist < 100:
+        elif dist < 100:
+                self.__awake = True
             # DECISAO EM Y:
                 if diffy > 0:
                     self.direction.x = 1
@@ -56,6 +57,8 @@ class EnemyHighDMG(Enemy):
                 else:
                     self.direction.x = -1
                     self.status = 'left'
+        else:
+            self.__awake = False
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
         if dist < self.__range:
             self.attack(player)

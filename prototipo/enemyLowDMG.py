@@ -31,6 +31,7 @@ class EnemyLowDMG(Enemy):
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA VISAO DO INIMIGO:
         if dist < 100 and player.getLight().getStatus():
+            self.__awake = True
         # DECISAO EM Y:
             if diffy > 0:
                 self.direction.x = 1
@@ -52,4 +53,6 @@ class EnemyLowDMG(Enemy):
         # DETECCAO DO AUTO_ATAQUE:
             if dist < self.__range:
                 self.attack(player)
+        else: 
+            self.__awake = False
     
