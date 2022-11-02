@@ -19,7 +19,6 @@ class Item(pygame.sprite.Sprite):
         self.kill()
         
     def exclui(self):
-        
         self.kill()
 
     def draw(self, x, y, valor, pos, surface):

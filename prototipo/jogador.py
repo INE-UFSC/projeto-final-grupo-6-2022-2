@@ -115,8 +115,9 @@ class Jogador(Character):
 
     def draw(self):
         surface = pygame.display.get_surface()
-        self.__inventory.draw(surface)
         self.__light.draw(surface)
+        self.__inventory.draw(surface)
+        
 
     #classe Character(ABC)
     def animate(self):
@@ -136,7 +137,7 @@ class Jogador(Character):
         self.cooldowns()
         self.get_status()
         self.animate()
-        #self.__light.setPos(self.rect.centerx, self.rect.centery)
+        #self.__light.setPos(self.hitbox.x, self.hitbox.y)
         self.move(self.getSpeed())
     
     #classe Character(ABC)
