@@ -50,9 +50,11 @@ class EnemyLowDMG(Enemy):
             else:
                 self.direction.x = -1
                 self.status = 'left'
-        # DETECCAO DO AUTO_ATAQUE:
-            if dist < self.__range:
-                self.attack(player)
         else: 
             self.__awake = False
+            self.direction.x = 0
+            self.direction.y = 0
+        # DETECCAO DO AUTO_ATAQUE:
+        if dist < self.__range:
+            self.attack(player)
     
