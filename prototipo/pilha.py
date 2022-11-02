@@ -8,16 +8,21 @@ class Pilha(Item):
         self.tempo_restante = nivel*30
         self.tamanho = [nivel*5,20]
         self.__status = status
+        self.__usando = False
 
     def getStatus(self):
         return self.__status
+    
+    def setUsando(self, usando):
+        self.__usando = usando
     
     def usar(self):
         print("usado pilha")
         self.kill()
     
     def contador(self):
-        self.tempo_restante -= 1
+        if self.__usando:
+            self.tempo_restante -= 1
         
         if self.tempo_restante == 0:
             self.__status = False

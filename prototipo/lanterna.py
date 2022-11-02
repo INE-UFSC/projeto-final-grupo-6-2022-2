@@ -31,6 +31,7 @@ class Lanterna(pygame.sprite.Sprite):
 
     def setStatus(self):
         self.__status = not self.__status
+        self.pilha.setUsando(self.__status)
 
     def draw(self, tela):
         if self.__status:
