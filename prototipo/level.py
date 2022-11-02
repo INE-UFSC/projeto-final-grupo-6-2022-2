@@ -13,7 +13,7 @@ class Level:
         # Pegar a tela
         self.selected_room = 0
         self.key = ''
-        self.rooms = [ROOM1, ROOM2]
+        self.rooms = ROOMS
         self.display_surface = pygame.display.get_surface()
         self.create_map()
         # Cria grupos de sprites
@@ -53,7 +53,6 @@ class Level:
     def chave(self):
         inventario = self.jogador.getInventory().getItemList()
         if self.key in inventario:
-            print("tem chave")
             inventario.remove(self.key)
             self.obstacle_sprites.remove(self.door)
             self.key = ''

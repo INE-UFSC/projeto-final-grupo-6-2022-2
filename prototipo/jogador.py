@@ -25,7 +25,7 @@ class Jogador(Character):
         self.itens_sprites = itens_sprites
 
         self.__inventory = Inventory()
-        self.__light = Lanterna()
+        self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
 
     def attack(self, enemy):
@@ -69,22 +69,25 @@ class Jogador(Character):
         # Input de inventário        
         if keys[pygame.K_1]:
             self.__inventory.use_item(1)
-        if keys[pygame.K_2]:
+        elif keys[pygame.K_2]:
             self.__inventory.use_item(2)
-        if keys[pygame.K_3]:
+        elif keys[pygame.K_3]:
             self.__inventory.use_item(3)
-        if keys[pygame.K_4]:
+        elif keys[pygame.K_4]:
             self.__inventory.use_item(4)
-        if keys[pygame.K_5]:
+        elif keys[pygame.K_5]:
             self.__inventory.use_item(5)
-        if keys[pygame.K_6]:
+        elif keys[pygame.K_6]:
             self.__inventory.use_item(6)
-        if keys[pygame.K_7]:
+        elif keys[pygame.K_7]:
             self.__inventory.use_item(7)
-        if keys[pygame.K_8]:
+        elif keys[pygame.K_8]:
             self.__inventory.use_item(8)
-        if keys[pygame.K_9]:
+        elif keys[pygame.K_9]:
             self.__inventory.use_item(9)
+            
+        if keys[pygame.K_LCTRL]:
+            self.__light.setStatus()
         
         #Input de ataques
         if keys[pygame.K_SPACE] and not self.attacking:
@@ -112,8 +115,9 @@ class Jogador(Character):
 
     def draw(self):
         surface = pygame.display.get_surface()
+        self.__light.draw(surface)
         self.__inventory.draw(surface)
-        #self.__lanterna.draw(self.hitbox, surface)
+        
 
     #classe Character(ABC)
     def animate(self):
@@ -133,6 +137,7 @@ class Jogador(Character):
         self.cooldowns()
         self.get_status()
         self.animate()
+        #self.__light.setPos(self.hitbox.x, self.hitbox.y)
         self.move(self.getSpeed())
     
     #classe Character(ABC)
