@@ -1,7 +1,7 @@
 import pygame
 from item import Item
 from settings import HEIGTH, WIDTH
-import settings
+
 
 class Inventory():
     def __init__(self):
