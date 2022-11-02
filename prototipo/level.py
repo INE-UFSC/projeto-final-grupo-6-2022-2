@@ -5,6 +5,7 @@ from jogador import Jogador
 from item import *
 from key import Key
 from door import Door
+from pilha import Pilha
 
 
 class Level:
@@ -31,7 +32,7 @@ class Level:
                 elif col == 'p':
                     self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
                 elif col == 'b':
-                    self.itens_sprites.append(Item(x,y,'tiles/pilha.png', [self.visible_sprites]))
+                    self.itens_sprites.append(Pilha(x,y,'tiles/pilha.png', [self.visible_sprites], 50))
                 elif col == 'l':
                     door = Door(x,y, 'tiles/porta.png', [self.visible_sprites,self.obstacle_sprites])
                     self.door = door
