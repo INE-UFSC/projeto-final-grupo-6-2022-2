@@ -1,7 +1,8 @@
 import pygame
+from abc import ABC, abstractmethod
 
 #Deve ser uma classe Abstrata
-class Item(pygame.sprite.Sprite):
+class Item(ABC, pygame.sprite.Sprite):
     def  __init__(self, x, y, sprite,grupo):
         pygame.sprite.Sprite.__init__(self)
         super().__init__(grupo)
@@ -13,10 +14,9 @@ class Item(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0,0)
         self.posicao = [self.x, self.y]
     
+    @abstractmethod
     def usar(self):
-        #Só teste. Essa funcão aqui deve ser um abstract method
-        print("usado")
-        self.kill()
+        pass
         
     def exclui(self):
         self.kill()
