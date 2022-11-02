@@ -67,5 +67,5 @@ class EnemyHighDMG(Enemy):
             self.direction.x = 0
             self.direction.y = 0
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
-        if dist < self.__range:
+        if dist < self.__range and not player.getLight().getStatus():
             self.attack(player)
