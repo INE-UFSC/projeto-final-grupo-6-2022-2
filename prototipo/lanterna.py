@@ -34,7 +34,7 @@ class Lanterna(pygame.sprite.Sprite):
         self.pilha.setUsando(self.__status)
 
     def draw(self, tela):
-        if self.__status:
+        if self.__status and self.pilha.getStatus():
             tela.blit(self.image, (self.__x, self.__y))
         else:
             pygame.draw.rect(tela, (0,0,0),(0,0, WIDTH, HEIGTH))
