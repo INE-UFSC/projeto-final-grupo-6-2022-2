@@ -2,11 +2,11 @@ import pygame
 from item import Item
 
 class Pilha(Item):
-    def __init__(self, x, y, sprite, grupo, nivel, status = True, tempo_restante = 10, tamanho = [100, 20]):
+    def __init__(self, x, y, sprite, grupo, nivel, status = True):
         super().__init__(x, y, sprite, grupo)
         self.nivel = nivel
-        self.tempo_restante = tempo_restante
-        self.tamanho = tamanho
+        self.tempo_restante = nivel*30
+        self.tamanho = [nivel*5,20]
         self.__status = status
 
     def getStatus(self):
@@ -16,10 +16,18 @@ class Pilha(Item):
         print("usado pilha")
         self.kill()
     
-    def update(self):
-        pass
+    def contador(self):
+        self.tempo_restante -= 1
+        
+        if self.tempo_restante == 0:
+            self.__status = False
+    
+        tela = pygame.display.get_surface()
+        self.draw_timer(tela)
 
     def draw_timer(self, tela):
-        pygame.draw.rect(tela, (0, 0, 255), (self.x + 10, self.y, self.tamanho[0], self.tamanho[1]))
-        pygame.draw.rect(tela, (0, 255, 0), (self.x + 10, self.y, self.tamanho[0] * (self.tempo_restante / 10), self.tamanho[1]))
-        pygame.draw.rect(tela, (255, 0, 0), (self.x + 10, self.y, self.tamanho[0] * (self.tempo_restante / 10), self.tamanho[1]), 1)
+        if self.__status:
+            pygame.draw.rect(tela, (0, 0, 255), (10, 10, self.tamanho[0], self.tamanho[1]))
+            pygame.draw.rect(tela, (0, 255, 0), (10, 10, self.tempo_restante/6, self.tamanho[1]))
+        else:
+            pygame.draw.rect(tela, (255, 0, 0), (10, 10, self.tamanho[0], self.tamanho[1]))

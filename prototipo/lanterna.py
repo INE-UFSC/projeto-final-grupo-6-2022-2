@@ -20,7 +20,7 @@ class Lanterna(pygame.sprite.Sprite):
         #self.hitbox = self.rect.inflate(0,-26)
     
     def update(self):
-        self.pilha.update()
+        self.pilha.contador()
     
     def setPos(self, x, y):
         self.hitbox.x = x
