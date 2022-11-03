@@ -16,8 +16,11 @@ class Pilha(Item):
     def setUsando(self, usando):
         self.__usando = usando
     
-    def usar(self):
-        print("usado pilha")
+    def getUsando(self):
+        return self.__usando
+    
+    def usar(self, jogador):
+        jogador.getLight().setPilha(self)
         self.kill()
     
     def contador(self):
