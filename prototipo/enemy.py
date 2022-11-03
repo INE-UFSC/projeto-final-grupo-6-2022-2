@@ -31,6 +31,7 @@ class Enemy(Character):
 
     def update(self):
         self.cooldowns()
+        self.reactToLight()
         self.move(self.getSpeed())
 
     @abstractmethod
