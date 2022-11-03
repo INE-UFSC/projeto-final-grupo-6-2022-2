@@ -35,22 +35,22 @@ class Jogador(Character):
         # Input de movimento
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.__direction.y = -1
-            self.__status = 'up'
+            self.setDirectionY(-1)
+            self.setStatus('up')
         elif keys[pygame.K_DOWN]:
-            self.__direction.y = 1
-            self.__status = 'down'
+            self.setDirectionY(1)
+            self.setStatus('down')
         else:
-            self.__direction.y = 0
+            self.setDirectionY(0)
             
         if keys[pygame.K_RIGHT]:
-            self.__direction.x = 1
-            self.__status = 'right'
+            self.setDirectionX(1)
+            self.setStatus('right')
         elif keys[pygame.K_LEFT]:
-            self.__direction.x = -1
-            self.__status = 'left'
+            self.setDirectionX(-1)
+            self.setStatus('left')
         else:
-            self.__direction.x = 0
+            self.setDirectionX(0)
         
         # Input de inventário        
         if keys[pygame.K_1]:
@@ -83,21 +83,21 @@ class Jogador(Character):
             
     def get_status(self):
         #Idle status
-        if self.__direction.x == 0 and self.__direction.y == 0:
+        if self.getDirectionX() == 0 and self.getDirectionY() == 0:
             if not 'idle' in self.__status and not 'attack' in self.__status:
                 self.__status = self.__status + '_idle'
         #Attack status
         if self.attacking:
-            self.__direction.x = 0
-            self.__direction.y = 0
-            if not 'attack' in self.__status:
-                if 'idle' in self.__status:
-                    self.__status = self.__status.replace('_idle','_attack')
+            self.setDirectionX(0)
+            self.setDirectionY(0)
+            if not 'attack' in self.getStatus():
+                if 'idle' in self.getStatus():
+                    self.setStatus(self.getStatus().replace('_idle','_attack'))
                 else:
-                    self.__status = self.__status + '_attack'
+                    self.setStatus(self.getStatus() + '_attack')
         else:
             if 'attack' in self.__status:
-                self.__status = self.__status.replace('_attack','')
+                self.setStatus(self.getStatus.replace('_attack',''))
 
     def draw(self):
         surface = pygame.display.get_surface()
@@ -109,10 +109,10 @@ class Jogador(Character):
     def animate(self):
         animation = self.animations[self.__status]
         #Loop de animação por frame
-        self.__frame_index += self.__animation_speed
+        self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed)
         # Verifica se o frame atual é maior que o número de frames
-        if self.__frame_index >= len(animation):
-            self.__frame_index = 0
+        if self.getFrameIndex() >= len(animation):
+            self.setFrameIndex(0)
         
         # Setando o frame atual
         self.image = animation[int(self.__frame_index)]
@@ -129,11 +129,11 @@ class Jogador(Character):
     #classe Character(ABC)
     def collision(self, direction):
         if direction == 'horizontal':
-            for sprite in self.__obstacle_sprites:                
+            for sprite in self.getObstacleSprites():                
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.__direction.x > 0: # Se mover para a direita
+                    if self.getDirectionX() > 0: # Se mover para a direita
                         self.hitbox.right = sprite.hitbox.left
-                    if self.__direction.x < 0: # Se mover para a esquerda
+                    if self.getDirectionX() < 0: # Se mover para a esquerda
                         self.hitbox.left = sprite.hitbox.right
             
             
@@ -145,11 +145,11 @@ class Jogador(Character):
                         item.exclui()
 
         if direction == 'vertical':
-            for sprite in self.__obstacle_sprites:
+            for sprite in self.getObstacleSprites():
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.__direction.y > 0: # Se mover para baixo
+                    if self.getDirectionY() > 0: # Se mover para baixo
                         self.hitbox.bottom = sprite.hitbox.top
-                    if self.__direction.y < 0: # Se mover para cima
+                    if self.getDirectionY() < 0: # Se mover para cima
                         self.hitbox.top = sprite.hitbox.bottom
             
             for item in self.itens_sprites:
