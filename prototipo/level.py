@@ -41,6 +41,10 @@ class Level:
                     key = Key(x,y,'tiles/key.png', [self.visible_sprites])
                     self.itens_sprites.append(key)
                     self.key = key
+                elif col == 'el':
+                    pass
+                elif col == 'eh':
+                    pass
         
                     
     def run(self):

@@ -8,7 +8,7 @@ class EnemyLowDMG(Enemy):
 
     # balancear os valores de vida e velocidade:
     def __init__(self, pos, sprite, groups, obstacle_sprites, player):
-        super().__init__(100, pos, 4, sprite, 20, groups, obstacle_sprites, player)
+        super().__init__(100, pos, 4, 'tiles/door.png', 20, groups, obstacle_sprites, player)
         self.__range = 5
 
     # INACABADO:
@@ -26,26 +26,26 @@ class EnemyLowDMG(Enemy):
             self.__awake = True
         # DECISAO EM Y:
             if diffy > 0:
-                self.direction.x = 1
-                self.status = 'down'
+                self.setDirectionY(1)
+                self.setStatus('down')
             elif diffx == 0:
-                self.direction.x = 0
+                self.setDirectionY(0)
             else:
-                self.direction.x = -1
-                self.status = 'up'
+                self.setDirectionY(-1)
+                self.setStatus('up')
         # DECISAO EM X:
             if diffx > 0:
-                self.direction.x = 1
-                self.status = 'right'
+                self.setDirectionX(1)
+                self.setStatus('right')
             elif diffx == 0:
-                self.direction.x = 0
+                self.setDirectionX(0)
             else:
-                self.direction.x = -1
-                self.status = 'left'
+                self.setDirectionX(-1)
+                self.setStatus('left')
         else: 
             self.__awake = False
-            self.direction.x = 0
-            self.direction.y = 0
+            self.setDirectionX(0)
+            self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE:
         if dist < self.__range and not self.attacking:
             self.attacking = True

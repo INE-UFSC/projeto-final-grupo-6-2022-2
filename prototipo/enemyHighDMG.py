@@ -6,7 +6,7 @@ from math import sqrt
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos, sprite, groups, obstacle_sprites, player):
-        super().__init__(500, pos, 3, sprite, 100, groups, obstacle_sprites,player)
+        super().__init__(500, pos, 3, 'tiles/rock.png', 100, groups, obstacle_sprites,player)
         self.__range = 5
         self.__confusion_counter = 0
 
@@ -26,18 +26,18 @@ class EnemyHighDMG(Enemy):
             self.__confusion_counter = 5
         # DECISAO EM Y:
             if diffy >= 0:
-                self.direction.x = -1
-                self.status = 'up'
+                self.setDirectionY(-1)
+                self.setStatus('up')
             else:
-                self.direction.x = 1
-                self.status = 'down'
+                self.setDirectionY(1)
+                self.setStatus('down')
         # DECISAO EM X:
             if diffx >= 0:
-                self.direction.x =  -1
-                self.status = 'left'
+                self.setDirectionX(-1)
+                self.setStatus('left')
             else:
-                self.direction.x = 1
-                self.status = 'right'
+                self.setDirectionX(1)
+                self.setStatus('right')
         # CONTADOR PARA CICLOS CONFUSO:
         elif self.__confusion_counter > 0:
             self.__confusion_counter -= 1
@@ -46,26 +46,26 @@ class EnemyHighDMG(Enemy):
                 self.__awake = True
             # DECISAO EM Y:
                 if diffy > 0:
-                    self.direction.x = 1
-                    self.status = 'down'
+                    self.setDirectionY(1)
+                    self.setStatus('down')
                 elif diffx == 0:
-                    self.direction.x = 0
+                    self.setDirectionY(0)
                 else:
-                    self.direction.x = -1
-                    self.status = 'up'
+                    self.setDirectionY(-1)
+                    self.setStatus('up')
             # DECISAO EM X:
                 if diffx > 0:
-                    self.direction.x = 1
-                    self.status = 'right'
+                    self.setDirectionX(1)
+                    self.setStatus('right')
                 elif diffx == 0:
-                    self.direction.x = 0
+                    self.setDirectionX(0)
                 else:
-                    self.direction.x = -1
-                    self.status = 'left'
+                    self.setDirectionX(-1)
+                    self.setStatus('left')
         else:
             self.__awake = False
-            self.direction.x = 0
-            self.direction.y = 0
+            self.setDirectionX(0)
+            self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
         if dist < self.__range and not self.__player.getLight().getStatus() and not self.attacking:
             self.attacking = True
