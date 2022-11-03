@@ -29,11 +29,11 @@ class Character(ABC, pygame.sprite.Sprite):
         self.attack_time = 0
 
     def move(self, speed):
-        if self.direction.magnitude() != 0:
-            self.direction.normalize()
-        self.hitbox.x += self.direction.x * speed
+        if self.__direction.magnitude() != 0:
+            self.__direction.normalize()
+        self.hitbox.x += self.__direction.x * speed
         self.collision('horizontal')
-        self.hitbox.y += self.direction.y * speed
+        self.hitbox.y += self.__direction.y * speed
         self.collision('vertical')
         self.rect.center = self.hitbox.center
 
@@ -74,6 +74,9 @@ class Character(ABC, pygame.sprite.Sprite):
         if isinstance(frame_index, int):
             self.__frame_index = frame_index
 
+    def getFrameIndex(self):
+        return self.__frame_index
+    
     def getAnimationSpeed(self):
         return self.__animation_speed
 
