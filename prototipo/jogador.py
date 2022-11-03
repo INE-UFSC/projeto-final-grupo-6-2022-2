@@ -68,23 +68,23 @@ class Jogador(Character):
         
         # Input de inventário        
         if keys[pygame.K_1]:
-            self.__inventory.use_item(1)
+            self.__inventory.use_item(1, self)
         elif keys[pygame.K_2]:
-            self.__inventory.use_item(2)
+            self.__inventory.use_item(2, self)
         elif keys[pygame.K_3]:
-            self.__inventory.use_item(3)
+            self.__inventory.use_item(3, self)
         elif keys[pygame.K_4]:
-            self.__inventory.use_item(4)
+            self.__inventory.use_item(4, self)
         elif keys[pygame.K_5]:
-            self.__inventory.use_item(5)
+            self.__inventory.use_item(5, self)
         elif keys[pygame.K_6]:
-            self.__inventory.use_item(6)
+            self.__inventory.use_item(6, self)
         elif keys[pygame.K_7]:
-            self.__inventory.use_item(7)
+            self.__inventory.use_item(7, self)
         elif keys[pygame.K_8]:
-            self.__inventory.use_item(8)
+            self.__inventory.use_item(8, self)
         elif keys[pygame.K_9]:
-            self.__inventory.use_item(9)
+            self.__inventory.use_item(9, self)
             
         if keys[pygame.K_LCTRL]:
             self.__light.setStatus()

@@ -15,7 +15,7 @@ class Item(ABC, pygame.sprite.Sprite):
         self.posicao = [self.x, self.y]
     
     @abstractmethod
-    def usar(self):
+    def usar(self, jogador):
         pass
         
     def exclui(self):

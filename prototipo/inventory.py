@@ -21,9 +21,9 @@ class Inventory():
     def getItemList(self):
         return self.__item_list
     
-    def use_item(self, id):
+    def use_item(self, id, jogador):
         if isinstance(self.__item_list[id-1], Item):
-            self.__item_list[id-1].usar()
+            self.__item_list[id-1].usar(jogador)
             self.__item_list[id-1] = None
     
     def add_item(self, item):
