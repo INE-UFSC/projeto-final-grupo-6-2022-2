@@ -18,13 +18,16 @@ class Lanterna(pygame.sprite.Sprite):
         self.__x = (WIDTH-self.rect[2])/2
         self.__y = (HEIGTH-self.rect[3])/2
         #self.hitbox = self.rect.inflate(0,-26)
-    
+
     def update(self):
         self.pilha.contador()
     
     def setPos(self, x, y):
         self.hitbox.x = x
         self.hitbox.y = y
+    
+    def setPilha(self, pilha: Pilha):
+        self.pilha = pilha
     
     def getStatus(self):
         return self.__status
@@ -34,7 +37,7 @@ class Lanterna(pygame.sprite.Sprite):
         self.pilha.setUsando(self.__status)
 
     def draw(self, tela):
-        if self.__status and self.pilha.getStatus():
+        if self.__status and self.pilha.getUsando() and self.pilha.getStatus():
             tela.blit(self.image, (self.__x, self.__y))
         else:
             pygame.draw.rect(tela, (0,0,0),(0,0, WIDTH, HEIGTH))
