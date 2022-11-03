@@ -5,8 +5,8 @@ from math import sqrt
 
 class EnemyHighDMG(Enemy):
 
-    def __init__(self, pos, sprite, groups):
-        super().__init__(500, pos, 3, sprite, 100, groups)
+    def __init__(self, pos, sprite, groups, obstacle_sprites, player):
+        super().__init__(500, pos, 3, sprite, 100, groups, obstacle_sprites,player)
         self.__range = 5
         self.__confusion_counter = 0
 
@@ -15,13 +15,13 @@ class EnemyHighDMG(Enemy):
         self.kill()
 
     # INACABADO (DEVE SER AFETADO PELA LANTERNA E NAO PELO RANGE):
-    def reactToLight(self, player):
-        posx, posy = player.getPos()
+    def reactToLight(self):
+        posx, posy = self.__player.getPos()
         diffx = posx - self.__posx
         diffy = posy - self.__posy
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
-        if (dist < 20) and player.getLight().getStatus():
+        if (dist < 20) and self.__player.getLight().getStatus():
             self.__awake = True
             self.__confusion_counter = 5
         # DECISAO EM Y:
@@ -67,5 +67,8 @@ class EnemyHighDMG(Enemy):
             self.direction.x = 0
             self.direction.y = 0
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
-        if dist < self.__range and not player.getLight().getStatus():
-            self.attack(player)
+        if dist < self.__range and not self.__player.getLight().getStatus() and not self.attacking:
+            self.attacking = True
+            self.attack_time = pygame.time.get_ticks()
+            self.attack(self.__player)
+            

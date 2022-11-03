@@ -7,8 +7,8 @@ from math import sqrt
 class EnemyLowDMG(Enemy):
 
     # balancear os valores de vida e velocidade:
-    def __init__(self, pos, sprite, groups):
-        super().__init__(100, pos, 4, sprite, 20, groups)
+    def __init__(self, pos, sprite, groups, obstacle_sprites, player):
+        super().__init__(100, pos, 4, sprite, 20, groups, obstacle_sprites, player)
         self.__range = 5
 
     # INACABADO:
@@ -16,13 +16,13 @@ class EnemyLowDMG(Enemy):
         self.kill()
 
     # INACABADO:
-    def reactToLight(self, player):
-        posx, posy = player.getPos()
+    def reactToLight(self):
+        posx, posy = self.__player.getPos()
         diffx = posx - self.__posx
         diffy = posy - self.__posy
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA VISAO DO INIMIGO:
-        if dist < 100 and player.getLight().getStatus():
+        if dist < 100 and self.__player.getLight().getStatus():
             self.__awake = True
         # DECISAO EM Y:
             if diffy > 0:
@@ -47,6 +47,7 @@ class EnemyLowDMG(Enemy):
             self.direction.x = 0
             self.direction.y = 0
         # DETECCAO DO AUTO_ATAQUE:
-        if dist < self.__range:
-            self.attack(player)
-    
+        if dist < self.__range and not self.attacking:
+            self.attacking = True
+            self.attack_time = pygame.time.get_ticks()
+            self.attack(self.__player)

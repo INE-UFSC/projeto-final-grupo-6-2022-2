@@ -7,20 +7,8 @@ from support import import_folder
 
 class Jogador(Character):
     def __init__(self, pos, groups, obstacle_sprites, itens_sprites):
-        super().__init__(30,pos, 5, 'tiles/player.png', groups)
-        self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0,-26)
-        # Grapihcs setup
+        super().__init__(30,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
         self.import_player_assets()
-        self.status = 'down'
-        self.frame_index = 0
-        self.animation_speed = 0.15
-        self.direction = pygame.math.Vector2()
-        self.obstacle_sprites = obstacle_sprites
-        # Movimento
-        self.attacking = False
-        self.attack_cooldown = 400
-        self.attack_time = 0
 
         self.itens_sprites = itens_sprites
 
@@ -31,7 +19,6 @@ class Jogador(Character):
     def attack(self, enemy):
         enemy.receiveDamage(self.__damage)
 
-
     def import_player_assets(self):
         character_path = 'graphics/player/'
         self.animations = {'up': [],'down': [],'left': [],'right': [],
@@ -41,7 +28,6 @@ class Jogador(Character):
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
         
-        
     def getInventory(self):
         return self.__inventory
 
@@ -49,22 +35,22 @@ class Jogador(Character):
         # Input de movimento
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.direction.y = -1
-            self.status = 'up'
+            self.__direction.y = -1
+            self.__status = 'up'
         elif keys[pygame.K_DOWN]:
-            self.direction.y = 1
-            self.status = 'down'
+            self.__direction.y = 1
+            self.__status = 'down'
         else:
-            self.direction.y = 0
+            self.__direction.y = 0
             
         if keys[pygame.K_RIGHT]:
-            self.direction.x = 1
-            self.status = 'right'
+            self.__direction.x = 1
+            self.__status = 'right'
         elif keys[pygame.K_LEFT]:
-            self.direction.x = -1
-            self.status = 'left'
+            self.__direction.x = -1
+            self.__status = 'left'
         else:
-            self.direction.x = 0
+            self.__direction.x = 0
         
         # Input de inventário        
         if keys[pygame.K_1]:
@@ -93,25 +79,25 @@ class Jogador(Character):
         if keys[pygame.K_SPACE] and not self.attacking:
             self.attacking = True
             self.attack_time = pygame.time.get_ticks()
-            print('ataque')
+            self.attack()   
             
     def get_status(self):
         #Idle status
-        if self.direction.x == 0 and self.direction.y == 0:
-            if not 'idle' in self.status and not 'attack' in self.status:
-                self.status = self.status + '_idle'
+        if self.__direction.x == 0 and self.__direction.y == 0:
+            if not 'idle' in self.__status and not 'attack' in self.__status:
+                self.__status = self.__status + '_idle'
         #Attack status
         if self.attacking:
-            self.direction.x = 0
-            self.direction.y = 0
-            if not 'attack' in self.status:
-                if 'idle' in self.status:
-                    self.status = self.status.replace('_idle','_attack')
+            self.__direction.x = 0
+            self.__direction.y = 0
+            if not 'attack' in self.__status:
+                if 'idle' in self.__status:
+                    self.__status = self.__status.replace('_idle','_attack')
                 else:
-                    self.status = self.status + '_attack'
+                    self.__status = self.__status + '_attack'
         else:
-            if 'attack' in self.status:
-                self.status = self.status.replace('_attack','')
+            if 'attack' in self.__status:
+                self.__status = self.__status.replace('_attack','')
 
     def draw(self):
         surface = pygame.display.get_surface()
@@ -121,15 +107,15 @@ class Jogador(Character):
 
     #classe Character(ABC)
     def animate(self):
-        animation = self.animations[self.status]
+        animation = self.animations[self.__status]
         #Loop de animação por frame
-        self.frame_index += self.animation_speed
+        self.__frame_index += self.__animation_speed
         # Verifica se o frame atual é maior que o número de frames
-        if self.frame_index >= len(animation):
-            self.frame_index = 0
+        if self.__frame_index >= len(animation):
+            self.__frame_index = 0
         
         # Setando o frame atual
-        self.image = animation[int(self.frame_index)]
+        self.image = animation[int(self.__frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
     def update(self):
@@ -143,11 +129,11 @@ class Jogador(Character):
     #classe Character(ABC)
     def collision(self, direction):
         if direction == 'horizontal':
-            for sprite in self.obstacle_sprites:                
+            for sprite in self.__obstacle_sprites:                
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.x > 0: # Se mover para a direita
+                    if self.__direction.x > 0: # Se mover para a direita
                         self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0: # Se mover para a esquerda
+                    if self.__direction.x < 0: # Se mover para a esquerda
                         self.hitbox.left = sprite.hitbox.right
             
             
@@ -159,11 +145,11 @@ class Jogador(Character):
                         item.exclui()
 
         if direction == 'vertical':
-            for sprite in self.obstacle_sprites:
+            for sprite in self.__obstacle_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.y > 0: # Se mover para baixo
+                    if self.__direction.y > 0: # Se mover para baixo
                         self.hitbox.bottom = sprite.hitbox.top
-                    if self.direction.y < 0: # Se mover para cima
+                    if self.__direction.y < 0: # Se mover para cima
                         self.hitbox.top = sprite.hitbox.bottom
             
             for item in self.itens_sprites:
@@ -172,12 +158,6 @@ class Jogador(Character):
                     if add:
                         self.itens_sprites.remove(item)
                         item.exclui()
-    
-    def cooldowns(self):
-        current_time = pygame.time.get_ticks()
-        if self.attacking:
-            if current_time - self.attack_time > self.attack_cooldown:
-                self.attacking = False
 
     def getLight(self):
         return self.__light

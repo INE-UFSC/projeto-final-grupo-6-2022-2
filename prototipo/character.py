@@ -5,7 +5,7 @@ import pygame
 
 class Character(ABC, pygame.sprite.Sprite):
 
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, groups):
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, groups, obstacle_sprites):
         super().__init__(groups)
         self.__health = health
         self.__speed = speed
@@ -18,6 +18,16 @@ class Character(ABC, pygame.sprite.Sprite):
         # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
         self.hitbox = self.rect.inflate(0,-26)
 
+        self.__status = 'down'
+        self.__frame_index = 0
+        self.__animation_speed = 0.15
+        self.__direction = pygame.math.Vector2()
+        self.__obstacle_sprites = obstacle_sprites
+
+        self.attacking = False
+        self.attack_cooldown = 400
+        self.attack_time = 0
+
     def move(self, speed):
         if self.direction.magnitude() != 0:
             self.direction.normalize()
@@ -26,6 +36,12 @@ class Character(ABC, pygame.sprite.Sprite):
         self.hitbox.y += self.direction.y * speed
         self.collision('vertical')
         self.rect.center = self.hitbox.center
+
+    def cooldowns(self):
+        current_time = pygame.time.get_ticks()
+        if self.attacking:
+            if current_time - self.attack_time > self.attack_cooldown:
+                self.attacking = False
 
     def getSpeed(self):
         return self.__speed
@@ -54,3 +70,8 @@ class Character(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def collision(self, direction):
         pass
+
+    @abstractmethod
+    def update(self):
+        pass
+    
