@@ -32,10 +32,6 @@ class Enemy(Character):
     def update(self):
         self.cooldowns()
         self.move(self.getSpeed())
-        
-    @abstractmethod
-    def spawn(self, pos):
-        pass
 
     @abstractmethod
     def reactToLight(self, light_pos):
