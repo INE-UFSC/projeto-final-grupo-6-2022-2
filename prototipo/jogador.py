@@ -7,7 +7,7 @@ from support import import_folder
 
 class Jogador(Character):
     def __init__(self, pos, groups, obstacle_sprites, itens_sprites):
-        super().__init__(30,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
+        super().__init__(110,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
         self.import_player_assets()
 
         self.itens_sprites = itens_sprites
@@ -17,7 +17,7 @@ class Jogador(Character):
         self.__damage = 100
 
     def attack(self, enemy):
-        enemy.receiveDamage(self.__damage)
+        pass
 
     def import_player_assets(self):
         character_path = 'graphics/player/'
