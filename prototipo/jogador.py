@@ -84,8 +84,8 @@ class Jogador(Character):
     def get_status(self):
         #Idle status
         if self.getDirectionX() == 0 and self.getDirectionY() == 0:
-            if not 'idle' in self.__status and not 'attack' in self.__status:
-                self.__status = self.__status + '_idle'
+            if not 'idle' in self.getStatus() and not 'attack' in self.getStatus():
+                self.setStatus(self.getStatus() + '_idle')
         #Attack status
         if self.attacking:
             self.setDirectionX(0)
@@ -96,7 +96,7 @@ class Jogador(Character):
                 else:
                     self.setStatus(self.getStatus() + '_attack')
         else:
-            if 'attack' in self.__status:
+            if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus.replace('_attack',''))
 
     def draw(self):
@@ -107,7 +107,7 @@ class Jogador(Character):
 
     #classe Character(ABC)
     def animate(self):
-        animation = self.animations[self.__status]
+        animation = self.animations[self.getStatus()]
         #Loop de animação por frame
         self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed)
         # Verifica se o frame atual é maior que o número de frames
@@ -115,7 +115,7 @@ class Jogador(Character):
             self.setFrameIndex(0)
         
         # Setando o frame atual
-        self.image = animation[int(self.__frame_index)]
+        self.image = animation[int(self.getFrameIndex())]
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
     def update(self):
