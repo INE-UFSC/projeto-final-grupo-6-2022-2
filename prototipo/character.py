@@ -71,7 +71,7 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__status = status
 
     def setFrameIndex(self, frame_index):
-        if isinstance(frame_index, int):
+        if isinstance(frame_index, int) or isinstance(frame_index, float):
             self.__frame_index = frame_index
 
     def getFrameIndex(self):
