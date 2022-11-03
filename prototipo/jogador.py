@@ -109,7 +109,7 @@ class Jogador(Character):
     def animate(self):
         animation = self.animations[self.getStatus()]
         #Loop de animação por frame
-        self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed)
+        self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed())
         # Verifica se o frame atual é maior que o número de frames
         if self.getFrameIndex() >= len(animation):
             self.setFrameIndex(0)
