@@ -52,6 +52,34 @@ class Character(ABC, pygame.sprite.Sprite):
     def getHealth(self):
         return self.__health
 
+    def getDirectionX(self):
+        return self.__direction.x
+
+    def setDirectionX(self, x):
+        self.__direction.x = x
+
+    def getDirectionY(self):
+        return self.__direction.y
+
+    def setDirectionY(self, y):
+        self.__direction.y = y
+    
+    def getStatus(self):
+        return self.__status
+
+    def setStatus(self, status):
+        self.__status = status
+
+    def setFrameIndex(self, frame_index):
+        if isinstance(frame_index, int):
+            self.__frame_index = frame_index
+
+    def getAnimationSpeed(self):
+        return self.__animation_speed
+
+    def getObstacleSprites(self):
+        return self.__obstacle_sprites
+
     def receiveDamage(self, damage: int):
         if isinstance(damage, int):
             if self.__health <= damage:
@@ -74,4 +102,3 @@ class Character(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def update(self):
         pass
-    
