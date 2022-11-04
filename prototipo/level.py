@@ -6,7 +6,8 @@ from item import *
 from key import Key
 from door import Door
 from pilha import Pilha
-
+from enemyLowDMG import EnemyLowDMG
+from enemyHighDMG import EnemyHighDMG
 
 class Level:
     def __init__(self):
@@ -23,6 +24,7 @@ class Level:
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
         self.itens_sprites = []
+        self.enemy_sprites = pygame.sprite.Group()
         for row_index, row in enumerate(self.rooms[self.selected_room]):
             for col_index, col in enumerate(row):
                 x = col_index * TILESIZE
@@ -42,9 +44,9 @@ class Level:
                     self.itens_sprites.append(key)
                     self.key = key
                 elif col == 'el':
-                    pass
+                    EnemyLowDMG((x,y), [self.visible_sprites, self.enemy_sprites], self.obstacle_sprites, self.jogador)
                 elif col == 'eh':
-                    pass
+                    EnemyHighDMG((x,y), [self.visible_sprites, self.enemy_sprites], self.obstacle_sprites, self.jogador)
         
                     
     def run(self):
