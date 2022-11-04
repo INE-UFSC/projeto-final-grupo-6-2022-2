@@ -8,7 +8,7 @@ class EnemyLowDMG(Enemy):
 
     # balancear os valores de vida e velocidade:
     def __init__(self, pos, groups, obstacle_sprites, player):
-        super().__init__(100, pos, 4, 'tiles/porta.png', 20, groups, obstacle_sprites, player)
+        super().__init__(200, pos, 4, 'tiles/porta.png', 20, groups, obstacle_sprites, player)
         self.__range = 5
 
     # INACABADO:
@@ -23,7 +23,7 @@ class EnemyLowDMG(Enemy):
         dist = sqrt(diffx**2 + diffy**2)
         print(dist)
         # RANGE DA VISAO DO INIMIGO:
-        if dist < 100 and self.getPlayer().getLight().getStatus():
+        if dist < 110 and self.getPlayer().getLight().getStatus():
             print('teste')
             self.__awake = True
         # DECISAO EM Y:

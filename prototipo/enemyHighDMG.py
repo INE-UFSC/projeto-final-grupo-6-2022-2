@@ -6,7 +6,7 @@ from math import sqrt
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos, groups, obstacle_sprites, player):
-        super().__init__(500, pos, 3, 'tiles/rock.png', 100, groups, obstacle_sprites,player)
+        super().__init__(700, pos, 3, 'tiles/rock.png', 100, groups, obstacle_sprites,player)
         self.__range = 5
         self.__confusion_counter = 0
 
@@ -21,9 +21,9 @@ class EnemyHighDMG(Enemy):
         diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
-        if (dist < 20) and self.getPlayer().getLight().getStatus():
+        if (dist < 200) and self.getPlayer().getLight().getStatus():
             self.__awake = True
-            self.__confusion_counter = 5
+            self.__confusion_counter = 100
         # DECISAO EM Y:
             if diffy >= 0:
                 self.setDirectionY(-1)
@@ -42,7 +42,7 @@ class EnemyHighDMG(Enemy):
         elif self.__confusion_counter > 0:
             self.__confusion_counter -= 1
         # FORA DO RANGE DA LANTERNA:
-        elif dist < 100:
+        elif dist < 400:
                 self.__awake = True
             # DECISAO EM Y:
                 if diffy > 0:

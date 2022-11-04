@@ -12,6 +12,7 @@ class Jogador(Character):
     def __init__(self, pos, groups, obstacle_sprites, itens_sprites, enemies):
         super().__init__(110,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
         self.import_player_assets()
+
         self.__enemies = enemies
 
         self.itens_sprites = itens_sprites
@@ -24,14 +25,27 @@ class Jogador(Character):
     # EXEMPLO:
     def attack(self):
         for enemy in self.__enemies:
+            damage = self.__damage
             x, y = enemy.getPos()
-            dist = sqrt((x-self.__posx)**2 + (y-self.__posy)**2)
-            attack_range = 10
+            x1, y1 = self.getPos()
+            diffx = x - x1
+            diffy = y - y1
+            dist = sqrt((diffx)**2 + (diffy)**2)
+            attack_range = 1000
             if self.__weapon != None:
-                    damage = self.__damage + self.__weapon.getDamage()
-                    attack_range = self.__weapon.getRange()
+                damage += self.__weapon.getDamage()
+                attack_range = self.__weapon.getRange()
             if dist <= attack_range:
                 enemy.receiveDamage(damage)
+                print("""1sim
+                1sim
+                1sim
+                1sim
+                1sim
+                1sim
+                1vsim
+                1sim
+                """)
 
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):
@@ -115,7 +129,7 @@ class Jogador(Character):
                     self.setStatus(self.getStatus() + '_attack')
         else:
             if 'attack' in self.getStatus():
-                self.setStatus(self.getStatus.replace('_attack',''))
+                self.setStatus(self.getStatus().replace('_attack',''))
 
     def draw(self):
         surface = pygame.display.get_surface()
