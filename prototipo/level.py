@@ -30,7 +30,7 @@ class Level:
                 if col == 'x':
                     Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'rock')
                 elif col == 'p':
-                    self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites)
+                    self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites, [])
                 elif col == 'b':
                     self.itens_sprites.append(Pilha(x,y,'tiles/pilha.png', [self.visible_sprites], 50))
                 elif col == 'l':
