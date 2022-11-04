@@ -47,7 +47,7 @@ class Character(ABC, pygame.sprite.Sprite):
         return self.__speed
     
     def getPos(self):
-        return (self.__posx, self.__posy)
+        return (self.hitbox.x, self.hitbox.y)
 
     def getHealth(self):
         return self.__health

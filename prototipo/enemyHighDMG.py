@@ -17,8 +17,8 @@ class EnemyHighDMG(Enemy):
     # INACABADO (DEVE SER AFETADO PELA LANTERNA E NAO PELO RANGE):
     def reactToLight(self):
         posx, posy = self.getPlayer().getPos()
-        diffx = posx - self.__posx
-        diffy = posy - self.__posy
+        diffx = posx - self.getPos()[0]
+        diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
         if (dist < 20) and self.getPlayer().getLight().getStatus():

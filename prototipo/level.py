@@ -54,6 +54,7 @@ class Level:
         self.visible_sprites.custom_draw(self.jogador)
         self.jogador.draw()
         self.visible_sprites.update()
+        self.enemy_sprites.update()
         self.chave()
         
         
