@@ -37,15 +37,7 @@ class Jogador(Character):
                 attack_range = self.__weapon.getRange()
             if dist <= attack_range:
                 enemy.receiveDamage(damage)
-                print("""1sim
-                1sim
-                1sim
-                1sim
-                1sim
-                1sim
-                1vsim
-                1sim
-                """)
+                
 
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):
