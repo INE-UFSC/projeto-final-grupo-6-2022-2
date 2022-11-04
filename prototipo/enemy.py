@@ -15,18 +15,18 @@ class Enemy(Character):
 
     def collision(self, direction):
         if direction == 'horizontal':
-            for sprite in self.__obstacle_sprites:                
+            for sprite in self.getObstacleSprites():                
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.__direction.x > 0: # Se mover para a direita
+                    if self.getDirectionX() > 0: # Se mover para a direita
                         self.hitbox.right = sprite.hitbox.left
-                    if self.__direction.x < 0: # Se mover para a esquerda
+                    if self.getDirectionX() < 0: # Se mover para a esquerda
                         self.hitbox.left = sprite.hitbox.right
         if direction == 'vertical':
-            for sprite in self.__obstacle_sprites:
+            for sprite in self.getObstacleSprites():
                 if sprite.hitbox.colliderect(self.hitbox):
-                    if self.__direction.y > 0: # Se mover para baixo
+                    if self.getDirectionY() > 0: # Se mover para baixo
                         self.hitbox.bottom = sprite.hitbox.top
-                    if self.__direction.y < 0: # Se mover para cima
+                    if self.getDirectionY() < 0: # Se mover para cima
                         self.hitbox.top = sprite.hitbox.bottom
 
     def update(self):
@@ -37,3 +37,7 @@ class Enemy(Character):
     @abstractmethod
     def reactToLight(self, light_pos):
         pass
+    
+    def getPlayer(self):
+        return self.__player
+    
