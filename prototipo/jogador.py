@@ -4,20 +4,38 @@ from lanterna import Lanterna
 from character import Character
 from settings import *
 from support import import_folder
+from weapon import Weapon
+from math import sqrt
+
 
 class Jogador(Character):
-    def __init__(self, pos, groups, obstacle_sprites, itens_sprites):
+    def __init__(self, pos, groups, obstacle_sprites, itens_sprites, enemies):
         super().__init__(110,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
         self.import_player_assets()
+        self.__enemies = enemies
 
         self.itens_sprites = itens_sprites
 
         self.__inventory = Inventory()
+        self.__weapon = None
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
 
-    def attack(self, enemy):
-        pass
+    # EXEMPLO:
+    def attack(self):
+        for enemy in self.__enemies:
+            x, y = enemy.getPos()
+            dist = sqrt((x-self.__posx)**2 + (y-self.__posy)**2)
+            attack_range = 10
+            if self.__weapon != None:
+                    damage = self.__damage + self.__weapon.getDamage()
+                    attack_range = self.__weapon.getRange()
+            if dist <= attack_range:
+                enemy.receiveDamage(damage)
+
+    def setWeapon(self, weapon):
+        if isinstance(weapon, Weapon):
+            self.__weapon = weapon
 
     def import_player_assets(self):
         character_path = 'graphics/player/'
@@ -158,6 +176,9 @@ class Jogador(Character):
                     if add:
                         self.itens_sprites.remove(item)
                         item.exclui()
+
+    def enemy_kill(self, enemy):
+        self.__enemies.remove(enemy)
 
     def getLight(self):
         return self.__light
