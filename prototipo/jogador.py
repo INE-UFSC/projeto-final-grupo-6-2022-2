@@ -52,19 +52,19 @@ class Jogador(Character):
     def input(self):
         # Input de movimento
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.setDirectionY(-1)
             self.setStatus('up')
-        elif keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s] :
             self.setDirectionY(1)
             self.setStatus('down')
         else:
             self.setDirectionY(0)
             
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.setDirectionX(1)
             self.setStatus('right')
-        elif keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.setDirectionX(-1)
             self.setStatus('left')
         else:
