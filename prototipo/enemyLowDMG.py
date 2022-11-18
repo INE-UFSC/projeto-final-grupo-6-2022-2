@@ -21,10 +21,8 @@ class EnemyLowDMG(Enemy):
         diffx = posx - self.getPos()[0]
         diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
-        print(dist)
         # RANGE DA VISAO DO INIMIGO:
         if dist < 110 and self.getPlayer().getLight().getStatus():
-            print('teste')
             self.__awake = True
         # DECISAO EM Y:
             if diffy > 0:
