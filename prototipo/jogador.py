@@ -30,6 +30,10 @@ class Jogador(Character):
             x1, y1 = self.getPos()
             diffx = x - x1
             diffy = y - y1
+            status = self.getStatus()
+            if (status == 'up' and diffy) > 0 or (status == 'down' and diffy) < 0 or (
+                status == 'left' and diffx > 0) or (status == 'right' and diffx < 0):
+                continue
             dist = sqrt((diffx)**2 + (diffy)**2)
             attack_range = 1000
             if self.__weapon != None:
