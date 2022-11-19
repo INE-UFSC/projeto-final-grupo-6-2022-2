@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 #Deve ser uma classe Abstrata
 class Item(ABC, pygame.sprite.Sprite):
-    def  __init__(self, x, y, sprite,grupo):
+    def  __init__(self, x, y, sprite, grupo):
         pygame.sprite.Sprite.__init__(self)
         super().__init__(grupo)
         self.x = x
@@ -15,7 +15,7 @@ class Item(ABC, pygame.sprite.Sprite):
         self.posicao = [self.x, self.y]
     
     @abstractmethod
-    def usar(self, jogador):
+    def use(self, jogador):
         pass
         
     def exclui(self):

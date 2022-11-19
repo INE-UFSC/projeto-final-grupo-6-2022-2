@@ -6,7 +6,7 @@ class Key(Item):
         pygame.sprite.Sprite.__init__(self)
         super().__init__(x, y, sprite, grupo)
     
-    def usar(self, jogador):
+    def use(self, jogador):
         print("usado chave")
         self.kill()
     

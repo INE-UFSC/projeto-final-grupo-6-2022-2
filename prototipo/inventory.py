@@ -23,7 +23,7 @@ class Inventory():
     
     def use_item(self, id, jogador):
         if isinstance(self.__item_list[id-1], Item):
-            self.__item_list[id-1].usar(jogador)
+            self.__item_list[id-1].use(jogador)
             self.__item_list[id-1] = None
     
     def add_item(self, item):

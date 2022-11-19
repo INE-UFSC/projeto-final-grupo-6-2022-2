@@ -2,8 +2,8 @@ from item import Item
 
 
 class Weapon(Item):
-    def __init__(self, x, y, sprite, grupo, damage, range):
-        super().__init__(self, x, y, sprite,grupo)
+    def __init__(self, x, y, sprite, group, damage, range):
+        super().__init__(x, y, sprite, group)
         self.__damage = damage
         self.__range = range
 

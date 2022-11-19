@@ -19,7 +19,7 @@ class Pilha(Item):
     def getUsando(self):
         return self.__usando
     
-    def usar(self, jogador):
+    def use(self, jogador):
         jogador.getLight().setPilha(self)
         self.kill()
     
