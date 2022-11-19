@@ -35,7 +35,7 @@ class Enemy(Character):
         self.move(self.getSpeed())
 
     @abstractmethod
-    def reactToLight(self, light_pos):
+    def reactToLight(self):
         pass
     
     def getPlayer(self):

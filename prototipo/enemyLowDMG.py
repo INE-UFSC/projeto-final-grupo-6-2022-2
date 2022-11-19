@@ -11,11 +11,9 @@ class EnemyLowDMG(Enemy):
         super().__init__(200, pos, 4, 'tiles/porta.png', 20, groups, obstacle_sprites, player)
         self.__range = 5
 
-    # INACABADO:
     def die(self):
         self.kill()
 
-    # INACABADO:
     def reactToLight(self):
         posx, posy = self.getPlayer().getPos()
         diffx = posx - self.getPos()[0]

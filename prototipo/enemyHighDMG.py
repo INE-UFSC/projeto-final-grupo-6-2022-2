@@ -10,11 +10,9 @@ class EnemyHighDMG(Enemy):
         self.__range = 5
         self.__confusion_counter = 0
 
-    # INACABADO:
     def die(self):
         self.kill()
 
-    # INACABADO (DEVE SER AFETADO PELA LANTERNA E NAO PELO RANGE):
     def reactToLight(self):
         posx, posy = self.getPlayer().getPos()
         diffx = posx - self.getPos()[0]
