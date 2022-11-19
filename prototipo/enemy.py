@@ -15,14 +15,14 @@ class Enemy(Character):
 
     def collision(self, direction):
         if direction == 'horizontal':
-            for sprite in self.getObstacleSprites():                
+            for sprite in (self.getObstacleSprites() + [self.__player]):
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.getDirectionX() > 0: # Se mover para a direita
                         self.hitbox.right = sprite.hitbox.left
                     if self.getDirectionX() < 0: # Se mover para a esquerda
                         self.hitbox.left = sprite.hitbox.right
         if direction == 'vertical':
-            for sprite in self.getObstacleSprites():
+            for sprite in (self.getObstacleSprites() + [self.__player]):
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.getDirectionY() > 0: # Se mover para baixo
                         self.hitbox.bottom = sprite.hitbox.top
