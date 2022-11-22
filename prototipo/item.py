@@ -3,9 +3,8 @@ from abc import ABC, abstractmethod
 
 #Deve ser uma classe Abstrata
 class Item(ABC, pygame.sprite.Sprite):
-    def  __init__(self, x, y, sprite, grupo):
+    def  __init__(self, x, y, sprite):
         pygame.sprite.Sprite.__init__(self)
-        super().__init__(grupo)
         self.x = x
         self.y = y
         self.sprite = sprite

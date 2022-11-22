@@ -5,8 +5,8 @@ import pygame
 
 class Character(ABC, pygame.sprite.Sprite):
 
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, groups, obstacle_sprites):
-        super().__init__(groups)
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, obstacle_sprites):
+        super().__init__()
         self.__health = health
         self.__speed = speed
         self.__diagonal_speed = speed/sqrt(2)

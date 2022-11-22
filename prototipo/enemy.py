@@ -5,7 +5,7 @@ from abc import abstractmethod
 class Enemy(Character):
 
     def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int, groups, obstacle_sprites, player):
-        super().__init__(health, pos, speed, sprite, groups, obstacle_sprites)
+        super().__init__(health, pos, speed, sprite, obstacle_sprites)
         self.__player = player
         self.__awake = False
         self.__damage = damage

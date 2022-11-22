@@ -5,8 +5,8 @@ from math import sqrt
 
 class EnemyHighDMG(Enemy):
 
-    def __init__(self, pos, groups, obstacle_sprites, player):
-        super().__init__(700, pos, 3, 'tiles/rock.png', 100, groups, obstacle_sprites,player)
+    def __init__(self, pos, obstacle_sprites, player):
+        super().__init__(700, pos, 3, 'tiles/rock.png', 100, obstacle_sprites,player)
         self.__range = 5
         self.__confusion_counter = 0
 

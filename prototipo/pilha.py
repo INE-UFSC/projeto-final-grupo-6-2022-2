@@ -2,8 +2,8 @@ import pygame
 from item import Item
 
 class Pilha(Item):
-    def __init__(self, x, y, sprite, grupo, nivel, status = True):
-        super().__init__(x, y, sprite, grupo)
+    def __init__(self, x, y, sprite, nivel, status = True):
+        super().__init__(x, y, sprite)
         self.nivel = nivel
         self.tempo_restante = nivel*30
         self.tamanho = [nivel*5,20]

@@ -7,8 +7,8 @@ from math import sqrt
 class EnemyLowDMG(Enemy):
 
     # balancear os valores de vida e velocidade:
-    def __init__(self, pos, groups, obstacle_sprites, player):
-        super().__init__(200, pos, 4, 'tiles/porta.png', 20, groups, obstacle_sprites, player)
+    def __init__(self, pos, obstacle_sprites, player):
+        super().__init__(200, pos, 4, 'tiles/porta.png', 20, obstacle_sprites, player)
         self.__range = 5
 
     def die(self):
