@@ -2,7 +2,7 @@ from item import Item
 from abc import ABC
 
 
-class Weapon(ABC, Item):
+class Weapon(Item):
     def __init__(self, x, y, group, sprite, damage, range):
         super().__init__(x, y, sprite, group)
         self.__damage = damage
