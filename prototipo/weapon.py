@@ -1,7 +1,8 @@
 from item import Item
+from abc import ABC
 
 
-class Weapon(Item):
+class Weapon(ABC, Item):
     def __init__(self, x, y, sprite, group, damage, range):
         super().__init__(x, y, sprite, group)
         self.__damage = damage
