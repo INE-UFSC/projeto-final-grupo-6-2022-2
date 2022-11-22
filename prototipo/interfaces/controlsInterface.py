@@ -1,38 +1,35 @@
 import pygame
 
-from abstractInterface import AbstractInterface
-from button import Button
-
-class ControlsInterface(AbstractInterface):
+class ControlsInterface:
     def __init__(self):
-        super().__init__(pygame.display.get_surface(), 'prototipo\interfaces\Captura de tela_20221104_205804.png')
-        self.__buttons = pygame.sprite.Group([Button(420, 90, 'prototipo\interfaces\setaControleMouseSelecionado.png', 'prototipo\interfaces\setaControleSemMouse.png')])
+        imgControle = pygame.image.load('prototipo\interfaces\Captura de tela_20221104_205804.png')
+        self.__rect = imgControle.get_rect()
+        self.__active = False
+        self.__image = pygame.Surface((self.__rect[2], 720))
+        self.__image.blit(imgControle, (0, (720 - self.__rect[3])/2))
     
-    def start(self, clock):
-        run = True
-        while run:
-            clock.tick(60)
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.QUIT:
-                    run = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    for button in self.__buttons:
-                        if event.button == 1 and button.colliding():
-                            print('voltar para janela anterior')
-                            return
+    def setActive(self):
+        self.__active = not self.__active
+    
+    def draw(self, screen):
+        if self.__active:
 
-            self.draw()
-            pygame.display.flip()
-    
-    def draw(self):
-        self.__buttons.update()
-        self.getScreen().fill((0,0,0))
-        self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))
-        self.__buttons.draw(self.getScreen())
-       
+            screen.blit(self.__image, (1280 - self.__rect[2], 0))
+      
 pygame.init()
 window = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
-tela = ControlsInterface()
-tela.start(clock)
+controles = ControlsInterface()
+run = True
+while run:
+    clock.tick(60)
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            run = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            controles.setActive()
+            
+    window.fill((157,15,15))
+    controles.draw(window)
+    pygame.display.flip()
