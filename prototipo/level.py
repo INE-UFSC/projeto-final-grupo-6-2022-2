@@ -8,6 +8,7 @@ from door import Door
 from pilha import Pilha
 from enemyLowDMG import EnemyLowDMG
 from enemyHighDMG import EnemyHighDMG
+from debug import debug
 
 class Level:
     def __init__(self):
@@ -56,6 +57,7 @@ class Level:
         self.visible_sprites.update()
         self.enemy_sprites.update()
         self.chave()
+        debug('Sala', self.selected_room, 60, 30)
         
         
     def chave(self):
