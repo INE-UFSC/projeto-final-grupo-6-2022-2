@@ -1,75 +1,38 @@
-import pygame
-from settings import *
-from tile import Tile
-from jogador import Jogador
 from item import *
-from key import Key
-from door import Door
-from pilha import Pilha
-from enemyLowDMG import EnemyLowDMG
-from enemyHighDMG import EnemyHighDMG
+from levelBuilder import LevelBuilder
 from debug import debug
 
 class Level:
     def __init__(self):
         
         # Pegar a tela
-        self.selected_room = 0
+        self.__lvl_builder = LevelBuilder()
+        self.__selected_room = 0
         self.key = ''
-        self.rooms = ROOMS
         self.display_surface = pygame.display.get_surface()
-        self.create_map()
+        self.__lvl_builder.create_map(self.__selected_room)
         # Cria grupos de sprites
 
-    def create_map(self):
-        self.visible_sprites = YSortCameraGroup()
-        self.obstacle_sprites = pygame.sprite.Group()
-        self.itens_sprites = []
-        self.enemy_sprites = pygame.sprite.Group()
-        for row_index, row in enumerate(self.rooms[self.selected_room]):
-            for col_index, col in enumerate(row):
-                x = col_index * TILESIZE
-                y = row_index * TILESIZE
-                if col == 'x':
-                    Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'rock')
-                elif col == 'p':
-                    self.jogador = Jogador((x,y),[self.visible_sprites],self.obstacle_sprites, self.itens_sprites, self.enemy_sprites)
-                elif col == 'b':
-                    self.itens_sprites.append(Pilha(x,y,'tiles/pilha.png', [self.visible_sprites], 50))
-                elif col == 'l':
-                    door = Door(x,y, 'tiles/porta.png', [self.visible_sprites,self.obstacle_sprites])
-                    self.door = door
-                    self.itens_sprites.append(door)
-                elif col == 'k':
-                    key = Key(x,y,'tiles/key.png', [self.visible_sprites])
-                    self.itens_sprites.append(key)
-                    self.key = key
-                elif col == 'el':
-                    EnemyLowDMG((x,y), [self.visible_sprites, self.enemy_sprites], self.obstacle_sprites, self.jogador)
-                elif col == 'eh':
-                    EnemyHighDMG((x,y), [self.visible_sprites, self.enemy_sprites], self.obstacle_sprites, self.jogador)
-        
-                    
     def run(self):
         # Atualizar e desenhar sprites/jogo
-        self.visible_sprites.custom_draw(self.jogador)
-        self.jogador.draw()
-        self.visible_sprites.update()
-        self.enemy_sprites.update()
+        self.__lvl_builder.getVisibleSprites().custom_draw(self.__lvl_builder.getPlayer())
+        self.__lvl_builder.getPlayer().draw()
+        self.__lvl_builder.getVisibleSprites().update()
+        self.__lvl_builder.getEnemySprites().update()
         self.chave()
-        debug('Sala', self.selected_room, 100, 20)
+        debug('Sala', self.__selected_room, 100, 20)
         
         
     def chave(self):
-        inventario = self.jogador.getInventory().getItemList()
+        inventario = self.__lvl_builder.getPlayer().getInventory().getItemList()
         if self.key in inventario:
             inventario.remove(self.key)
-            self.obstacle_sprites.remove(self.door)
+            self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor)
             self.key = ''
-        if self.door in inventario:
-            inventario.remove(self.door)
-            self.selected_room += 1
-            self.create_map()
+        if self.__lvl_builder.getDoor in inventario:
+            inventario.remove(self.__lvl_builder.getDoor)
+            self.__selected_room += 1
+            self.__lvl_builder.create_map(self.__selected_room)
             
 
 class YSortCameraGroup(pygame.sprite.Group):
