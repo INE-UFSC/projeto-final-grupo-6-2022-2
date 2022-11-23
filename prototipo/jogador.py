@@ -9,8 +9,8 @@ from math import sqrt
 
 
 class Jogador(Character):
-    def __init__(self, pos, groups, obstacle_sprites, itens_sprites, enemies):
-        super().__init__(110,pos, 5, 'tiles/player.png', groups, obstacle_sprites)
+    def __init__(self, pos, obstacle_sprites, itens_sprites, enemies):
+        super().__init__(110, pos, 5, 'tiles/player.png', obstacle_sprites)
         self.import_player_assets()
 
         self.__enemies = enemies
@@ -23,7 +23,7 @@ class Jogador(Character):
         self.__damage = 100
 
     # EXEMPLO:
-    def attack(self):
+    def attack(self, receiver=None):
         for enemy in self.__enemies:
             damage = self.__damage
             x, y = enemy.getPos()

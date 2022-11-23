@@ -10,7 +10,7 @@ class Lanterna(pygame.sprite.Sprite):
 
         self.cor = (0, 255, 255)
         self.__status = status
-        self.pilha = Pilha(pos[0], pos[1], 'tiles/pilha.png', pygame.sprite.Group(), 50)
+        self.pilha = Pilha(pos[0], pos[1], 'tiles/pilha.png', 50)
         self.tempo_ligada = tempo_ligada
 
         self.image = pygame.image.load('tiles/light.png').convert_alpha()
