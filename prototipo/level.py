@@ -8,7 +8,6 @@ class Level:
         # Pegar a tela
         self.__lvl_builder = LevelBuilder()
         self.__selected_room = 0
-        self.key = ''
         self.display_surface = pygame.display.get_surface()
         self.__lvl_builder.create_map(self.__selected_room)
         # Cria grupos de sprites
@@ -25,12 +24,11 @@ class Level:
         
     def chave(self):
         inventario = self.__lvl_builder.getPlayer().getInventory().getItemList()
-        if self.key in inventario:
-            inventario.remove(self.key)
-            self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor)
-            self.key = ''
-        if self.__lvl_builder.getDoor in inventario:
-            inventario.remove(self.__lvl_builder.getDoor)
+        if self.__lvl_builder.getKey() in inventario:
+            inventario.remove(self.__lvl_builder.getKey())
+            self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor())
+        if self.__lvl_builder.getDoor() in inventario:
+            inventario.remove(self.__lvl_builder.getDoor())
             self.__selected_room += 1
             self.__lvl_builder.create_map(self.__selected_room)
             
