@@ -8,12 +8,12 @@ mixer.init()
 class Pilha(Item):
     def __init__(self, x, y, sprite, nivel, status = True):
         super().__init__(x, y, sprite)
+        self.__som = Sound('pilha')
         self.nivel = nivel
         self.tempo_restante = nivel*30
         self.tamanho = [nivel*5,10]
         self.__status = status
         self.__usando = False
-        self.__som = Sound('pilha')
         self.image = pygame.image.load('tiles/pilha.png').convert_alpha()
         self.hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha() 
 
