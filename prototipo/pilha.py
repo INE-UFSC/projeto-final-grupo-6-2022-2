@@ -1,5 +1,9 @@
 import pygame
 from item import Item
+from pygame import mixer 
+from sound import Sound
+mixer.init()
+
 
 class Pilha(Item):
     def __init__(self, x, y, sprite, nivel, status = True):
@@ -9,6 +13,7 @@ class Pilha(Item):
         self.tamanho = [nivel*5,10]
         self.__status = status
         self.__usando = False
+        self.__som = Sound('pilha')
         self.image = pygame.image.load('tiles/pilha.png').convert_alpha()
         self.hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha() 
 
@@ -23,6 +28,8 @@ class Pilha(Item):
     
     def use(self, jogador):
         jogador.getLight().setPilha(self)
+        # Toca o som
+        self.__som.play()
         self.kill()
     
     def contador(self):
