@@ -1,7 +1,53 @@
 import pygame
 
 from abstractInterface import AbstractInterface
+#from optionsInterface import OptionsInterface
 from button import Button
 
 class MenuInterface(AbstractInterface):
-    pass
+    def __init__(self):
+        super().__init__(pygame.display.get_surface(), 'interfaces\menu_jogo.png')
+        self.__buttons = pygame.sprite.Group(
+            [Button(1030, 375, 'interfaces\Botoes\\botao_start_hover.png',
+                             'interfaces\Botoes\\botao_start.png', 
+                             'interfaces\Botoes\\botao_start_pressed.png', 'start')],
+            [Button(1030, 425, 'interfaces\Botoes\\botao_continue_hover.png',
+                             'interfaces\Botoes\\botao_continue.png', 
+                             'interfaces\Botoes\\botao_continue_pressed.png', 'continue')],
+            [Button(1030, 475, 'interfaces\Botoes\\botao_options_hover.png',
+                             'interfaces\Botoes\\botao_options.png', 
+                             'interfaces\Botoes\\botao_options_pressed.png', 'options')],
+            [Button(1030, 525, 'interfaces\Botoes\\botao_exit_hover.png',
+                             'interfaces\Botoes\\botao_exit.png', 
+                             'interfaces\Botoes\\botao_exit_pressed.png', 'exit')])
+
+        #self.__options = OptionsInterface()
+        
+    def start(self, clock):
+        run = True
+        while run:
+            clock.tick(60)
+            events = pygame.event.get()
+            for event in events:
+                
+                if event.type == pygame.QUIT:
+                    run = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for button in self.__buttons:
+                        if event.button == 1 and button.colliding():
+                            return
+                        
+            self.draw()
+            pygame.display.flip()
+    
+    def draw(self):
+        self.__buttons.update()
+        self.getScreen().fill((0,0,0))
+        self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))
+        self.__buttons.draw(self.getScreen())
+
+pygame.init()
+window = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+tela = MenuInterface()
+tela.start(clock)
