@@ -23,7 +23,7 @@ class MenuInterface(AbstractInterface):
                              'interfaces\Botoes\\botao_exit_pressed.png', 'exit')])
 
         self.__options = OptionsInterface()
-        
+
     def start(self, clock):
         run = True
         while run:
@@ -36,9 +36,22 @@ class MenuInterface(AbstractInterface):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for button in self.__buttons:
                         if event.button == 1 and button.colliding():
-                            if button.key == 'options':
-                                self.__options.start(clock)
-                        
+                            self.__key = button.key
+                            self.setButtonPressed()
+            
+            if self.getChangeInterface():
+                if self.__key == 'options':
+                    self.__options.start(clock)
+                elif self.__key == 'exit':
+                    pygame.quit()
+                    sys.exit()
+                elif self.__key == 'continue' or self.__key == 'start':
+                    return self.__key
+                
+                self.setButtonPressed()
+
+                
+            self.cooldownBottonPressed()
             self.draw()
             pygame.display.flip()
     
