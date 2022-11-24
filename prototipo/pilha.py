@@ -2,14 +2,15 @@ import pygame
 from item import Item
 
 class Pilha(Item):
-    def __init__(self, x, y, sprite, grupo, nivel, status = True):
-        super().__init__(x, y, sprite, grupo)
+    def __init__(self, x, y, sprite, nivel, status = True):
+        super().__init__(x, y, sprite)
         self.nivel = nivel
         self.tempo_restante = nivel*30
         self.tamanho = [nivel*5,10]
         self.__status = status
         self.__usando = False
         self.image = pygame.image.load('tiles/pilha.png').convert_alpha()
+        self.hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha() 
 
     def getStatus(self):
         return self.__status
@@ -36,7 +37,7 @@ class Pilha(Item):
 
         
     def draw_timer(self, surface):
-        hud_vida = pygame.image.load('tiles/spr_hud_vida.png').convert_alpha() 
+        
 
         if self.__status:
             pygame.draw.rect(surface, (0, 0, 255), (2, 15, self.tamanho[0] - 10, self.tamanho[1]))
@@ -47,7 +48,7 @@ class Pilha(Item):
         x =0
         y = 0
         display = pygame.display.get_surface()
-        display.blit(hud_vida, (x, y))
+        display.blit(self.hud_vida, (x, y))
         
 
         
