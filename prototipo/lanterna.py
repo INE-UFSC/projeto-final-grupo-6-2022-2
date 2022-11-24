@@ -2,12 +2,13 @@ import pygame
 
 from pilha import Pilha
 from settings import WIDTH, HEIGTH
+from sound import Sound
 
 
 class Lanterna(pygame.sprite.Sprite):
     def __init__(self, pos, status=False, tempo_ligada=0):
         super().__init__(pygame.sprite.Group())
-
+        self.__som = Sound('lanterna')
         self.cor = (0, 255, 255)
         self.__status = status
         self.pilha = Pilha(pos[0], pos[1], 'tiles/pilha.png', 50)
@@ -47,6 +48,7 @@ class Lanterna(pygame.sprite.Sprite):
         # caso o jogador segure CTRL
         if self.__toggle_timer <= 0:
             self.__status = not self.__status
+            self.__som.play()
             self.pilha.setUsando(self.__status)
 
         self.__toggle_timer = self.__toggle_cooldown

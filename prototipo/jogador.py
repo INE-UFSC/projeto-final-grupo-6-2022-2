@@ -102,6 +102,7 @@ class Jogador(Character):
             
         if keys[pygame.K_LCTRL]:
             self.__light.setStatus()
+            
         
         #Input de ataques
         if keys[pygame.K_SPACE] and not self.attacking:
