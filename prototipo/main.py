@@ -22,7 +22,7 @@ class Game:
 
             self.screen.fill((0, 0, 0))
             self.level.run()
-            self.controles.draw(self.screen)
+            self.controles.draw()
             pygame.display.update()
             self.clock.tick(FPS)
 
