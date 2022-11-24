@@ -8,19 +8,16 @@ from pilha import Pilha
 from enemyLowDMG import EnemyLowDMG
 from enemyHighDMG import EnemyHighDMG
 from ySortCameraGroup import YSortCameraGroup
+from damageController import DamageController
 
 
 class LevelBuilder:
 
     def __init__(self):
-        # Pegar a tela
-        # self.__key = ''
-        # self.display_surface = pygame.display.get_surface()
-        # self.create_map()
-
         self.rooms = ROOMS
 
     def create_map(self, selected_room):
+        self.__dmg_ctrl = DamageController()
         self.__visible_sprites = YSortCameraGroup()
         self.__obstacle_sprites = pygame.sprite.Group()
         self.__itens_sprites = []
@@ -59,6 +56,7 @@ class LevelBuilder:
                     enemy = EnemyHighDMG((x, y), self.__obstacle_sprites, self.__player)
                     self.__visible_sprites.add(enemy)
                     self.__enemy_sprites.add(enemy)
+        self.__dmg_ctrl.update_characters(self.__enemy_sprites, self.__player)
 
     def getKey(self):
         return self.__key

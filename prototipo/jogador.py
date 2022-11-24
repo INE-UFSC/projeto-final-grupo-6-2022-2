@@ -2,10 +2,10 @@ import pygame
 from inventory import Inventory
 from lanterna import Lanterna
 from character import Character
+from damageController import DamageController
 from settings import *
 from support import import_folder
 from weapon import Weapon
-from math import sqrt
 
 
 class Jogador(Character):
@@ -24,23 +24,11 @@ class Jogador(Character):
 
     # EXEMPLO:
     def attack(self, receiver=None):
-        for enemy in self.__enemies:
-            damage = self.__damage
-            x, y = enemy.getPos()
-            x1, y1 = self.getPos()
-            diffx = x - x1
-            diffy = y - y1
-            status = self.getStatus()
-            if (status == 'up' and diffy) > 0 or (status == 'down' and diffy) < 0 or (
-                status == 'left' and diffx > 0) or (status == 'right' and diffx < 0):
-                continue
-            dist = sqrt((diffx)**2 + (diffy)**2)
-            attack_range = 1000
-            if self.__weapon != None:
-                damage += self.__weapon.getDamage()
-                attack_range = self.__weapon.getRange()
-            if dist <= attack_range:
-                enemy.receiveDamage(damage)
+        dmg_ctrl = DamageController()
+        if self.__weapon == None:
+            dmg_ctrl.meele_attack(self.__damage, 1000)
+        else:
+            self.__weapon.attack()
                 
 
     def setWeapon(self, weapon):
@@ -192,6 +180,9 @@ class Jogador(Character):
 
     def getLight(self):
         return self.__light
+
+    def get_weapon(self):
+        return self.__weapon
     
     def die(self):
         pass
