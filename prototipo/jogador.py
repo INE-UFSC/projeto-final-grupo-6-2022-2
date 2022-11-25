@@ -90,6 +90,7 @@ class Jogador(Character):
             
         if keys[pygame.K_LCTRL]:
             self.__light.setStatus()
+
         
         #Input de ataques
         if keys[pygame.K_SPACE] and not self.attacking:
@@ -115,6 +116,10 @@ class Jogador(Character):
             if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack',''))
 
+
+        
+                
+        
     def draw(self):
         surface = pygame.display.get_surface()
         self.__light.draw(surface)
