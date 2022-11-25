@@ -9,6 +9,7 @@ class Pilha(Item):
     def __init__(self, x, y, sprite, nivel, status = True):
         super().__init__(x, y, sprite)
         self.__som = Sound('pilha')
+        self.__sem_pilha = Sound('sem_pilha')
         self.nivel = nivel
         self.tempo_restante = nivel*30
         self.tamanho = [nivel*5,10]
@@ -38,6 +39,8 @@ class Pilha(Item):
         
         if self.tempo_restante == 0:
             self.__status = False
+            self.__sem_pilha.play()
+
     
         tela = pygame.display.get_surface()
         self.draw_timer(tela)
@@ -45,7 +48,6 @@ class Pilha(Item):
         
     def draw_timer(self, surface):
         
-
         if self.__status:
             pygame.draw.rect(surface, (0, 0, 255), (2, 15, self.tamanho[0] - 10, self.tamanho[1]))
             pygame.draw.rect(surface, (0, 255, 0), (2, 15, self.tempo_restante/6 - 10, self.tamanho[1]))
