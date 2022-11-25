@@ -28,8 +28,8 @@ class Jogador(Character):
         if self.__weapon == None:
             dmg_ctrl.meele_attack(self.__damage, 1000)
         else:
-            self.__weapon.attack()
-                
+            msg = self.__weapon.attack()
+            return msg
 
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):
