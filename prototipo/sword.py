@@ -1,5 +1,5 @@
 from weapon import Weapon
-from damageController import DamagaController
+from damageController import DamageController
 
 
 class MeleeWeapon(Weapon):
@@ -16,5 +16,5 @@ class MeleeWeapon(Weapon):
         return self.__damage
 
     def attack(self):
-        dmg_ctrl = DamagaController()
-        dmg_ctrl.meele_attack(self.getDamage(), self.getRange())
+        dmg_ctrl = DamageController()
+        dmg_ctrl.meele_attack(self.__damage, self.__range)
