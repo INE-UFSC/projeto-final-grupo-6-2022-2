@@ -10,10 +10,10 @@ class OptionsInterface(AbstractInterface):
         buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
                                                        'interfaces\Botoes\\botao_mainmenu.png',
                                                        'interfaces\Botoes\\botao_mainmenu_pressed.png', 'voltar')])
-        super().__init__(pygame.display.get_surface(), 'interfaces\menu_jogo.png', buttons)
+        super().__init__(pygame.display.get_surface(), 'interfaces\\telaOptions.png', buttons)
         
-        self.__slider = Slider(self.getScreen(), 500, 600, 500, 40, colour = (225, 215, 208), handleColour = (132, 116, 110))
-    
+        self.__slider = Slider(self.getScreen(), 175, 300, 400, 30, colour = (225, 215, 208), handleColour = (132, 116, 110))
+
     def update(self):
         if self.getChangeInterface():
             return self.getKey()
