@@ -2,6 +2,7 @@ import pygame, sys
 from settings import *
 from level import Level
 from interfaces.controlsInterface import ControlsInterface
+from hud import Hud
 
 class Game:
     def __init__(self):
@@ -11,6 +12,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.controles = ControlsInterface()
         self.level = Level()
+        self.hud = Hud()
 
     def run(self):
 
@@ -20,11 +22,12 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
+            self.clock.tick(FPS)
             self.screen.fill((0, 0, 0))
             self.level.run()
             self.controles.draw()
+            # self.hud.update()
             pygame.display.update()
-            self.clock.tick(FPS)
 
 if __name__ == "__main__":
     game = Game()

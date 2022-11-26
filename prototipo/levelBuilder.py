@@ -5,6 +5,7 @@ from item import *
 from key import Key
 from door import Door
 from pilha import Pilha
+from hud import Hud
 from enemyLowDMG import EnemyLowDMG
 from enemyHighDMG import EnemyHighDMG
 from ySortCameraGroup import YSortCameraGroup
@@ -23,6 +24,7 @@ class LevelBuilder:
     def create_map(self, selected_room):
         self.__visible_sprites = YSortCameraGroup()
         self.__obstacle_sprites = pygame.sprite.Group()
+        self.__hud = Hud()
         self.__itens_sprites = []
         self.__enemy_sprites = pygame.sprite.Group()
         for row_index, row in enumerate(self.rooms[selected_room]):
@@ -80,3 +82,6 @@ class LevelBuilder:
 
     def getEnemySprites(self):
         return self.__enemy_sprites
+    
+    def getHud(self):
+        return self.__hud

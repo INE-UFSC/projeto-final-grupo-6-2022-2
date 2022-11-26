@@ -6,6 +6,7 @@ from settings import *
 from support import import_folder
 from weapon import Weapon
 from math import sqrt
+from hud import Hud
 
 
 class Jogador(Character):
@@ -16,7 +17,7 @@ class Jogador(Character):
         self.__enemies = enemies
 
         self.itens_sprites = itens_sprites
-
+        self.__hud = Hud()
         self.__inventory = Inventory()
         self.__weapon = None
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
@@ -136,6 +137,7 @@ class Jogador(Character):
         surface = pygame.display.get_surface()
         self.__light.draw(surface)
         self.__inventory.draw(surface)
+
         
 
     #classe Character(ABC)

@@ -19,7 +19,12 @@ class Level:
         self.__lvl_builder.getVisibleSprites().update()
         self.__lvl_builder.getEnemySprites().update()
         self.chave()
+        self.draw_hud()
+        
         debug('Sala', self.__selected_room, 100, 20)
+
+    def draw_hud(self):
+        self.__lvl_builder.getHud().draw(self.__lvl_builder.getPlayer().getLight().pilha)
         
         
     def chave(self):
