@@ -104,7 +104,7 @@ class Character(ABC, pygame.sprite.Sprite):
         pass
 
     @abstractmethod
-    def attack(self, receiver):
+    def attack(self):
         pass
 
     @abstractmethod

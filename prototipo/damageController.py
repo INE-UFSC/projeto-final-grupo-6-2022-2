@@ -12,8 +12,12 @@ class DamageController(metaclass=SingletonMeta):
         self.__enemies = enemies
         self.__player = player
 
-    def meele_attack(self, damage, attack_range):
-        for enemy in self.__enemies:
+    def meele_attack(self, damage, attack_range, enemy_sel='enemies'):
+        if enemy_sel == 'enemies':
+            enemies = self.__enemies
+        else:
+            enemies = [self.__player]
+        for enemy in enemies:
             x, y = enemy.getPos()
             x1, y1 = self.__player.getPos()
             diffx = x - x1

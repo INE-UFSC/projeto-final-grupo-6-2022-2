@@ -23,7 +23,7 @@ class Jogador(Character):
         self.__damage = 100
 
     # EXEMPLO:
-    def attack(self, receiver=None):
+    def attack(self):
         dmg_ctrl = DamageController()
         if self.__weapon == None:
             dmg_ctrl.meele_attack(self.__damage, 1000)
