@@ -1,6 +1,5 @@
 from character import Character
 from abc import abstractmethod
-from damageController import DamageController
 
 
 class Enemy(Character):
@@ -10,11 +9,9 @@ class Enemy(Character):
         self.__player = player
         self.__awake = False
         self.__damage = damage
-        self.__range = 400
 
-    def attack(self):
-        dmg_ctrl = DamageController()
-        dmg_ctrl.meele_attack(self.__damage, self.__range, str(self))
+    def attack(self, player):
+        player.receiveDamage(self.__damage)
 
     def collision(self, direction):
         if direction == 'horizontal':
@@ -33,9 +30,6 @@ class Enemy(Character):
                     if self.getDirectionY() < 0: # Se mover para cima
                         self.hitbox.top = sprite.hitbox.bottom
 
-    def __str__(self):
-        return 'enemy'
-
     def update(self):
         self.cooldowns()
         self.reactToLight()
@@ -47,6 +41,4 @@ class Enemy(Character):
     
     def getPlayer(self):
         return self.__player
-
-    def getRange(self):
-        return self.__range
+    

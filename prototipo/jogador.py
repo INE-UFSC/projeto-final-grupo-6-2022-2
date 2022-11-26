@@ -3,8 +3,10 @@ from inventory import Inventory
 from lanterna import Lanterna
 from character import Character
 from damageController import DamageController
+from settings import *
 from support import import_folder
 from weapon import Weapon
+from math import sqrt
 from hud import Hud
 from debug import debug
 
@@ -23,7 +25,7 @@ class Jogador(Character):
 
 
     # EXEMPLO:
-    def attack(self):
+    def attack(self, receiver=None):
         dmg_ctrl = DamageController()
         if self.__weapon == None:
             dmg_ctrl.meele_attack(self.__damage, 1000)
@@ -115,7 +117,7 @@ class Jogador(Character):
             if not 'idle' in self.getStatus() and not 'attack' in self.getStatus():
                 self.setStatus(self.getStatus() + '_idle')
         #Attack status
-        if self.getAttackingStatus():
+        if self.attacking:
             self.setDirectionX(0)
             self.setDirectionY(0)
             if not 'attack' in self.getStatus():
@@ -126,13 +128,19 @@ class Jogador(Character):
         else:
             if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack',''))
+
+
+        
+                
         
     def draw(self):
         surface = pygame.display.get_surface()
         self.__light.draw(surface)
         self.__inventory.draw(surface)
 
+        
 
+    #classe Character(ABC)
     def animate(self):
         animation = self.animations[self.getStatus()]
         #Loop de animação por frame
@@ -146,6 +154,7 @@ class Jogador(Character):
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
     def update(self):
+        self.input()
         self.cooldowns()
         self.get_status()
         self.animate()
