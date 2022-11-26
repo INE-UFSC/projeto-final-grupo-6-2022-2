@@ -1,18 +1,14 @@
 from enemy import Enemy
 import pygame
 from math import sqrt
-
-
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos, obstacle_sprites, player):
         super().__init__(700, pos, 3, 'tiles/rock.png', 100, obstacle_sprites, player)
-        self.__range = 5
         self.__confusion_counter = 0
 
     def die(self):
         self.kill()
-
     def reactToLight(self):
         posx, posy = self.getPlayer().getPos()
         diffx = posx - self.getPos()[0]
@@ -65,8 +61,8 @@ class EnemyHighDMG(Enemy):
             self.setDirectionX(0)
             self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
-        if dist < self.__range and not self.getPlayer().getLight().getStatus() and not self.attacking:
-            self.attacking = True
-            self.attack_time = pygame.time.get_ticks()
-            self.attack(self.getPlayer())
+        if dist < self.getRange() and not self.getPlayer().getLight().getStatus() and not self.getAttackingStatus():
+            self.setAttackingStatus()
+            self.setAttackTimer()
+            self.attack()
             
