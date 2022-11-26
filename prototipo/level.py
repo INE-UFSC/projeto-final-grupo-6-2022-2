@@ -15,6 +15,7 @@ class Level:
 
     def run(self):
         # Atualizar e desenhar sprites/jogo
+        self.input()
         self.__lvl_builder.getVisibleSprites().custom_draw(self.__lvl_builder.getPlayer())
         self.__lvl_builder.getPlayer().draw()
         self.__lvl_builder.getVisibleSprites().update()
@@ -37,7 +38,57 @@ class Level:
             inventario.remove(self.__lvl_builder.getDoor())
             self.__selected_room += 1
             self.__lvl_builder.create_map(self.__selected_room)
-            
+
+    def input(self):
+        # Input de movimento
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.__lvl_builder.getPlayer().setDirectionY(-1)
+            self.__lvl_builder.getPlayer().setStatus('up')
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.__lvl_builder.getPlayer().setDirectionY(1)
+            self.__lvl_builder.getPlayer().setStatus('down')
+        else:
+            self.__lvl_builder.getPlayer().setDirectionY(0)
+
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.__lvl_builder.getPlayer().setDirectionX(1)
+            self.__lvl_builder.getPlayer().setStatus('right')
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            self.__lvl_builder.getPlayer().setDirectionX(-1)
+            self.__lvl_builder.getPlayer().setStatus('left')
+        else:
+            self.__lvl_builder.getPlayer().setDirectionX(0)
+
+        # Input de inventário
+        if keys[pygame.K_1]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(1, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_2]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(2, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_3]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(3, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_4]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(4, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_5]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(5, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_6]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(6, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_7]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(7, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_8]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(8, self.__lvl_builder.getPlayer())
+        elif keys[pygame.K_9]:
+            self.__lvl_builder.getPlayer().getInventory().use_item(9, self.__lvl_builder.getPlayer())
+
+        if keys[pygame.K_LCTRL]:
+            self.__lvl_builder.getPlayer().getLight().setStatus()
+
+        # Input de ataques
+        if keys[pygame.K_SPACE] and not self.__lvl_builder.getPlayer().getAttackingStatus():
+            self.__lvl_builder.getPlayer().setAttackingStatus()
+            self.__lvl_builder.getPlayer().setAttackTimer()
+            self.__lvl_builder.getPlayer().attack()
+
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
