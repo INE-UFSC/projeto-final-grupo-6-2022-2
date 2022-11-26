@@ -1,18 +1,14 @@
 from item import Item
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
-class Weapon(Item):
-    def __init__(self, x, y, group, sprite, damage, range):
-        super().__init__(x, y, sprite, group)
-        self.__damage = damage
-        self.__range = range
+class Weapon(Item, ABC):
+    def __init__(self, x, y, sprite):
+        super().__init__(x, y, sprite)
 
     def use(self, player):
         player.setWeapon(self)
 
-    def getRange(self):
-        return self.__range
-
-    def getDamage(self):
-        return self.__damage
+    @abstractmethod
+    def attack(self):
+        pass
