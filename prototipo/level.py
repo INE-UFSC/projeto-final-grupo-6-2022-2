@@ -11,6 +11,7 @@ class Level:
         self.__selected_room = 0
         self.display_surface = pygame.display.get_surface()
         self.__lvl_builder.create_map(self.__selected_room)
+
         # Cria grupos de sprites
 
     def run(self):
@@ -24,8 +25,13 @@ class Level:
         
         debug('Sala', self.__selected_room, 100, 20)
 
+
     def draw_hud(self):
-        self.__lvl_builder.getHud().draw(self.__lvl_builder.getPlayer().getLight().pilha)
+        self.__lvl_builder.getHud().draw(self.__lvl_builder.getPlayer())
+
+
+
+
         
         
     def chave(self):

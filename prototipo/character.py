@@ -51,6 +51,10 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def getHealth(self):
         return self.__health
+    
+    def setHealth(self, health):
+        if isinstance(health, int):
+            self.__health = health
 
     def getDirectionX(self):
         return self.__direction.x

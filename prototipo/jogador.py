@@ -8,21 +8,21 @@ from support import import_folder
 from weapon import Weapon
 from math import sqrt
 from hud import Hud
+from debug import debug
 
 
 class Jogador(Character):
-    def __init__(self, pos, obstacle_sprites, itens_sprites, enemies):
-        super().__init__(110, pos, 5, 'tiles/player.png', obstacle_sprites)
+    def __init__(self, pos, obstacle_sprites, itens_sprites, enemies, health):
+        super().__init__(100, pos, 5, 'tiles/player.png', obstacle_sprites)
         self.import_player_assets()
-
         self.__enemies = enemies
-
         self.itens_sprites = itens_sprites
-        self.__hud = Hud()
         self.__inventory = Inventory()
         self.__weapon = None
+        self.tamanho = [health*5,10]
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
+
 
     # EXEMPLO:
     def attack(self, receiver=None):
@@ -49,9 +49,20 @@ class Jogador(Character):
     def getInventory(self):
         return self.__inventory
 
+    def tomar_Dano_ou_curar_vida(self, vida):
+        self.setHealth(self.getHealth + vida)
+
     def input(self):
         # Input de movimento
+        # Se apertar J diminui a vida do player
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_j]:
+            self.setHealth(self.getHealth() - 1)
+            print(self.getHealth())
+        if keys[pygame.K_k]:
+            self.setHealth(self.getHealth() + 1)
+            print(self.getHealth())
+
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.setDirectionY(-1)
             self.setStatus('up')
@@ -149,7 +160,6 @@ class Jogador(Character):
         self.animate()
         self.__light.update()
         self.move(self.getSpeed())
-    
     #classe Character(ABC)
     def collision(self, direction):
         if direction == 'horizontal':

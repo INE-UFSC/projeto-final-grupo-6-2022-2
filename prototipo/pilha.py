@@ -24,7 +24,7 @@ class Pilha(Item):
         self.__status = status
         self.__usando = False
         self.image = pygame.image.load('tiles/pilha.png').convert_alpha()
-        self.hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha() 
+        self.hud_pilha = pygame.image.load('tiles/hud_pilha.png').convert_alpha() 
 
     def getStatus(self):
         return self.__status
@@ -54,8 +54,6 @@ class Pilha(Item):
         if self.tempo_restante == 0:
             self.__status = False
             self.__sem_pilha.play()
-        print(self.tempo_restante)
-        # print(self.nivel)
 
     
 
