@@ -2,18 +2,13 @@ from enemy import Enemy
 from abc import ABC
 import pygame
 from math import sqrt
-
-
 class EnemyLowDMG(Enemy):
-
     # balancear os valores de vida e velocidade:
     def __init__(self, pos, obstacle_sprites, player):
         super().__init__(200, pos, 4, 'tiles/porta.png', 20, obstacle_sprites, player)
-        self.__range = 5
 
     def die(self):
         self.kill()
-
     def reactToLight(self):
         posx, posy = self.getPlayer().getPos()
         diffx = posx - self.getPos()[0]
@@ -45,7 +40,7 @@ class EnemyLowDMG(Enemy):
             self.setDirectionX(0)
             self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE:
-        if dist < self.__range and not self.attacking:
-            self.attacking = True
-            self.attack_time = pygame.time.get_ticks()
-            self.attack(self.getPlayer())
+        if dist < self.getRange() and not self.getAttackingStatus():
+            self.setAttackingStatus()
+            self.setAttackTimer()
+            self.attack()
