@@ -20,24 +20,28 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__direction = pygame.math.Vector2()
         self.__obstacle_sprites = obstacle_sprites
 
-        self.attacking = False
-        self.attack_cooldown = 400
-        self.attack_time = 0
+        self.__attacking = False
+        self.__attack_cooldown = 400
+        self.__attack_time = 0
 
     def move(self, speed):
         if self.__direction.magnitude() != 0:
-            self.__direction.normalize()
-        self.hitbox.x += self.__direction.x * speed
-        self.collision('horizontal')
-        self.hitbox.y += self.__direction.y * speed
-        self.collision('vertical')
-        self.rect.center = self.hitbox.center
+	@@ -39,18 +39,9 @@ def move(self, speed):
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
-        if self.attacking:
-            if current_time - self.attack_time > self.attack_cooldown:
-                self.attacking = False
+        if self.__attacking:
+            if current_time - self.__attack_time > self.__attack_cooldown:
+                self.__attacking = False
+
+    def getAttackingStatus(self):
+        return self.__attacking
+
+    def setAttackingStatus(self):
+        self.__attacking = True
+
+    def setAttackTimer(self):
+        self.__attack_time = pygame.time.get_ticks()
 
     def getSpeed(self):
         return self.__speed
@@ -84,12 +88,7 @@ class Character(ABC, pygame.sprite.Sprite):
         pass
 
     @abstractmethod
-    def attack(self, receiver):
+    def attack(self):
         pass
 
     @abstractmethod
-    def collision(self, direction):
-        pass
-    @abstractmethod
-    def update(self):
-        pass
