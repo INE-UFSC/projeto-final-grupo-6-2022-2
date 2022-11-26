@@ -56,7 +56,6 @@ class Level:
             self.__player.setStatus('down')
         else:
             self.__player.setDirectionY(0)
-
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.__player.setDirectionX(1)
             self.__player.setStatus('right')
