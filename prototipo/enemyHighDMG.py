@@ -4,7 +4,7 @@ from math import sqrt
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos, obstacle_sprites, player):
-        super().__init__(700, pos, 3, 'tiles/rock.png', 100, obstacle_sprites, player)
+        super().__init__(700, pos, 3, 'tiles/parede_vertical_direita.png', 100, obstacle_sprites, player)
         self.__confusion_counter = 0
 
     def die(self):
