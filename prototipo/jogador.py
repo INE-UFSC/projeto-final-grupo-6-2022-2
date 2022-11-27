@@ -52,64 +52,6 @@ class Jogador(Character):
     def tomar_Dano_ou_curar_vida(self, vida):
         self.setHealth(self.getHealth + vida)
 
-    def input(self):
-        # Input de movimento
-        # Se apertar J diminui a vida do player
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_j]:
-            self.setHealth(self.getHealth() - 1)
-            print(self.getHealth())
-        if keys[pygame.K_k]:
-            self.setHealth(self.getHealth() + 1)
-            print(self.getHealth())
-
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
-            self.setDirectionY(-1)
-            self.setStatus('up')
-        elif keys[pygame.K_DOWN] or keys[pygame.K_s] :
-            self.setDirectionY(1)
-            self.setStatus('down')
-        else:
-            self.setDirectionY(0)
-            
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.setDirectionX(1)
-            self.setStatus('right')
-        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.setDirectionX(-1)
-            self.setStatus('left')
-        else:
-            self.setDirectionX(0)
-        
-        # Input de inventário        
-        if keys[pygame.K_1]:
-            self.__inventory.use_item(1, self)
-        elif keys[pygame.K_2]:
-            self.__inventory.use_item(2, self)
-        elif keys[pygame.K_3]:
-            self.__inventory.use_item(3, self)
-        elif keys[pygame.K_4]:
-            self.__inventory.use_item(4, self)
-        elif keys[pygame.K_5]:
-            self.__inventory.use_item(5, self)
-        elif keys[pygame.K_6]:
-            self.__inventory.use_item(6, self)
-        elif keys[pygame.K_7]:
-            self.__inventory.use_item(7, self)
-        elif keys[pygame.K_8]:
-            self.__inventory.use_item(8, self)
-        elif keys[pygame.K_9]:
-            self.__inventory.use_item(9, self)
-            
-        if keys[pygame.K_LCTRL]:
-            self.__light.setStatus()
-
-        
-        #Input de ataques
-        if keys[pygame.K_SPACE] and not self.attacking:
-            self.attacking = True
-            self.attack_time = pygame.time.get_ticks()
-            self.attack()   
             
     def get_status(self):
         #Idle status
@@ -154,7 +96,6 @@ class Jogador(Character):
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
     def update(self):
-        self.input()
         self.cooldowns()
         self.get_status()
         self.animate()

@@ -11,15 +11,76 @@ class Level:
         self.__selected_room = 0
         self.display_surface = pygame.display.get_surface()
         self.__lvl_builder.create_map(self.__selected_room)
+        self.__player = self.__lvl_builder.getPlayer()
 
         # Cria grupos de sprites
 
+    def input(self):
+        # Input de movimento
+        # Se apertar J diminui a vida do player
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_j]:
+            self.__player.setHealth(self.__player.getHealth() - 1)
+            print(self.__player.getHealth())
+        if keys[pygame.K_k]:
+            self.__player.setHealth(self.__player.getHealth() + 1)
+            print(self.__player.getHealth())
+
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.__player.setDirectionY(-1)
+            self.__player.setStatus('up')
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.__player.setDirectionY(1)
+            self.__player.setStatus('down')
+        else:
+            self.__player.setDirectionY(0)
+
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.__player.setDirectionX(1)
+            self.__player.setStatus('right')
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            self.__player.setDirectionX(-1)
+            self.__player.setStatus('left')
+        else:
+            self.__player.setDirectionX(0)
+
+        # Input de inventário
+        if keys[pygame.K_1]:
+            self.__player.getInventory().use_item(1, self.__player)
+        elif keys[pygame.K_2]:
+            self.__player.getInventory().use_item(2, self.__player)
+        elif keys[pygame.K_3]:
+            self.__player.getInventory().use_item(3, self.__player)
+        elif keys[pygame.K_4]:
+            self.__player.getInventory().use_item(4, self.__player)
+        elif keys[pygame.K_5]:
+            self.__player.getInventory().use_item(5, self.__player)
+        elif keys[pygame.K_6]:
+            self.__player.getInventory().use_item(6, self.__player)
+        elif keys[pygame.K_7]:
+            self.__player.getInventory().use_item(7, self.__player)
+        elif keys[pygame.K_8]:
+            self.__player.getInventory().use_item(8, self.__player)
+        elif keys[pygame.K_9]:
+            self.__player.getInventory().use_item(9, self.__player)
+
+        if keys[pygame.K_LCTRL]:
+            self.__player.getLight().setStatus()
+
+        # Input de ataques
+        if keys[pygame.K_SPACE] and not self.__player.getAttackingStatus():
+            self.__player.setAttackingStatus()
+            self.__player.setAttackTimer()
+            self.__player.attack()
+
     def run(self):
         # Atualizar e desenhar sprites/jogo
-        self.__lvl_builder.getVisibleSprites().custom_draw(self.__lvl_builder.getPlayer())
-        self.__lvl_builder.getPlayer().draw()
+        self.input()
+        self.__lvl_builder.getVisibleSprites().custom_draw(self.__player)
+        self.__player.draw()
         self.__lvl_builder.getVisibleSprites().update()
         self.__lvl_builder.getEnemySprites().update()
+        self.__player = self.__player
         self.chave()
         self.draw_hud()
         
@@ -27,15 +88,11 @@ class Level:
 
 
     def draw_hud(self):
-        self.__lvl_builder.getHud().draw(self.__lvl_builder.getPlayer())
+        self.__lvl_builder.getHud().draw(self.__player)
 
-
-
-
-        
         
     def chave(self):
-        inventario = self.__lvl_builder.getPlayer().getInventory().getItemList()
+        inventario = self.__player.getInventory().getItemList()
         if self.__lvl_builder.getKey() in inventario:
             inventario.remove(self.__lvl_builder.getKey())
             self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor())
