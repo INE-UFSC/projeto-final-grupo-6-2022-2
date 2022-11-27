@@ -10,12 +10,12 @@ class EnemyHighDMG(Enemy):
     def die(self):
         self.kill()
     def reactToLight(self):
-        posx, posy = self.getPlayer().getPos()
+        posx, posy = self.getPlayerPos()
         diffx = posx - self.getPos()[0]
         diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA LANTERNA:
-        if (dist < 200) and self.getPlayer().getLight().getStatus():
+        if (dist < 200) and self.getLightStatus():
             self.__awake = True
             self.__confusion_counter = 100
         # DECISAO EM Y:
@@ -61,7 +61,7 @@ class EnemyHighDMG(Enemy):
             self.setDirectionX(0)
             self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
-        if dist < self.getRange() and not self.getPlayer().getLight().getStatus() and not self.getAttackingStatus():
+        if dist < self.getRange() and not self.getLightStatus() and not self.getAttackingStatus():
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()

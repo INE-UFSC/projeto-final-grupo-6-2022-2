@@ -1,7 +1,7 @@
 from enemy import Enemy
-from abc import ABC
-import pygame
 from math import sqrt
+
+
 class EnemyLowDMG(Enemy):
     # balancear os valores de vida e velocidade:
     def __init__(self, pos, obstacle_sprites, player):
@@ -10,12 +10,12 @@ class EnemyLowDMG(Enemy):
     def die(self):
         self.kill()
     def reactToLight(self):
-        posx, posy = self.getPlayer().getPos()
+        posx, posy = self.getPlayerPos()
         diffx = posx - self.getPos()[0]
         diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA VISAO DO INIMIGO:
-        if dist < 110 and self.getPlayer().getLight().getStatus():
+        if dist < 110 and self.getLightStatus():
             self.__awake = True
         # DECISAO EM Y:
             if diffy > 0:

@@ -1,5 +1,8 @@
 from singletonMeta import SingletonMeta
 from math import sqrt
+from character import Character
+
+
 class DamageController(metaclass=SingletonMeta):
     def __init__(self):
         self.__enemies = None
@@ -11,14 +14,19 @@ class DamageController(metaclass=SingletonMeta):
     def meele_attack(self, damage, attack_range, enemy_sel='enemies'):
         if enemy_sel == 'enemies':
             enemies = self.__enemies
+            attacker = self.__player
         else:
             enemies = [self.__player]
+            if isinstance(enemy_sel, Character):
+                attacker = enemy_sel
+            else:
+                return 0
         for enemy in enemies:
             x, y = enemy.getPos()
-            x1, y1 = self.__player.getPos()
+            x1, y1 = attacker.getPos()
             diffx = x - x1
             diffy = y - y1
-            status = self.__player.getStatus()
+            status = attacker.getStatus()
             if (status == 'up' and diffy) > 0 or (status == 'down' and diffy) < 0 or (
                 status == 'left' and diffx > 0) or (status == 'right' and diffx < 0):
                 continue

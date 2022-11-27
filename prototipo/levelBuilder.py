@@ -100,7 +100,7 @@ class LevelBuilder:
         return self.__key
 
     def getDoor(self):
-            return self.__door
+        return self.__door
 
     def getPlayer(self):
         return self.__player
@@ -111,7 +111,7 @@ class LevelBuilder:
     def getObstacleSprites(self):
         return self.__obstacle_sprites
 
-    def getItensSprites(self):
+    def getItemSprites(self):
         return self.__itens_sprites
 
     def getEnemySprites(self):
