@@ -79,6 +79,16 @@ class Level:
             self.__player.setAttackTimer()
             self.__player.attack()
 
+    def move_character(self):
+        for character in list(self.__lvl_builder.getEnemySprites()) + [self.__player]:
+            if character.getDirectionMagnitude() != 0:
+                character.directionNormalize()
+            character.hitbox.x += character.getDirectionX() * character.getSpeed()
+            character.collision('horizontal') # passar colisao para level
+            character.hitbox.y += character.getDirectionY() * character.getSpeed()
+            character.collision('vertical') # passar colisao para level
+            character.rect.center = character.hitbox.center
+
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.input()
@@ -86,7 +96,7 @@ class Level:
         self.__player.draw()
         self.__lvl_builder.getVisibleSprites().update()
         self.enemy_update()
-        self.__player = self.__player
+        self.move_character()
         self.chave()
         self.draw_hud()
         

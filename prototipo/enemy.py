@@ -39,7 +39,6 @@ class Enemy(Character):
     def update(self):
         self.cooldowns()
         self.reactToLight()
-        self.move(self.getSpeed())
 
     def light_info_update(self, player_pos: tuple, light_status: bool):
         self.__player_pos = player_pos

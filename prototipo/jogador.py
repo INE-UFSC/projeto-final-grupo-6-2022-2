@@ -71,9 +71,6 @@ class Jogador(Character):
             if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack',''))
 
-
-        
-                
         
     def draw(self):
         surface = pygame.display.get_surface()
@@ -100,7 +97,7 @@ class Jogador(Character):
         self.get_status()
         self.animate()
         self.__light.update()
-        self.move(self.getSpeed())
+
     #classe Character(ABC)
     def collision(self, direction):
         if direction == 'horizontal':

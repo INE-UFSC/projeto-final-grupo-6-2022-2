@@ -26,15 +26,6 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__attack_cooldown = 400
         self.__attack_time = 0
 
-    def move(self, speed):
-        if self.__direction.magnitude() != 0:
-            self.__direction.normalize()
-        self.hitbox.x += self.__direction.x * speed
-        self.collision('horizontal')
-        self.hitbox.y += self.__direction.y * speed
-        self.collision('vertical')
-        self.rect.center = self.hitbox.center
-
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
         if self.__attacking:
@@ -63,6 +54,9 @@ class Character(ABC, pygame.sprite.Sprite):
         if isinstance(health, int):
             self.__health = health
 
+    def getDirectionMagnitude(self):
+        return self.__direction.magnitude()
+
     def getDirectionX(self):
         return self.__direction.x
 
@@ -74,6 +68,9 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def setDirectionY(self, y):
         self.__direction.y = y
+
+    def directionNormalize(self):
+        self.__direction.normalize_ip()
     
     def getStatus(self):
         return self.__status
