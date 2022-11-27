@@ -12,8 +12,14 @@ class Level:
         self.display_surface = pygame.display.get_surface()
         self.__lvl_builder.create_map(self.__selected_room)
         self.__player = self.__lvl_builder.getPlayer()
+        self.enemy_update()
 
         # Cria grupos de sprites
+
+    def enemy_update(self):
+        for enemy in self.__lvl_builder.getEnemySprites():
+            enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())
+            enemy.update()
 
     def input(self):
         # Input de movimento
@@ -79,7 +85,7 @@ class Level:
         self.__lvl_builder.getVisibleSprites().custom_draw(self.__player)
         self.__player.draw()
         self.__lvl_builder.getVisibleSprites().update()
-        self.__lvl_builder.getEnemySprites().update()
+        self.enemy_update()
         self.__player = self.__player
         self.chave()
         self.draw_hud()
