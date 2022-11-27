@@ -8,7 +8,6 @@ class Character(ABC, pygame.sprite.Sprite):
         super().__init__()
         self.__health = health
         self.__speed = speed
-        self.__diagonal_speed = speed/sqrt(2)
         self.__posx = pos[0]
         self.__posy = pos[1]
         # PLANEJAR COMO LIDAR COM EXCECOES:
