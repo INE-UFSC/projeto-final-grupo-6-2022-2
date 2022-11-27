@@ -49,6 +49,7 @@ class Jogador(Character):
     def getInventory(self):
         return self.__inventory
 
+    #Se for tomar dano passar vida como parametro negativo
     def tomar_Dano_ou_curar_vida(self, vida):
         self.setHealth(self.getHealth + vida)
 
@@ -62,7 +63,7 @@ class Jogador(Character):
         if keys[pygame.K_k]:
             self.setHealth(self.getHealth() + 1)
             print(self.getHealth())
-
+        
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.setDirectionY(-1)
             self.setStatus('up')

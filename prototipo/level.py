@@ -28,11 +28,7 @@ class Level:
 
     def draw_hud(self):
         self.__lvl_builder.getHud().draw(self.__lvl_builder.getPlayer())
-
-
-
-
-        
+       
         
     def chave(self):
         inventario = self.__lvl_builder.getPlayer().getInventory().getItemList()

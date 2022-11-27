@@ -29,7 +29,11 @@ class LevelBuilder:
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col == 'x':
-                    tile = Tile((x, y), 'rock')
+                    tile = Tile((x, y), 'tiles/parede_vertical.png')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'y':
+                    tile = Tile((x, y), 'tiles/parede_horizontal.png')
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
                 elif col == 'p':
