@@ -107,7 +107,7 @@ class Jogador(Character):
 
         
         #Input de ataques
-        if keys[pygame.K_SPACE] and not self.attacking:
+        if keys[pygame.K_SPACE] and not self.getAttackingStatus():
             self.attacking = True
             self.attack_time = pygame.time.get_ticks()
             self.attack()   

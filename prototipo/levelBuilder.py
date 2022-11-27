@@ -29,11 +29,39 @@ class LevelBuilder:
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col == 'x':
-                    tile = Tile((x, y), 'tiles/parede_vertical.png')
+                    tile = Tile((x, y), 'parede_vertical_esquerda')
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
-                elif col == 'y':
-                    tile = Tile((x, y), 'tiles/parede_horizontal.png')
+                elif col == 'm':
+                    tile = Tile((x, y), 'parede_quina_direita_cima')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'n':
+                    tile = Tile((x, y), 'parede_quina_esquerda_baixo')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'o':
+                    tile = Tile((x, y), 'parede_quina_direita_baixo')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'j':
+                    tile = Tile((x, y), 'parede_quina_esquerda_cima')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'a':
+                    tile = Tile((x, y), 'parede_teste')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                if col == 'q':
+                    tile = Tile((x, y), 'parede_vertical_direita')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'h':
+                    tile = Tile((x, y), 'parede_horizontal_baixo')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                if col == 'y':
+                    tile = Tile((x, y), 'parede_horizontal_cima')
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
                 elif col == 'p':
@@ -49,6 +77,10 @@ class LevelBuilder:
                     self.__obstacle_sprites.add(door)
                     self.__door = door
                     self.__itens_sprites.append(door)
+                elif col == 'c':
+                    tile = Tile((x, y), 'porta_cima')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
                 elif col == 'k':
                     key = Key(x, y, 'tiles/key.png')
                     self.__visible_sprites.add(key)
