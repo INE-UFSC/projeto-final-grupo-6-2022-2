@@ -28,6 +28,10 @@ class Game:
                     
                     if key == 'restart':
                         self.level = Level()
+                    
+                    if key == 'mainmenu':
+                        return key
+                    
                 
             self.clock.tick(FPS)
             self.screen.fill((0, 0, 0))
