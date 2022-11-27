@@ -64,7 +64,7 @@ class LevelBuilder:
         return self.__key
 
     def getDoor(self):
-            return self.__door
+        return self.__door
 
     def getPlayer(self):
         return self.__player

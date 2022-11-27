@@ -138,6 +138,7 @@ class Level:
         self.__lvl_builder.getVisibleSprites().update()
         self.enemy_update()
         self.move_character()
+        self.__player = self.__lvl_builder.getPlayer()
         self.chave()
         self.draw_hud()
         
