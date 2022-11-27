@@ -3,10 +3,13 @@ from inventory import Inventory
 from lanterna import Lanterna
 from character import Character
 from damageController import DamageController
+from settings import *
 from support import import_folder
 from weapon import Weapon
+from math import sqrt
 from hud import Hud
 from debug import debug
+
 
 class Jogador(Character):
     def __init__(self, pos, obstacle_sprites, itens_sprites, enemies, health):
@@ -29,9 +32,11 @@ class Jogador(Character):
         else:
             msg = self.__weapon.attack()
             return msg
+
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):
             self.__weapon = weapon
+
     def import_player_assets(self):
         character_path = 'graphics/player/'
         self.animations = {'up': [],'down': [],'left': [],'right': [],
@@ -43,8 +48,10 @@ class Jogador(Character):
         
     def getInventory(self):
         return self.__inventory
+
     def tomar_Dano_ou_curar_vida(self, vida):
         self.setHealth(self.getHealth + vida)
+
     def input(self):
         # Input de movimento
         # Se apertar J diminui a vida do player
@@ -55,6 +62,7 @@ class Jogador(Character):
         if keys[pygame.K_k]:
             self.setHealth(self.getHealth() + 1)
             print(self.getHealth())
+
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.setDirectionY(-1)
             self.setStatus('up')
@@ -95,6 +103,7 @@ class Jogador(Character):
             
         if keys[pygame.K_LCTRL]:
             self.__light.setStatus()
+
         
         #Input de ataques
         if keys[pygame.K_SPACE] and not self.attacking:
@@ -120,21 +129,79 @@ class Jogador(Character):
             if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack',''))
 
+
+        
+                
+        
     def draw(self):
         surface = pygame.display.get_surface()
         self.__light.draw(surface)
         self.__inventory.draw(surface)
 
+        
 
+    #classe Character(ABC)
     def animate(self):
         animation = self.animations[self.getStatus()]
         #Loop de animação por frame
-	@@ -146,6 +154,7 @@ def animate(self):
+        self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed())
+        # Verifica se o frame atual é maior que o número de frames
+        if self.getFrameIndex() >= len(animation):
+            self.setFrameIndex(0)
+        
+        # Setando o frame atual
+        self.image = animation[int(self.getFrameIndex())]
         self.rect = self.image.get_rect(center = self.hitbox.center)
-
+        
     def update(self):
+        self.input()
         self.cooldowns()
         self.get_status()
         self.animate()
-        
+        self.__light.update()
+        self.move(self.getSpeed())
+    #classe Character(ABC)
+    def collision(self, direction):
+        if direction == 'horizontal':
+            for sprite in self.getObstacleSprites():                
+                if sprite.hitbox.colliderect(self.hitbox):
+                    if self.getDirectionX() > 0: # Se mover para a direita
+                        self.hitbox.right = sprite.hitbox.left
+                    if self.getDirectionX() < 0: # Se mover para a esquerda
+                        self.hitbox.left = sprite.hitbox.right
+            
+            
+            for item in self.itens_sprites:
+                if sprite.hitbox.colliderect(self.hitbox):
+                    add = self.__inventory.add_item(item)
+                    if add:
+                        self.itens_sprites.remove(item)
+                        item.exclui()
+
+        if direction == 'vertical':
+            for sprite in self.getObstacleSprites():
+                if sprite.hitbox.colliderect(self.hitbox):
+                    if self.getDirectionY() > 0: # Se mover para baixo
+                        self.hitbox.bottom = sprite.hitbox.top
+                    if self.getDirectionY() < 0: # Se mover para cima
+                        self.hitbox.top = sprite.hitbox.bottom
+            
+            for item in self.itens_sprites:
+                if item.hitbox.colliderect(self.hitbox):
+                    add = self.__inventory.add_item(item)
+                    if add:
+                        self.itens_sprites.remove(item)
+                        item.exclui()
+
+    def enemy_kill(self, enemy):
+        self.__enemies.remove(enemy)
+
+    def getLight(self):
+        return self.__light
+
+    def get_weapon(self):
+        return self.__weapon
+    
+    def die(self):
+        pass
     

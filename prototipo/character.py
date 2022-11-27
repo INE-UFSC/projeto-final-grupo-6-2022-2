@@ -26,7 +26,12 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def move(self, speed):
         if self.__direction.magnitude() != 0:
-	@@ -39,18 +39,9 @@ def move(self, speed):
+            self.__direction.normalize()
+        self.hitbox.x += self.__direction.x * speed
+        self.collision('horizontal')
+        self.hitbox.y += self.__direction.y * speed
+        self.collision('vertical')
+        self.rect.center = self.hitbox.center
 
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
@@ -92,3 +97,6 @@ class Character(ABC, pygame.sprite.Sprite):
         pass
 
     @abstractmethod
+    def update(self):
+        pass
+
