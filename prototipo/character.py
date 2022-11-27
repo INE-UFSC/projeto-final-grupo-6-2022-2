@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from math import sqrt
 import pygame
+
+
 class Character(ABC, pygame.sprite.Sprite):
     def __init__(self, health: int, pos: tuple, speed: int, sprite: str, obstacle_sprites):
         super().__init__()
@@ -53,41 +55,52 @@ class Character(ABC, pygame.sprite.Sprite):
     
     def getPos(self):
         return (self.hitbox.x, self.hitbox.y)
+
     def getHealth(self):
         return self.__health
     
     def setHealth(self, health):
         if isinstance(health, int):
             self.__health = health
+
     def getDirectionX(self):
         return self.__direction.x
+
     def setDirectionX(self, x):
         self.__direction.x = x
+
     def getDirectionY(self):
         return self.__direction.y
+
     def setDirectionY(self, y):
         self.__direction.y = y
     
     def getStatus(self):
         return self.__status
+
     def setStatus(self, status):
         self.__status = status
+
     def setFrameIndex(self, frame_index):
         if isinstance(frame_index, int) or isinstance(frame_index, float):
             self.__frame_index = frame_index
+
     def getFrameIndex(self):
         return self.__frame_index
     
     def getAnimationSpeed(self):
         return self.__animation_speed
+
     def getObstacleSprites(self):
         return self.__obstacle_sprites
+
     def receiveDamage(self, damage: int):
         if isinstance(damage, int):
             if self.__health <= damage:
                 self.die()
             else:
                 self.__health -= damage
+
     @abstractmethod
     def die(self):
         pass

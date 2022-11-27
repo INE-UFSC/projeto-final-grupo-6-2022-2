@@ -13,7 +13,7 @@ class Enemy(Character):
 
     def attack(self):
         dmg_ctrl = DamageController()
-        dmg_ctrl.meele_attack(self.__damage, self.__range, str(self))
+        dmg_ctrl.meele_attack(self.__damage, self.__range, self)
 
     def collision(self, direction):
         if direction == 'horizontal':
