@@ -23,7 +23,7 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
+                elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
                     key = self.pause.start(self.clock)
                     
                     if key == 'restart':
