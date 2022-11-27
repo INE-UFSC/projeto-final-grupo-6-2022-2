@@ -28,7 +28,7 @@ class MenuInterface(AbstractInterface):
         if self.getChangeInterface():
             key = self.getKey()
             if key == 'options':
-                self.__options.start(clock)
+                self.__options.start(pygame.time.Clock())
             elif key == 'exit':
                 pygame.quit()
                 sys.exit()

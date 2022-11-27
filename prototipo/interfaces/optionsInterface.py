@@ -2,8 +2,8 @@ import pygame
 import pygame_widgets
 
 from pygame_widgets.slider import Slider
-from abstractInterface import AbstractInterface
-from button import Button
+from interfaces.abstractInterface import AbstractInterface
+from interfaces.button import Button
 
 class OptionsInterface(AbstractInterface):
     def __init__(self):
