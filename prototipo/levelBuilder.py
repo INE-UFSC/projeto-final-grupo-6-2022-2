@@ -1,5 +1,5 @@
 from settings import *
-from tile import Tile
+from tile import Tile, Chao
 from jogador import Jogador
 from item import *
 from key import Key
@@ -17,6 +17,14 @@ class LevelBuilder:
     def __init__(self):
         self.rooms = ROOMS
 
+    def selected_floor(self, sala):
+        if sala == 1:
+            self.chao = pygame.image.load('tiles/chao.png').convert_alpha()
+        if sala == 2:
+            self.chao = pygame.image.load('tiles/chao2.png').convert_alpha()
+        return self.chao
+    
+
     def create_map(self, selected_room):
         self.__dmg_ctrl = DamageController()
         self.__visible_sprites = YSortCameraGroup()
@@ -24,6 +32,8 @@ class LevelBuilder:
         self.__hud = Hud()
         self.__itens_sprites = []
         self.__enemy_sprites = pygame.sprite.Group()
+        self.__chao = Chao((0,0), f'tiles/chao{selected_room}.png')
+        self.__visible_sprites.add(self.__chao)
         for row_index, row in enumerate(self.rooms[selected_room]):
             for col_index, col in enumerate(row):
                 x = col_index * TILESIZE
@@ -49,7 +59,15 @@ class LevelBuilder:
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
                 elif col == 'a':
-                    tile = Tile((x, y), 'parede_teste')
+                    tile = Tile((x, y), 'parede')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'z':
+                    tile = Tile((x, y), 'parede_com_corrente')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
+                elif col == 'i':
+                    tile = Tile((x, y), 'parede_com_vaso')
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
                 if col == 'q':
