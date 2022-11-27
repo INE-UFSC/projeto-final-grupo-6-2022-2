@@ -17,22 +17,6 @@ class Enemy(Character):
         dmg_ctrl = DamageController()
         dmg_ctrl.meele_attack(self.__damage, self.__range, self)
 
-    def collision(self, direction):
-        if direction == 'horizontal':
-            for sprite in (list(self.getObstacleSprites()) + [self.__player]):
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.getDirectionX() > 0: # Se mover para a direita
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.getDirectionX() < 0: # Se mover para a esquerda
-                        self.hitbox.left = sprite.hitbox.right
-        if direction == 'vertical':
-            for sprite in (list(self.getObstacleSprites()) + [self.__player]):
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.getDirectionY() > 0: # Se mover para baixo
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.getDirectionY() < 0: # Se mover para cima
-                        self.hitbox.top = sprite.hitbox.bottom
-
     def __str__(self):
         return 'enemy'
 

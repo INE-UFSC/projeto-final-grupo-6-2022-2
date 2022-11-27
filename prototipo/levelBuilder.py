@@ -75,7 +75,7 @@ class LevelBuilder:
     def getObstacleSprites(self):
         return self.__obstacle_sprites
 
-    def getItensSprites(self):
+    def getItemSprites(self):
         return self.__itens_sprites
 
     def getEnemySprites(self):

@@ -98,39 +98,6 @@ class Jogador(Character):
         self.animate()
         self.__light.update()
 
-    #classe Character(ABC)
-    def collision(self, direction):
-        if direction == 'horizontal':
-            for sprite in self.getObstacleSprites():                
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.getDirectionX() > 0: # Se mover para a direita
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.getDirectionX() < 0: # Se mover para a esquerda
-                        self.hitbox.left = sprite.hitbox.right
-            
-            
-            for item in self.itens_sprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    add = self.__inventory.add_item(item)
-                    if add:
-                        self.itens_sprites.remove(item)
-                        item.exclui()
-
-        if direction == 'vertical':
-            for sprite in self.getObstacleSprites():
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.getDirectionY() > 0: # Se mover para baixo
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.getDirectionY() < 0: # Se mover para cima
-                        self.hitbox.top = sprite.hitbox.bottom
-            
-            for item in self.itens_sprites:
-                if item.hitbox.colliderect(self.hitbox):
-                    add = self.__inventory.add_item(item)
-                    if add:
-                        self.itens_sprites.remove(item)
-                        item.exclui()
-
     def enemy_kill(self, enemy):
         self.__enemies.remove(enemy)
 

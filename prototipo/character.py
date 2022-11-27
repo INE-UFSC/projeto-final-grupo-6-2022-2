@@ -108,8 +108,3 @@ class Character(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def update(self):
         pass
-
-    @abstractmethod
-    def collision(self, direction):
-        pass
-
