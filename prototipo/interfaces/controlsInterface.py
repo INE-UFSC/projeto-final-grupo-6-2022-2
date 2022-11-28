@@ -1,19 +1,22 @@
 import pygame
 
-class ControlsInterface:
-    def __init__(self):
-        imgControle = pygame.image.load('interfaces\\telaControles.png')
-        self.__screen = pygame.display.get_surface()
-        self.__rect = imgControle.get_rect()
-        self.__active = False
-        self.__image = pygame.Surface((self.__rect[2], self.__screen.get_height()))
-        self.__image.fill((7,7,7))
-        self.__image.blit(imgControle, (0, (self.__screen.get_height() - self.__rect[3])/2))
-    
-    def setActive(self):
-        self.__active = not self.__active
-    
-    def draw(self):
-        if self.__active:
+from interfaces.abstractInterface import AbstractInterface
+from interfaces.button import Button
 
-            self.__screen.blit(self.__image, (self.__screen.get_width() - self.__rect[2], 0))
+
+class ControlsInterface(AbstractInterface):
+    def __init__(self):
+        buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
+                                                       'interfaces\Botoes\\botao_mainmenu.png',
+                                                       'interfaces\Botoes\\botao_mainmenu_pressed.png', 'voltar')])
+        super().__init__(pygame.display.get_surface(), 'interfaces\\telaControles.png', buttons)
+
+    def update(self):
+        if self.getChangeInterface():
+            return self.getKey()
+
+    def draw(self):
+        self.getButtons().update()
+        self.getScreen().fill((0,0,0))
+        self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))
+        self.getButtons().draw(self.getScreen())
