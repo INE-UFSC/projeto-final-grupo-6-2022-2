@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class AbstractInterface(ABC):
     def __init__(self, screen, file_background_image, buttons):
+        self.__clock = pygame.time.Clock()
         self.__screen = screen
         self.__background = pygame.image.load(file_background_image)
         self.__buttons = buttons
@@ -28,10 +29,10 @@ class AbstractInterface(ABC):
     def getButtons(self):
         return self.__buttons
     
-    def start(self, clock):
+    def start(self):
         run = True
         while run:
-            clock.tick(60)
+            self.__clock.tick(60)
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:

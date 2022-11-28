@@ -35,9 +35,9 @@ class PauseInterface(AbstractInterface):
             if key == 'restart' or key == 'mainmenu' or key == 'continue':
                 return key
             elif key == 'options':
-                self.__options.start(pygame.time.Clock())
+                self.__options.start()
             elif key == 'controls':
-                self.__controls.start(pygame.time.Clock())
+                self.__controls.start()
                 
             self.setButtonPressed()
 

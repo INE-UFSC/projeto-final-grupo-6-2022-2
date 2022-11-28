@@ -1,10 +1,11 @@
 import pygame
 import sys
 
+from main import Game
 from interfaces.abstractInterface import AbstractInterface
 from interfaces.optionsInterface import OptionsInterface
 from interfaces.controlsInterface import ControlsInterface
-from button import Button
+from interfaces.button import Button
 
 class MenuInterface(AbstractInterface):
     def __init__(self):
@@ -33,12 +34,12 @@ class MenuInterface(AbstractInterface):
         if self.getChangeInterface():
             key = self.getKey()
             if key == 'options':
-                self.__options.start(pygame.time.Clock())
+                self.__options.start()
             elif key == 'exit':
                 pygame.quit()
                 sys.exit()
             elif key == 'controls':
-                self.__controls.start(pygame.time.Clock())
+                self.__controls.start()
             elif key == 'continue' or key == 'start':
                 return key
                 
