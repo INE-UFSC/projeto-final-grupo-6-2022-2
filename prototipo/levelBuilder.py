@@ -95,6 +95,10 @@ class LevelBuilder:
                     self.__obstacle_sprites.add(door)
                     self.__door = door
                     self.__itens_sprites.append(door)
+                elif col == 'v':
+                    tile = Tile((x, y), 'barril')
+                    self.__visible_sprites.add(tile)
+                    self.__obstacle_sprites.add(tile)
                 elif col == 'c':
                     tile = Tile((x, y), 'porta_cima')
                     self.__visible_sprites.add(tile)
