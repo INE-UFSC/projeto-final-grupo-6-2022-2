@@ -48,10 +48,19 @@ class Jogador(Character):
         
     def getInventory(self):
         return self.__inventory
+    
 
     #Se for tomar dano passar vida como parametro negativo
     def tomar_Dano_ou_curar_vida(self, vida):
-        self.setHealth(self.getHealth + vida)
+        if self.getHealth() + vida > 100:
+            self.setHealth(100)
+        else:
+            self.setHealth(self.getHealth() + vida)
+        if self.getHealth() <= 0:
+            self.die()
+        elif self.getHealth() > 100:
+            self.setHealth(100)
+
 
             
     def get_status(self):

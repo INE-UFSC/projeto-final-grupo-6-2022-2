@@ -20,7 +20,7 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
-                    key = self.pause.start(self.clock)
+                    key = self.pause.start()
                     
                     if key == 'restart':
                         self.level = Level()

@@ -28,10 +28,10 @@ class Level:
         # Se apertar J diminui a vida do player
         keys = pygame.key.get_pressed()
         if keys[pygame.K_j]:
-            self.__player.setHealth(self.__player.getHealth() - 1)
+            self.__player.tomar_Dano_ou_curar_vida(-1)
             print(self.__player.getHealth())
         if keys[pygame.K_k]:
-            self.__player.setHealth(self.__player.getHealth() + 1)
+            self.__player.tomar_Dano_ou_curar_vida(1)
             print(self.__player.getHealth())
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
