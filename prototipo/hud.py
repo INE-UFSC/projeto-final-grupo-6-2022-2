@@ -37,7 +37,7 @@ class Hud():
 
         gordura_da_barra = 15
         vida_maxima = 100
-        pygame.draw.rect(self.__display, (0, 0, 255), (x_barra, y_barra, width_barra, gordura_da_barra))
+        pygame.draw.rect(self.__display, (255, 0, 0), (x_barra, y_barra, width_barra, gordura_da_barra))
         pygame.draw.rect(self.__display, (0, 255, 0), (x_barra, y_barra, (width_barra / vida_maxima) * vida, gordura_da_barra))
         self.__display.blit(self.__hud_vida, (x, y))
 

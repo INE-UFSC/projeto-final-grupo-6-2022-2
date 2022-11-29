@@ -4,7 +4,7 @@ import pygame
 
 
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, obstacle_sprites):
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str):
         super().__init__()
         self.__health = health
         self.__speed = speed
@@ -19,8 +19,7 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__frame_index = 0
         self.__animation_speed = 0.15
         self.__direction = pygame.math.Vector2()
-        self.__obstacle_sprites = obstacle_sprites
-
+        
         self.__attacking = False
         self.__attack_cooldown = 400
         self.__attack_time = 0
