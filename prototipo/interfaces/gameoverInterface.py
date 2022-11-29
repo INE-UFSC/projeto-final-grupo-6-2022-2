@@ -6,10 +6,10 @@ from interfaces.button import Button
 class GameOverInterface(ExternalInterface):
     def __init__(self):
         buttons = pygame.sprite.Group(
-            [Button(1030, 350, 'interfaces\Botoes\\botao_restart_hover.png',
+            [Button(700, 350, 'interfaces\Botoes\\botao_restart_hover.png',
                              'interfaces\Botoes\\botao_restart.png', 
                              'interfaces\Botoes\\botao_restart_pressed.png', 'restart')],
-            [Button(1030, 450, 'interfaces\Botoes\\botao_mainmenu_hover.png',
+            [Button(700, 450, 'interfaces\Botoes\\botao_mainmenu_hover.png',
                              'interfaces\Botoes\\botao_mainmenu.png', 
                              'interfaces\Botoes\\botao_mainmenu_pressed.png', 'mainmenu')])
         
