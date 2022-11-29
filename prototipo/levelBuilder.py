@@ -83,7 +83,7 @@ class LevelBuilder:
                     self.__visible_sprites.add(tile)
                     self.__obstacle_sprites.add(tile)
                 elif col == 'p':
-                    self.__player = Jogador((x, y), self.__obstacle_sprites, self.__itens_sprites, self.__enemy_sprites, 100)
+                    self.__player = Jogador((x, y), 100)
                     self.__visible_sprites.add(self.__player)
                 elif col == 'b':
                     battery = Pilha(x, y, 'tiles/pilha.png', 50)
@@ -105,11 +105,11 @@ class LevelBuilder:
                     self.__itens_sprites.append(key)
                     self.__key = key
                 elif col == 'el':
-                    enemy = EnemyLowDMG((x, y), self.__obstacle_sprites, self.__player)
+                    enemy = EnemyLowDMG((x, y))
                     self.__visible_sprites.add(enemy)
                     self.__enemy_sprites.add(enemy)
                 elif col == 'eh':
-                    enemy = EnemyHighDMG((x, y), self.__obstacle_sprites, self.__player)
+                    enemy = EnemyHighDMG((x, y))
                     self.__visible_sprites.add(enemy)
                     self.__enemy_sprites.add(enemy)
         self.__dmg_ctrl.update_characters(self.__enemy_sprites, self.__player)

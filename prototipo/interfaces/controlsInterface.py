@@ -1,19 +1,15 @@
 import pygame
 
-from interfaces.abstractInterface import AbstractInterface
+from interfaces.internalInterface import InternalInterface
 from interfaces.button import Button
 
 
-class ControlsInterface(AbstractInterface):
+class ControlsInterface(InternalInterface):
     def __init__(self):
         buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
                                                        'interfaces\Botoes\\botao_mainmenu.png',
                                                        'interfaces\Botoes\\botao_mainmenu_pressed.png', 'voltar')])
         super().__init__(pygame.display.get_surface(), 'interfaces\\telaControles.png', buttons)
-
-    def update(self):
-        if self.getChangeInterface():
-            return self.getKey()
 
     def draw(self):
         self.getButtons().update()

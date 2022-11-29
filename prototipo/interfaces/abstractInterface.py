@@ -1,9 +1,8 @@
-import pygame, sys
+import pygame
 from abc import ABC, abstractmethod
 
 class AbstractInterface(ABC):
     def __init__(self, screen, file_background_image, buttons):
-        self.__clock = pygame.time.Clock()
         self.__screen = screen
         self.__background = pygame.image.load(file_background_image)
         self.__buttons = buttons
@@ -26,41 +25,37 @@ class AbstractInterface(ABC):
     def getKey(self):
         return self.__key
     
+    def setKey(self, key):
+        self.__key = key
+    
     def getButtons(self):
         return self.__buttons
     
-    def start(self):
-        run = True
-        while run:
-            self.__clock.tick(60)
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    for button in self.__buttons:
-                        if event.button == 1 and button.colliding():
-                            self.__key = button.key
-                            self.setButtonPressed()
+    @abstractmethod
+    def run(self):
+        pass
+    """        if pygame.mouse.get_pressed(num_buttons=3)[0]:
+            for button in self.__buttons:
+                if button.colliding():
+                    self.__key = button.key
+                    self.setButtonPressed()
             
-            key = self.update()
-            if key != None:
-                self.__key = None
-                return key
-            
-            self.draw()
-            self.cooldownBottonPressed()
-            
-            pygame.display.flip()
+        key = self.update()
+        if key != None:
+            self.__key = None
+            return key
+        
+        self.draw()
+        self.cooldownBottonPressed()"""
     
     @abstractmethod
     def draw(self):
         pass
     
-    @abstractmethod
     def update(self):
-        pass
+        if self.getChangeInterface():
+            return self.getKey()
+
     
     def cooldownBottonPressed(self):
         current_time = pygame.time.get_ticks()

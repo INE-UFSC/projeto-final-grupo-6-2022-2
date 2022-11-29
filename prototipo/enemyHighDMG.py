@@ -3,8 +3,8 @@ import pygame
 from math import sqrt
 class EnemyHighDMG(Enemy):
 
-    def __init__(self, pos, obstacle_sprites, player):
-        super().__init__(700, pos, 3, 'tiles/parede_vertical_direita.png', 100, obstacle_sprites, player)
+    def __init__(self, pos):
+        super().__init__(700, pos, 3, 'tiles/parede_vertical_direita.png', 100)
         self.__confusion_counter = 0
 
     def die(self):

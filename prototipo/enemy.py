@@ -4,9 +4,8 @@ from damageController import DamageController
 
 
 class Enemy(Character):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int, obstacle_sprites, player):
-        super().__init__(health, pos, speed, sprite, obstacle_sprites)
-        self.__player = player
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int):
+        super().__init__(health, pos, speed, sprite)
         self.__player_pos = ()
         self.__light_status = False
         self.__awake = False

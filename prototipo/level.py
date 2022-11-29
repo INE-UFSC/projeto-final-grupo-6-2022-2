@@ -18,6 +18,11 @@ class Level:
 
         # Cria grupos de sprites
 
+    def getPlayerDead(self):
+        if self.__player.getHealth() <= 50:
+            return True
+        return False
+
     def enemy_update(self):
         for enemy in self.__lvl_builder.getEnemySprites():
             enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())

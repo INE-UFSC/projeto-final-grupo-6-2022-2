@@ -12,11 +12,9 @@ from debug import debug
 
 
 class Jogador(Character):
-    def __init__(self, pos, obstacle_sprites, itens_sprites, enemies, health):
-        super().__init__(100, pos, 5, 'tiles/player.png', obstacle_sprites)
+    def __init__(self, pos, health):
+        super().__init__(100, pos, 5, 'tiles/player.png')
         self.import_player_assets()
-        self.__enemies = enemies
-        self.itens_sprites = itens_sprites
         self.__inventory = Inventory()
         self.__weapon = None
         self.tamanho = [health*5,10]
@@ -98,9 +96,6 @@ class Jogador(Character):
         self.get_status()
         self.animate()
         self.__light.update()
-
-    def enemy_kill(self, enemy):
-        self.__enemies.remove(enemy)
 
     def getLight(self):
         return self.__light
