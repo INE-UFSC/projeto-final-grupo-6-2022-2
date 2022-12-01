@@ -3,11 +3,12 @@ from weapon import Weapon
 
 class ProjectileWeapon(Weapon):
 
-    def __init__(self, x, y, name):
+    def __init__(self, x, y, name, damage):
         super().__init__(x, y, f'tiles/{name}.png')
         self.__name = name
+        self.__damage = damage
 
     # retorna o path do sprite para que level instancie o projetil
     # ideia em desenvolvimento
     def attack(self):
-        return f'tile/{self.__name}_projectile.png'
+        return f'tile/{self.__name}_projectile.png', self.__damage
