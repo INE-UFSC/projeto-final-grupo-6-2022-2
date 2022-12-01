@@ -86,9 +86,6 @@ class Character(ABC, pygame.sprite.Sprite):
     def getAnimationSpeed(self):
         return self.__animation_speed
 
-    def getObstacleSprites(self):
-        return self.__obstacle_sprites
-
     def receiveDamage(self, damage: int):
         if isinstance(damage, int):
             if self.__health <= damage:
