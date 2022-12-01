@@ -14,8 +14,9 @@ class Lanterna(pygame.sprite.Sprite):
         self.pilha = Pilha(pos[0], pos[1], 'tiles/pilha.png', 50)
         self.tempo_ligada = tempo_ligada
 
-        self.image = pygame.image.load('tiles/light.png').convert_alpha()
-        self.rect = self.image.get_rect()
+        self.Onimage = pygame.image.load('tiles/lightOn.png').convert_alpha()
+        self.Offimage = pygame.image.load('tiles/lightOff.png').convert_alpha()
+        self.rect = self.Onimage.get_rect()
 
         self.__x = (WIDTH - self.rect[2]) / 2
         self.__y = (HEIGTH - self.rect[3]) / 2
@@ -58,6 +59,6 @@ class Lanterna(pygame.sprite.Sprite):
 
     def draw(self, tela):
         if self.__status and self.pilha.getUsando() and self.pilha.getStatus():
-            tela.blit(self.image, (self.__x, self.__y))
+            tela.blit(self.Onimage, (self.__x, self.__y))
         else:
-            pygame.draw.rect(tela, (0, 0, 0), (0, 0, WIDTH, HEIGTH))
+            tela.blit(self.Offimage, (self.__x, self.__y))
