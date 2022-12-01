@@ -93,9 +93,7 @@ class Level:
             self.__player.getLight().setStatus()
 
         # Input de ataques
-        if keys[pygame.K_SPACE] and not self.__player.getAttackingStatus():
-            self.__player.setAttackingStatus()
-            self.__player.setAttackTimer()
+        if keys[pygame.K_SPACE]:
             msg = self.__player.attack()
             if msg is not None:
                 self.__lvl_builder.add_projectile(msg[0], msg[1], msg[2])
@@ -109,6 +107,25 @@ class Level:
             character.hitbox.y += character.getDirectionY() * character.getSpeed()
             self.collision('vertical', character) # passar colisao para level
             character.rect.center = character.hitbox.center
+
+    def move_projectile(self):
+        for proj in list(self.__lvl_builder.getProjectileSprites()):
+            dirx, diry = proj.getDirection()
+            speed = proj.getSpeed()
+            if proj.getDirectionMagnitude() != 0:
+                proj.directionNormalize()
+            proj.hitbox.x += dirx * speed
+            proj.hitbox.y += diry * speed
+            self.projectile_collision(proj)
+
+    def projectile_collision(self, projectile):
+        for sprite in self.__lvl_builder.getEnemySprites():
+            if sprite.hitbox.colliderect(projectile.hitbox):
+                projectile.hit(sprite)
+
+        for sprite in self.__lvl_builder.getObstacleSprites():
+            if sprite.hitbox.colliderect(projectile.hitbox):
+                projectile.kill()
 
     def collision(self, direction, character):
         obstacle_sprites = list(self.__lvl_builder.getObstacleSprites())
@@ -174,7 +191,7 @@ class Level:
         self.__player.draw()
         self.__lvl_builder.getVisibleSprites().update()
         self.move_character()
-        
+        self.move_projectile()
         self.chave()
         self.draw_hud()
         
