@@ -3,23 +3,36 @@ from levelBuilder import LevelBuilder
 from debug import debug
 from enemy import Enemy
 from jogador import Jogador
-
+from levelDAO import LevelDAO
 
 class Level:
     def __init__(self):
         
         # Pegar a tela
         self.__lvl_builder = LevelBuilder()
+        self.__dao = LevelDAO()
         self.__selected_room = 0
         self.display_surface = pygame.display.get_surface()
         self.__lvl_builder.create_map(self.__selected_room)
         self.__player = self.__lvl_builder.getPlayer()
         self.enemy_update()
-
         # Cria grupos de sprites
 
+    def restart(self):
+        self.__lvl_builder.create_map(self.__selected_room)
+    
+    def load(self):
+        #self.__lvl_builder.setInventoryPlayer(self.__dao.get('inventory'))
+        self.__selected_room = self.__dao.get('selected_room')
+        self.__lvl_builder.create_map(self.__selected_room)
+        
+    def dump(self):
+        #self.__dao.add('inventory', self.__player.getInventory())
+        self.__dao.add(self)
+    
+    #RETIRAR ESSA FUNÇÂO DPS
     def getPlayerDead(self):
-        if self.__player.getHealth() <= 50:
+        if self.__player.getHealth() <= 0:
             return True
         return False
 
@@ -154,13 +167,14 @@ class Level:
 
     def run(self):
         # Atualizar e desenhar sprites/jogo
+        self.enemy_update()
+        self.__player = self.__lvl_builder.getPlayer()
         self.input()
         self.__lvl_builder.getVisibleSprites().custom_draw(self.__player)
         self.__player.draw()
         self.__lvl_builder.getVisibleSprites().update()
-        self.enemy_update()
         self.move_character()
-        self.__player = self.__lvl_builder.getPlayer()
+        
         self.chave()
         self.draw_hud()
         
@@ -179,8 +193,12 @@ class Level:
         if self.__lvl_builder.getDoor() in inventario:
             inventario.remove(self.__lvl_builder.getDoor())
             self.__selected_room += 1
+            self.dump()
             self.__lvl_builder.create_map(self.__selected_room)
-            
+            self.load()
+
+    def getSelectRoom(self):
+        return self.__selected_room
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
