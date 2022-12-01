@@ -21,7 +21,6 @@ class Level:
         self.__lvl_builder.create_map(self.__selected_room)
     
     def load(self):
-        #self.__lvl_builder.setInventoryPlayer(self.__dao.get('inventory'))
         self.__selected_room = self.__dao.get('selected_room')
         self.__lvl_builder.create_map(self.__selected_room)
         
@@ -194,9 +193,11 @@ class Level:
             inventario.remove(self.__lvl_builder.getDoor())
             self.__selected_room += 1
             self.dump()
-            self.__lvl_builder.create_map(self.__selected_room)
             self.load()
 
+    def getPlayer(self):
+        return self.__player
+    
     def getSelectRoom(self):
         return self.__selected_room
 
