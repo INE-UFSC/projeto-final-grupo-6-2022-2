@@ -23,9 +23,10 @@ class Level:
     def load(self):
         self.__selected_room = self.__dao.get('selected_room')
         self.__lvl_builder.create_map(self.__selected_room)
-        
+        #self.__lvl_builder.getPlayer().loadInventory()
+    
     def dump(self):
-        #self.__dao.add('inventory', self.__player.getInventory())
+        #self.__player.dumpInventory()
         self.__dao.add(self)
     
     #RETIRAR ESSA FUNÇÂO DPS
@@ -200,21 +201,3 @@ class Level:
     
     def getSelectRoom(self):
         return self.__selected_room
-
-class YSortCameraGroup(pygame.sprite.Group):
-    def __init__(self):
-        # Setup
-        super().__init__()
-        self.display_surface = pygame.display.get_surface()
-        self.half_width = self.display_surface.get_size()[0] / 2
-        self.half_height = self.display_surface.get_size()[1] / 2
-        self.offset = pygame.math.Vector2()
-
-    def custom_draw(self, jogador):
-        # Pegando offset
-        self.offset.x = jogador.rect.centerx - self.half_width
-        self.offset.y = jogador.rect.centery - self.half_height
-        # Desenhando sprites
-        for sprite in self.sprites():
-            offset_pos = sprite.rect.topleft - self.offset
-            self.display_surface.blit(sprite.image, offset_pos)
