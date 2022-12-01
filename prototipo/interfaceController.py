@@ -7,7 +7,7 @@ from interfaces.controlsInterface import ControlsInterface
 
 class InterfaceController:
     def __init__(self):
-        self.__ingame = InGame()
+        self.__ingame = InGame(True)
         self.__mainmenu = MenuInterface()
         self.__pause = PauseInterface()
         self.__options = OptionsInterface()
@@ -20,8 +20,15 @@ class InterfaceController:
     def nextInterface(self, key, running):
         if key == 'mainmenu':
             return self.__mainmenu, False
-        elif key == 'start' or key == 'continue':
-            return InGame(), True
+        elif key == 'start':
+            self.__ingame = InGame(True)
+            return self.__ingame, True
+        elif key == 'continue':
+            if running:
+                return self.__ingame, True
+            else:
+                self.__ingame = InGame(False)
+                return self.__ingame, True
         elif key == 'morreu':
             return self.__gameover, False
         elif key == 'pause':
