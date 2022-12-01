@@ -10,6 +10,7 @@ from enemyLowDMG import EnemyLowDMG
 from enemyHighDMG import EnemyHighDMG
 from ySortCameraGroup import YSortCameraGroup
 from damageController import DamageController
+from Projectile import Projectile
 
 
 class LevelBuilder:
@@ -32,6 +33,7 @@ class LevelBuilder:
         self.__hud = Hud()
         self.__itens_sprites = []
         self.__enemy_sprites = pygame.sprite.Group()
+        self.__projectile_sprites = pygame.sprite.Group()
         self.__chao = Chao((0,0), f'tiles/chao{selected_room}.png')
         self.__visible_sprites.add(self.__chao)
         for row_index, row in enumerate(self.rooms[selected_room]):
@@ -118,6 +120,13 @@ class LevelBuilder:
                     self.__enemy_sprites.add(enemy)
         self.__dmg_ctrl.update_characters(self.__enemy_sprites, self.__player)
 
+    def add_projectile(self, sprite, dmg, shot_speed):
+        pos = self.__player.getPos()
+        direction = (self.__player.getDirectionX(), self.__player.getDirectionY())
+        projectile = Projectile(pos, sprite, direction, dmg, shot_speed)
+        self.__visible_sprites.add(projectile)
+        self.__projectile_sprites.add(projectile)
+
     def getKey(self):
         return self.__key
 
@@ -126,6 +135,9 @@ class LevelBuilder:
 
     def getPlayer(self):
         return self.__player
+
+    def getProjectileSprites(self):
+        return self.__projectile_sprites
 
     def getVisibleSprites(self):
         return self.__visible_sprites

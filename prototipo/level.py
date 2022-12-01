@@ -1,7 +1,6 @@
 from item import *
 from levelBuilder import LevelBuilder
 from debug import debug
-from enemy import Enemy
 from jogador import Jogador
 
 
@@ -84,7 +83,9 @@ class Level:
         if keys[pygame.K_SPACE] and not self.__player.getAttackingStatus():
             self.__player.setAttackingStatus()
             self.__player.setAttackTimer()
-            self.__player.attack()
+            msg = self.__player.attack()
+            if msg is not None:
+                self.__lvl_builder.add_projectile(msg[0], msg[1], msg[2])
 
     def move_character(self):
         for character in list(self.__lvl_builder.getEnemySprites()) + [self.__player]:
@@ -99,7 +100,6 @@ class Level:
     def collision(self, direction, character):
         obstacle_sprites = list(self.__lvl_builder.getObstacleSprites())
         item_sprites = []
-        enemy_sprites = []
 
         if isinstance(character, Jogador):
             item_sprites = self.__lvl_builder.getItemSprites()
