@@ -24,10 +24,11 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__attack_cooldown = 400
         self.__attack_time = 0
 
-    def cooldowns(self):
+    # arrumar para que cada tipo de personagem tenha seu proprio self.__attack_cooldown
+    def cooldowns(self, attack_cooldown=400):
         current_time = pygame.time.get_ticks()
         if self.__attacking:
-            if current_time - self.__attack_time > self.__attack_cooldown:
+            if current_time - self.__attack_time > attack_cooldown:
                 self.__attacking = False
 
     def getAttackingStatus(self):

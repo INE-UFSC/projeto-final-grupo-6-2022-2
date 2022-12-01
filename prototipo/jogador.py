@@ -25,8 +25,11 @@ class Jogador(Character):
     # EXEMPLO:
     def attack(self):
         dmg_ctrl = DamageController()
-        if self.__weapon == None:
-            dmg_ctrl.meele_attack(self.__damage, 1000)
+        if self.__weapon is None:
+            if not self.getAttackingStatus():
+                self.setAttackingStatus()
+                self.setAttackTimer()
+                dmg_ctrl.meele_attack(self.__damage, 1000)
         else:
             msg = self.__weapon.attack()
             return msg
@@ -58,8 +61,6 @@ class Jogador(Character):
             self.die()
         elif self.getHealth() > 100:
             self.setHealth(100)
-
-
             
     def get_status(self):
         #Idle status
@@ -101,7 +102,10 @@ class Jogador(Character):
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
     def update(self):
-        self.cooldowns()
+        if self.__weapon is not None:
+            self.cooldowns(self.__weapon.getAttackCooldown())
+        else:
+            self.cooldowns()
         self.get_status()
         self.animate()
         self.__light.update()

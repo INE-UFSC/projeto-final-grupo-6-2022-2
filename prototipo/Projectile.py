@@ -1,4 +1,5 @@
 import pygame
+from damageController import DamageController
 
 
 class Projectile(pygame.sprite.Sprite):
@@ -19,3 +20,16 @@ class Projectile(pygame.sprite.Sprite):
 
     def getSpeed(self):
         return self.__speed
+
+    def getDirectionMagnitude(self):
+        return self.__direction.magnitude()
+
+    def getDirection(self):
+        return self.__direction.x, self.__direction.y
+
+    def directionNormalize(self):
+        self.__direction.normalize_ip()
+
+    def hit(self, enemy):
+        DamageController().projectile_damage(self, enemy)
+        self.kill()

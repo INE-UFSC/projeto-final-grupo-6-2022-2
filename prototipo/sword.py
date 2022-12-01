@@ -4,8 +4,8 @@ from damageController import DamageController
 
 class MeleeWeapon(Weapon):
 
-    def __init__(self, x, y, name, dmg, _range):
-        super().__init__(x, y, f'tiles/{name}.png')
+    def __init__(self, x, y, name, dmg, _range, cooldown):
+        super().__init__(x, y, f'tiles/{name}.png', cooldown)
         self.__damage = dmg
         self.__range = _range
 

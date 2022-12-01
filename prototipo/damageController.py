@@ -36,5 +36,5 @@ class DamageController(metaclass=SingletonMeta):
 
     def projectile_damage(self, projectile, enemy):
         dmg = projectile.getDamage()
-        # enemy.receiveDamage(dmg)
+        enemy.receiveDamage(dmg)
         
