@@ -132,16 +132,16 @@ class LevelBuilder:
         # status = self.__player.getFrameIndex()
         status = self.__player.getStatus()
         # arrumar para o index:
-        if status == 'up':
+        if status == 'up' or status == 'up_idle':
             direction = (0, -1)
-        elif status == 'down':
+        elif status == 'down' or status == 'down_idle':
             direction = (0, 1)
-        elif status == 'left':
+        elif status == 'left' or status == 'left_idle':
             direction = (-1, 0)
-        elif status == 'right':
+        elif status == 'right' or status == 'right_idle':
             direction = (1, 0)
         else:
-            return 1
+            return 0
         projectile = Projectile(pos, sprite, direction, dmg, shot_speed)
         self.__visible_sprites.add(projectile)
         self.__projectile_sprites.add(projectile)
