@@ -25,14 +25,13 @@ class Jogador(Character):
     # EXEMPLO:
     def attack(self):
         dmg_ctrl = DamageController()
-        if self.__weapon is None:
-            if not self.getAttackingStatus():
-                self.setAttackingStatus()
-                self.setAttackTimer()
-                dmg_ctrl.meele_attack(self.__damage, 1000)
-        else:
-            msg = self.__weapon.attack()
-            return msg
+        if not self.getAttackingStatus():
+            self.setAttackTimer()
+            if self.__weapon is None:
+                    dmg_ctrl.meele_attack(self.__damage, 1000)
+            else:
+                msg = self.__weapon.attack()
+                return msg
 
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):

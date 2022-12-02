@@ -10,4 +10,4 @@ class ProjectileWeapon(Weapon):
         self.__shot_speed = shot_speed
 
     def attack(self):
-        return f'tile/{self.__name}_projectile.png', self.__damage, self.__shot_speed
+        return f'tiles/{self.__name}_projectile.png', self.__damage, self.__shot_speed

@@ -7,6 +7,9 @@ class Projectile(pygame.sprite.Sprite):
     def __init__(self, pos, sprite, direction, damage, speed):
         super().__init__()
         self.__sprite = self.image = pygame.image.load(sprite).convert_alpha()
+        pos = list(pos)
+        pos[0] += direction[0]*25
+        pos[1] += direction[1]*50
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -5)
         self.__damage = damage

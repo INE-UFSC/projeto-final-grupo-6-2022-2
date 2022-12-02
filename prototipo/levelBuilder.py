@@ -11,6 +11,7 @@ from enemyHighDMG import EnemyHighDMG
 from ySortCameraGroup import YSortCameraGroup
 from damageController import DamageController
 from Projectile import Projectile
+from projectileWeapon import ProjectileWeapon
 
 
 class LevelBuilder:
@@ -31,7 +32,7 @@ class LevelBuilder:
         self.__visible_sprites = YSortCameraGroup()
         self.__obstacle_sprites = pygame.sprite.Group()
         self.__hud = Hud()
-        self.__itens_sprites = []
+        self.__item_sprites = []
         self.__enemy_sprites = pygame.sprite.Group()
         self.__projectile_sprites = pygame.sprite.Group()
         self.__chao = Chao((0,0), f'tiles/chao{selected_room}.png')
@@ -89,14 +90,14 @@ class LevelBuilder:
                     self.__visible_sprites.add(self.__player)
                 elif col == 'b':
                     battery = Pilha(x, y, 'tiles/pilha.png', 50)
-                    self.__itens_sprites.append(battery)
+                    self.__item_sprites.append(battery)
                     self.__visible_sprites.add(battery)
                 elif col == 'l':
                     door = Door(x, y, 'tiles/porta.png')
                     self.__visible_sprites.add(door)
                     self.__obstacle_sprites.add(door)
                     self.__door = door
-                    self.__itens_sprites.append(door)
+                    self.__item_sprites.append(door)
                 elif col == 'v':
                     tile = Tile((x, y), 'barril')
                     self.__visible_sprites.add(tile)
@@ -108,7 +109,7 @@ class LevelBuilder:
                 elif col == 'k':
                     key = Key(x, y, 'tiles/key.png')
                     self.__visible_sprites.add(key)
-                    self.__itens_sprites.append(key)
+                    self.__item_sprites.append(key)
                     self.__key = key
                 elif col == 'el':
                     enemy = EnemyLowDMG((x, y))
@@ -118,11 +119,29 @@ class LevelBuilder:
                     enemy = EnemyHighDMG((x, y))
                     self.__visible_sprites.add(enemy)
                     self.__enemy_sprites.add(enemy)
+                elif col.endswith('-lrwpn'):
+                    name, damage, shot_speed, cooldown, type = col.split('-')
+                    damage, shot_speed, cooldown = int(damage), int(shot_speed), int(cooldown)
+                    weapon = ProjectileWeapon(x, y, name, damage, shot_speed, cooldown)
+                    self.__visible_sprites.add(weapon)
+                    self.__item_sprites.append(weapon)
         self.__dmg_ctrl.update_characters(self.__enemy_sprites, self.__player)
 
     def add_projectile(self, sprite, dmg, shot_speed):
         pos = self.__player.getPos()
-        direction = (self.__player.getDirectionX(), self.__player.getDirectionY())
+        # status = self.__player.getFrameIndex()
+        status = self.__player.getStatus()
+        # arrumar para o index:
+        if status == 'up':
+            direction = (0, -1)
+        elif status == 'down':
+            direction = (0, 1)
+        elif status == 'left':
+            direction = (-1, 0)
+        elif status == 'right':
+            direction = (1, 0)
+        else:
+            return 1
         projectile = Projectile(pos, sprite, direction, dmg, shot_speed)
         self.__visible_sprites.add(projectile)
         self.__projectile_sprites.add(projectile)
@@ -146,7 +165,7 @@ class LevelBuilder:
         return self.__obstacle_sprites
 
     def getItemSprites(self):
-        return self.__itens_sprites
+        return self.__item_sprites
 
     def getEnemySprites(self):
         return self.__enemy_sprites

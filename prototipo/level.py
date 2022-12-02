@@ -97,6 +97,7 @@ class Level:
             msg = self.__player.attack()
             if msg is not None:
                 self.__lvl_builder.add_projectile(msg[0], msg[1], msg[2])
+            self.__player.setAttackingStatus()
 
     def move_character(self):
         for character in list(self.__lvl_builder.getEnemySprites()) + [self.__player]:
@@ -117,6 +118,7 @@ class Level:
             proj.hitbox.x += dirx * speed
             proj.hitbox.y += diry * speed
             self.projectile_collision(proj)
+            proj.rect.center = proj.hitbox.center
 
     def projectile_collision(self, projectile):
         for sprite in self.__lvl_builder.getEnemySprites():
