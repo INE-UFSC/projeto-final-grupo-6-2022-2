@@ -8,7 +8,6 @@ class InGame:
     def __init__(self, newgame):
         # Configuração inicial
         self.screen = pygame.display.get_surface()
-        self.clock = pygame.time.Clock()
         self.level = Level()
         
         if not newgame:
@@ -16,9 +15,6 @@ class InGame:
         
 
     def run(self):
-        
-        
-        
         self.screen.fill((0, 0, 0))
         self.level.run()
         
@@ -26,10 +22,3 @@ class InGame:
             return 'morreu'
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             return 'pause'
-        
-    def draw(self):
-        pass
-
-        
-        
-
