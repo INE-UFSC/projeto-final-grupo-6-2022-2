@@ -19,15 +19,17 @@ class Level:
 
     def restart(self):
         self.__lvl_builder.create_map(self.__selected_room)
+        self.__lvl_builder.getPlayer().loadInventory()
     
     def load(self):
         self.__selected_room = self.__dao.get('selected_room')
         self.__lvl_builder.create_map(self.__selected_room)
-        #self.__lvl_builder.getPlayer().loadInventory()
+        self.__lvl_builder.getPlayer().loadInventory()
     
     def dump(self):
-        #self.__player.dumpInventory()
+        self.__player.saveInventory()
         self.__dao.add(self)
+        
     
     #RETIRAR ESSA FUNÇÂO DPS
     def getPlayerDead(self):
@@ -208,9 +210,11 @@ class Level:
         inventario = self.__player.getInventory().getItemList()
         if self.__lvl_builder.getKey() in inventario:
             inventario.remove(self.__lvl_builder.getKey())
+            inventario.append(None)
             self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor())
         if self.__lvl_builder.getDoor() in inventario:
             inventario.remove(self.__lvl_builder.getDoor())
+            inventario.append(None)
             self.__selected_room += 1
             self.dump()
             self.load()

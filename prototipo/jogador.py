@@ -9,6 +9,7 @@ from weapon import Weapon
 from math import sqrt
 from hud import Hud
 from debug import debug
+from inventoryTranslator import InventoryTranslator
 
 
 class Jogador(Character):
@@ -20,7 +21,6 @@ class Jogador(Character):
         self.tamanho = [health*5,10]
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
-
 
     # EXEMPLO:
     def attack(self):
@@ -108,6 +108,12 @@ class Jogador(Character):
         self.get_status()
         self.animate()
         self.__light.update()
+    
+    def loadInventory(self):
+        self.__inventory.setItemList(InventoryTranslator().loadInventory())
+
+    def saveInventory(self):
+        InventoryTranslator().saveInventory(self.__inventory.getItemList())
 
     def getLight(self):
         return self.__light
