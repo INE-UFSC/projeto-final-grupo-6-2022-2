@@ -11,7 +11,6 @@ class Game:
         self.clock = pygame.time.Clock()
         self.__interfaceController = InterfaceController()
         self.__actualInterface = self.__interfaceController.firstInterface()
-        self.__nextInterface = None
         self.__running = False
         self.key = ''
         
@@ -28,7 +27,7 @@ class Game:
                 if self.key == 'exit':
                     pygame.quit()
                     sys.exit()
-                self.__nextInterface, self.__running = self.__interfaceController.nextInterface(self.key, self.__running)
-                self.__actualInterface = self.__nextInterface
+                self.__actualInterface, self.__running = self.__interfaceController.nextInterface(self.key, self.__running)
+            
             self.clock.tick(FPS)
             pygame.display.flip()
