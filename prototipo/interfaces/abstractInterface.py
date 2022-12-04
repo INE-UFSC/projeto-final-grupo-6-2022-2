@@ -31,28 +31,26 @@ class AbstractInterface(ABC):
     def getButtons(self):
         return self.__buttons
     
-    @abstractmethod
     def run(self):
-        pass
-    """        if pygame.mouse.get_pressed(num_buttons=3)[0]:
-            for button in self.__buttons:
+        self.update()
+        if pygame.mouse.get_pressed(num_buttons=3)[0]:
+            for button in self.getButtons():
                 if button.colliding():
-                    self.__key = button.key
+                    self.setKey(button.key)
                     self.setButtonPressed()
             
-        key = self.update()
+        key = self.nextAction()
         if key != None:
-            self.__key = None
+            self.setKey(None)
             return key
         
-        self.draw()
-        self.cooldownBottonPressed()"""
-    
+        self.cooldownBottonPressed()
+        
     @abstractmethod
-    def draw(self):
+    def update(self):
         pass
     
-    def update(self):
+    def nextAction(self):
         if self.getChangeInterface():
             return self.getKey()
 

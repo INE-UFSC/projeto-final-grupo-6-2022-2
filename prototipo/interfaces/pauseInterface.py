@@ -1,11 +1,9 @@
 import pygame
 
-from interfaces.internalInterface import InternalInterface
-from interfaces.optionsInterface import OptionsInterface
-from interfaces.controlsInterface import ControlsInterface
+from interfaces.abstractInterface import AbstractInterface
 from interfaces.button import Button
 
-class PauseInterface(InternalInterface):
+class PauseInterface(AbstractInterface):
     def __init__(self):
         buttons = pygame.sprite.Group(
             [Button(1030, 250, 'interfaces\Botoes\\botao_restart_hover.png',
@@ -26,7 +24,7 @@ class PauseInterface(InternalInterface):
         
         super().__init__(pygame.display.get_surface(), 'interfaces\\telaPause.png', buttons)
 
-    def draw(self):
+    def update(self):
         self.getButtons().update()
         self.getScreen().fill((0,0,0))
         self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))

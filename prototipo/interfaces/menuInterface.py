@@ -1,12 +1,10 @@
 import pygame
 import sys
 
-from interfaces.externalInterface import ExternalInterface
-from interfaces.optionsInterface import OptionsInterface
-from interfaces.controlsInterface import ControlsInterface
+from interfaces.abstractInterface import AbstractInterface
 from interfaces.button import Button
 
-class MenuInterface(ExternalInterface):
+class MenuInterface(AbstractInterface):
     def __init__(self):
         buttons = pygame.sprite.Group(
             [Button(1030, 250, 'interfaces\Botoes\\botao_start_hover.png',
@@ -27,7 +25,7 @@ class MenuInterface(ExternalInterface):
         
         super().__init__(pygame.display.get_surface(), 'interfaces\menu_jogo.png', buttons)
 
-    def draw(self):
+    def update(self):
         self.getButtons().update()
         self.getScreen().fill((0,0,0))
         self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))

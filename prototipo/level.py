@@ -19,7 +19,8 @@ class Level:
 
     def restart(self):
         self.__lvl_builder.create_map(self.__selected_room)
-        self.__lvl_builder.getPlayer().loadInventory()
+        if self.__selected_room != 0:
+            self.__lvl_builder.getPlayer().loadInventory()
     
     def load(self):
         self.__selected_room = self.__dao.get('selected_room')
@@ -33,7 +34,7 @@ class Level:
     
     #RETIRAR ESSA FUNÇÂO DPS
     def getPlayerDead(self):
-        if self.__player.getHealth() <= 0:
+        if self.__player.getHealth() <= 50:
             return True
         return False
 

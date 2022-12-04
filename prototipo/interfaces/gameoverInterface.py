@@ -1,9 +1,9 @@
 import pygame
 
-from interfaces.externalInterface import ExternalInterface
+from interfaces.abstractInterface import AbstractInterface
 from interfaces.button import Button
 
-class GameOverInterface(ExternalInterface):
+class GameOverInterface(AbstractInterface):
     def __init__(self):
         buttons = pygame.sprite.Group(
             [Button(700, 350, 'interfaces\Botoes\\botao_restart_hover.png',
@@ -16,11 +16,6 @@ class GameOverInterface(ExternalInterface):
         super().__init__(pygame.display.get_surface(), 'interfaces\\telaMorte.png', buttons)
 
     def update(self):
-        if self.getChangeInterface():
-            if self.getKey() == 'mainmenu' or self.getKey() == 'restart':
-                return self.getKey()
-
-    def draw(self):
         self.getButtons().update()
         self.getScreen().fill((0,0,0))
         self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))

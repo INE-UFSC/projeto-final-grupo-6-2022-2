@@ -16,13 +16,16 @@ class InGame:
         
 
     def run(self):
-        if pygame.key.get_pressed()[pygame.K_ESCAPE]:
-            return 'pause'
-        if self.level.getPlayerDead():
-            return 'morreu'
+        
+        
         
         self.screen.fill((0, 0, 0))
         self.level.run()
+        
+        if self.level.getPlayerDead():
+            return 'morreu'
+        if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+            return 'pause'
         
     def draw(self):
         pass
