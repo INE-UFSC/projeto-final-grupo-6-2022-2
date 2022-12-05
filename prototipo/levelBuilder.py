@@ -12,6 +12,7 @@ from ySortCameraGroup import YSortCameraGroup
 from damageController import DamageController
 from Projectile import Projectile
 from projectileWeapon import ProjectileWeapon
+from meleeWeapon import MeleeWeapon
 
 
 class LevelBuilder:
@@ -123,6 +124,12 @@ class LevelBuilder:
                     name, damage, shot_speed, cooldown, type = col.split('-')
                     damage, shot_speed, cooldown = int(damage), int(shot_speed), int(cooldown)
                     weapon = ProjectileWeapon(x, y, name, damage, shot_speed, cooldown)
+                    self.__visible_sprites.add(weapon)
+                    self.__item_sprites.append(weapon)
+                elif col.endswith('-mlwpn'):
+                    name, dmg, _range, cooldown, type = col.split('-')
+                    dmg, _range, cooldown = int(dmg), int(_range), int(cooldown)
+                    weapon = MeleeWeapon(x, y, name, dmg, _range, cooldown)
                     self.__visible_sprites.add(weapon)
                     self.__item_sprites.append(weapon)
         self.__dmg_ctrl.update_characters(self.__enemy_sprites, self.__player)

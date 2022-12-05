@@ -8,6 +8,8 @@ class Weapon(Item, ABC):
         self.__attack_cooldown = cooldown
 
     def use(self, player):
+        if player.get_weapon() is not None:
+            player.getInventory().add_item(player.get_weapon())
         player.setWeapon(self)
 
     def getAttackCooldown(self):

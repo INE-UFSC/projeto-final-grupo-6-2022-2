@@ -1,5 +1,5 @@
 from pilha import Pilha
-from sword import MeleeWeapon
+from meleeWeapon import MeleeWeapon
 from projectileWeapon import ProjectileWeapon
 
 from inventoryDAO import InventoryDAO

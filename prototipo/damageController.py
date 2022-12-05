@@ -30,7 +30,7 @@ class DamageController(metaclass=SingletonMeta):
             if (status == 'up' and diffy) > 0 or (status == 'down' and diffy) < 0 or (
                 status == 'left' and diffx > 0) or (status == 'right' and diffx < 0):
                 continue
-            dist = sqrt((diffx)**2 + (diffy)**2)
+            dist = sqrt(diffx**2 + diffy**2)
             if dist <= attack_range:
                 enemy.receiveDamage(damage)
 
