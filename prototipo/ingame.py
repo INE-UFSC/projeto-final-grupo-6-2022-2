@@ -5,13 +5,13 @@ from level import Level
 
 
 class InGame:
-    def __init__(self, newgame):
+    def __init__(self):
         # Configuração inicial
         self.screen = pygame.display.get_surface()
         self.level = Level()
         
-        if not newgame:
-            self.level.load()
+    def loadgame(self):
+        self.level.load()
         
 
     def run(self):
