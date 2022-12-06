@@ -25,7 +25,6 @@ class InventoryTranslator:
 
     def saveInventory(self, item_list):
         for pos, item in enumerate(item_list):
-            print(item)
             if isinstance(item, Pilha):
                 self.__dao.add('pilha', pos)
             elif isinstance(item, MeleeWeapon):
