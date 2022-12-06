@@ -12,20 +12,25 @@ class Level:
         self.__dao = LevelDAO()
         self.__selected_room = 0
         self.display_surface = pygame.display.get_surface()
-        self.__lvl_builder.create_map(self.__selected_room)
-        self.__player = self.__lvl_builder.getPlayer()
+        lists = self.__lvl_builder.create_map(self.__selected_room)
+        self.__visible_sprites = lists[0]
+        self.__obstacle_sprites = lists[1]
+        self.__item_sprites = lists[2]
+        self.__enemy_sprites = lists[3]
+        self.__projectile_sprites = lists[4]
+        self.__player = lists[5]
         self.enemy_update()
         # Cria grupos de sprites
 
     def restart(self):
         self.__lvl_builder.create_map(self.__selected_room)
         if self.__selected_room != 0:
-            self.__lvl_builder.getPlayer().loadInventory()
+            self.__player.loadInventory()
     
     def load(self):
         self.__selected_room = self.__dao.get('selected_room')
         self.__lvl_builder.create_map(self.__selected_room)
-        self.__lvl_builder.getPlayer().loadInventory()
+        self.__player.loadInventory()
     
     def dump(self):
         self.__player.saveInventory()
@@ -39,7 +44,7 @@ class Level:
         return False
 
     def enemy_update(self):
-        for enemy in self.__lvl_builder.getEnemySprites():
+        for enemy in self.__enemy_sprites:
             enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())
             enemy.update()
 
@@ -97,13 +102,14 @@ class Level:
 
         # Input de ataques
         if keys[pygame.K_SPACE]:
-            msg = self.__player.attack()
-            if msg is not None:
-                self.__lvl_builder.add_projectile(msg[0], msg[1], msg[2])
+            projectile = self.__player.attack()
+            if projectile is not None:
+                self.__visible_sprites.add(projectile)
+                self.__projectile_sprites.add(projectile)
             self.__player.setAttackingStatus()
 
     def move_character(self):
-        for character in list(self.__lvl_builder.getEnemySprites()) + [self.__player]:
+        for character in list(self.__enemy_sprites) + [self.__player]:
             if character.getDirectionMagnitude() != 0:
                 character.directionNormalize()
             character.hitbox.x += character.getDirectionX() * character.getSpeed()
@@ -113,7 +119,7 @@ class Level:
             character.rect.center = character.hitbox.center
 
     def move_projectile(self):
-        for proj in list(self.__lvl_builder.getProjectileSprites()):
+        for proj in list(self.__projectile_sprites):
             dirx, diry = proj.getDirection()
             speed = proj.getSpeed()
             if proj.getDirectionMagnitude() != 0:
@@ -124,21 +130,21 @@ class Level:
             proj.rect.center = proj.hitbox.center
 
     def projectile_collision(self, projectile):
-        for sprite in self.__lvl_builder.getEnemySprites():
+        for sprite in self.__enemy_sprites:
             if sprite.hitbox.colliderect(projectile.hitbox):
                 projectile.hit(sprite)
 
-        for sprite in self.__lvl_builder.getObstacleSprites():
+        for sprite in self.__obstacle_sprites:
             if sprite.hitbox.colliderect(projectile.hitbox):
                 projectile.kill()
 
     def collision(self, direction, character):
-        obstacle_sprites = list(self.__lvl_builder.getObstacleSprites())
+        obstacle_sprites = list(self.__obstacle_sprites)
         item_sprites = []
 
         if isinstance(character, Jogador):
-            item_sprites = self.__lvl_builder.getItemSprites()
-            enemy_sprites = self.__lvl_builder.getEnemySprites()
+            item_sprites = self.__item_sprites
+            enemy_sprites = self.__enemy_sprites
 
         else:
             enemy_sprites = [self.__player]
@@ -190,11 +196,11 @@ class Level:
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.enemy_update()
-        self.__player = self.__lvl_builder.getPlayer()
+        # self.__player = self.__player
         self.input()
-        self.__lvl_builder.getVisibleSprites().custom_draw(self.__player)
+        self.__visible_sprites.custom_draw(self.__player)
         self.__player.draw()
-        self.__lvl_builder.getVisibleSprites().update()
+        self.__visible_sprites.update()
         self.move_character()
         self.move_projectile()
         self.chave()
@@ -212,7 +218,7 @@ class Level:
         if self.__lvl_builder.getKey() in inventario:
             inventario.remove(self.__lvl_builder.getKey())
             inventario.append(None)
-            self.__lvl_builder.getObstacleSprites().remove(self.__lvl_builder.getDoor())
+            self.__obstacle_sprites.remove(self.__lvl_builder.getDoor())
         if self.__lvl_builder.getDoor() in inventario:
             inventario.remove(self.__lvl_builder.getDoor())
             inventario.append(None)

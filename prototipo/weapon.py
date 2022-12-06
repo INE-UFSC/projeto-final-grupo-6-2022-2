@@ -16,5 +16,5 @@ class Weapon(Item, ABC):
         return self.__attack_cooldown
 
     @abstractmethod
-    def attack(self):
+    def attack(self, attack_direction):
         pass

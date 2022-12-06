@@ -30,8 +30,10 @@ class Jogador(Character):
             if self.__weapon is None:
                     dmg_ctrl.meele_attack(self.__damage, 1000)
             else:
-                msg = self.__weapon.attack()
-                return msg
+                projectile = self.__weapon.attack(self.getStatus())
+                if projectile is not None:
+                    projectile.setPos(self.getPos())
+                return projectile
 
     def setWeapon(self, weapon):
         if isinstance(weapon, Weapon):
