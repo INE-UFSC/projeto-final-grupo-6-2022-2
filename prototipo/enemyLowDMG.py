@@ -7,8 +7,6 @@ class EnemyLowDMG(Enemy):
     def __init__(self, pos):
         super().__init__(200, pos, 4, 'tiles/porta.png', 20)
 
-    def die(self):
-        self.kill()
     def reactToLight(self):
         posx, posy = self.getPlayerPos()
         diffx = posx - self.getPos()[0]

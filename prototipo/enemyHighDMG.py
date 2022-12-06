@@ -7,8 +7,6 @@ class EnemyHighDMG(Enemy):
         super().__init__(700, pos, 3, 'tiles/parede_vertical_direita.png', 100)
         self.__confusion_counter = 0
 
-    def die(self):
-        self.kill()
     def reactToLight(self):
         posx, posy = self.getPlayerPos()
         diffx = posx - self.getPos()[0]

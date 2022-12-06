@@ -33,12 +33,12 @@ class Enemy(Character):
     def getLightStatus(self):
         return self.__light_status
 
+    def die(self):
+        self.kill()
+
     @abstractmethod
     def reactToLight(self):
         pass
-
-    def getPlayer(self):
-        return self.__player
 
     def getRange(self):
         return self.__range
