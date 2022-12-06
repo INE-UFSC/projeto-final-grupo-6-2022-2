@@ -14,10 +14,7 @@ class Enemy(Character):
 
     def attack(self):
         dmg_ctrl = DamageController()
-        dmg_ctrl.meele_attack(self.__damage, self.__range, self)
-
-    def __str__(self):
-        return 'enemy'
+        dmg_ctrl.melee_attack(self.__damage, self.__range, self)
 
     def update(self):
         self.cooldowns()

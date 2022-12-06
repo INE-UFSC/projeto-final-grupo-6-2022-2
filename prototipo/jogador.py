@@ -13,12 +13,12 @@ from inventoryTranslator import InventoryTranslator
 
 
 class Jogador(Character):
-    def __init__(self, pos, health):
+    def __init__(self, pos):
         super().__init__(100, pos, 5, 'tiles/player.png')
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None
-        self.tamanho = [health*5,10]
+        self.tamanho = [500, 10]
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
 
@@ -28,7 +28,7 @@ class Jogador(Character):
         if not self.getAttackingStatus():
             self.setAttackTimer()
             if self.__weapon is None:
-                    dmg_ctrl.meele_attack(self.__damage, 1000)
+                    dmg_ctrl.melee_attack(self.__damage, 1000)
             else:
                 projectile = self.__weapon.attack(self.getStatus())
                 if projectile is not None:

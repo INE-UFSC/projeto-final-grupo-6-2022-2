@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from math import sqrt
 import pygame
 
 
@@ -12,9 +11,9 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__posy = pos[1]
         # PLANEJAR COMO LIDAR COM EXCECOES:
         self.__sprite = self.image = pygame.image.load(sprite).convert_alpha()
-        self.rect = self.image.get_rect(topleft = pos)
+        self.rect = self.image.get_rect(topleft=pos)
         # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
-        self.hitbox = self.rect.inflate(0,-26)
+        self.hitbox = self.rect.inflate(0, -26)
         self.__status = 'down'
         self.__frame_index = 0
         self.__animation_speed = 0.15
