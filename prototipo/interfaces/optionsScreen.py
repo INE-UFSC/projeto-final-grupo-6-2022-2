@@ -2,10 +2,10 @@ import pygame
 import pygame_widgets
 
 from pygame_widgets.slider import Slider
-from interfaces.abstractInterface import AbstractInterface
+from interfaces.abstractScreen import AbstractScreen
 from interfaces.button import Button
 
-class OptionsInterface(AbstractInterface):
+class OptionsScreen(AbstractScreen):
     def __init__(self):
         buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
                                                        'interfaces\Botoes\\botao_mainmenu.png',

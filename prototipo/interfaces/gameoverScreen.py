@@ -1,9 +1,9 @@
 import pygame
 
-from interfaces.abstractInterface import AbstractInterface
+from interfaces.abstractScreen import AbstractScreen
 from interfaces.button import Button
 
-class GameOverInterface(AbstractInterface):
+class GameOverScreen(AbstractScreen):
     def __init__(self):
         buttons = pygame.sprite.Group(
             [Button(700, 350, 'interfaces\Botoes\\botao_restart_hover.png',

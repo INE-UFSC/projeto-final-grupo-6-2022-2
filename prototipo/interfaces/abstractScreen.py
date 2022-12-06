@@ -1,14 +1,14 @@
 import pygame
 from abc import ABC, abstractmethod
 
-class AbstractInterface(ABC):
+class AbstractScreen(ABC):
     def __init__(self, screen, file_background_image, buttons):
         self.__screen = screen
         self.__background = pygame.image.load(file_background_image)
         self.__buttons = buttons
         self.__pressed_time = 60
         self.__button_pressed = False
-        self.__change_interface = False
+        self.__change_screen = False
 
     def setButtonPressed(self):
         self.__button_pressed = not self.__button_pressed
@@ -19,8 +19,8 @@ class AbstractInterface(ABC):
     def getBackground(self):
         return self.__background
     
-    def getChangeInterface(self):
-        return self.__change_interface
+    def getChangeScreen(self):
+        return self.__change_screen
 
     def getKey(self):
         return self.__key
@@ -51,7 +51,7 @@ class AbstractInterface(ABC):
         pass
     
     def nextAction(self):
-        if self.getChangeInterface():
+        if self.getChangeScreen():
             return self.getKey()
 
     
@@ -59,9 +59,9 @@ class AbstractInterface(ABC):
         current_time = pygame.time.get_ticks()
         if self.__button_pressed:
             if current_time - self.__pressed_time > self.__pressed_time:
-                self.__change_interface = True
+                self.__change_screen = True
         else:
-            self.__change_interface = False
+            self.__change_screen = False
     
     
     

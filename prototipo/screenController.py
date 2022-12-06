@@ -1,24 +1,24 @@
 from ingame import InGame
-from interfaces.menuInterface import MenuInterface
-from interfaces.gameoverInterface import GameOverInterface
-from interfaces.pauseInterface import PauseInterface
-from interfaces.optionsInterface import OptionsInterface
-from interfaces.controlsInterface import ControlsInterface
+from interfaces.menuScreen import MenuScreen
+from interfaces.gameoverScreen import GameOverScreen
+from interfaces.pauseScreen import PauseScreen
+from interfaces.optionsScreen import OptionsScreen
+from interfaces.controlsScreen import ControlsScreen
 
-class InterfaceController:
+class ScreenController:
     def __init__(self):
         self.__ingame = InGame()
-        self.__mainmenu = MenuInterface()
-        self.__pause = PauseInterface()
-        self.__options = OptionsInterface()
-        self.__controls = ControlsInterface()
-        self.__gameover = GameOverInterface()
+        self.__mainmenu = MenuScreen()
+        self.__pause = PauseScreen()
+        self.__options = OptionsScreen()
+        self.__controls = ControlsScreen()
+        self.__gameover = GameOverScreen()
         self.__last_screen = None
 
-    def firstInterface(self):
+    def firstScreen(self):
         return self.__mainmenu
     
-    def nextInterface(self, key, screen):
+    def nextScreen(self, key, screen):
         
         if key == 'mainmenu':
             return self.__mainmenu
@@ -26,7 +26,7 @@ class InterfaceController:
             self.__ingame = InGame()
             return self.__ingame
         elif key == 'continue':
-            if isinstance(screen, PauseInterface):
+            if isinstance(screen, PauseScreen):
                 return self.__ingame
             else:
                 self.__ingame.loadgame()

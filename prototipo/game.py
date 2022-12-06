@@ -1,7 +1,7 @@
 import pygame, sys
 
 from settings import WIDTH, HEIGTH, FPS
-from interfaceController import InterfaceController
+from screenController import ScreenController
 
 
 class Game:
@@ -9,9 +9,8 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         self.clock = pygame.time.Clock()
-        self.__interfaceController = InterfaceController()
-        self.__actualInterface = self.__interfaceController.firstInterface()
-        self.__running = False
+        self.__screen_controller = ScreenController()
+        self.__actualScreen = self.__screen_controller.firstScreen()
         
     def start(self):
         while True:
@@ -20,13 +19,13 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            key = self.__actualInterface.run()
+            key = self.__actualScreen.run()
             
             if key != None:
                 if key == 'exit':
                     pygame.quit()
                     sys.exit()
-                self.__actualInterface = self.__interfaceController.nextInterface(key, self.__actualInterface)
+                self.__actualScreen = self.__screen_controller.nextScreen(key, self.__actualScreen)
             
             self.clock.tick(FPS)
             pygame.display.flip()

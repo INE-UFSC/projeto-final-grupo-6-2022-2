@@ -1,10 +1,10 @@
 import pygame
 
-from interfaces.abstractInterface import AbstractInterface
+from interfaces.abstractScreen import AbstractScreen
 from interfaces.button import Button
 
 
-class ControlsInterface(AbstractInterface):
+class ControlsScreen(AbstractScreen):
     def __init__(self):
         buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
                                                        'interfaces\Botoes\\botao_mainmenu.png',
