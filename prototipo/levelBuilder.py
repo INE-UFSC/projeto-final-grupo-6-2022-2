@@ -23,7 +23,7 @@ class LevelBuilder:
         if sala == 1:
             self.chao = pygame.image.load('tiles/chao.png').convert_alpha()
         if sala == 2:
-            self.chao = pygame.image.load('tiles/chao2.png').convert_alpha()
+            self.chao = pygame.image.load('tiles/chao1.png').convert_alpha()
         return self.chao
     
 

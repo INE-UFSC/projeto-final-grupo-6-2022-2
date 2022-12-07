@@ -218,9 +218,9 @@ class Level:
             inventario.append(None)
             self.__obstacle_sprites.remove(self.__lvl_builder.getDoor())
         if self.__lvl_builder.getDoor() in inventario:
+            self.__selected_room += 1
             inventario.remove(self.__lvl_builder.getDoor())
             inventario.append(None)
-            self.__selected_room += 1
             self.dump()
             self.load()
 

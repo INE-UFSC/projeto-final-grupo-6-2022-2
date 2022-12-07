@@ -41,9 +41,6 @@ class Lanterna(pygame.sprite.Sprite):
         self.pilha = pilha
         self.pilha.setUsando(self.__status)
 
-    def setHealth(self, health):
-        self.health = health
-
     def getStatus(self):
         return self.__status
 
