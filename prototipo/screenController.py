@@ -21,6 +21,7 @@ class ScreenController:
     def nextScreen(self, key, screen):
         
         if key == 'mainmenu':
+            self.__mainmenu = MenuScreen()
             return self.__mainmenu
         elif key == 'start':
             self.__ingame = InGame()

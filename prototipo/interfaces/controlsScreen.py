@@ -16,3 +16,4 @@ class ControlsScreen(AbstractScreen):
         self.getScreen().fill((0,0,0))
         self.getScreen().blit(self.getBackground(), ((1280-self.getBackground().get_rect()[2])//2,0))
         self.getButtons().draw(self.getScreen())
+
