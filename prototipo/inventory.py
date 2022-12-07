@@ -6,7 +6,7 @@ from settings import HEIGTH, WIDTH
 class Inventory():
     def __init__(self):
         self.__item_list = [None]*9
-        self.__image = pygame.image.load('tiles/inventário.png').convert_alpha()
+        self.__image = pygame.image.load('tiles/inventario.png').convert_alpha()
         self.__rect = self.__image.get_rect()
         self.__x = (WIDTH-self.__rect[2])/2
         self.__y = HEIGTH-70
