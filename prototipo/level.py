@@ -22,13 +22,25 @@ class Level:
         # Cria grupos de sprites
 
     def restart(self):
-        self.__lvl_builder.create_map(self.__selected_room)
+        lists = self.__lvl_builder.create_map(self.__selected_room)
+        self.__visible_sprites = lists[0]
+        self.__obstacle_sprites = lists[1]
+        self.__item_sprites = lists[2]
+        self.__enemy_sprites = lists[3]
+        self.__projectile_sprites = lists[4]
+        self.__player = lists[5]
         if self.__selected_room != 0:
             self.__player.loadInventory()
     
     def load(self):
         self.__selected_room = self.__dao.get('selected_room')
-        self.__lvl_builder.create_map(self.__selected_room)
+        lists = self.__lvl_builder.create_map(self.__selected_room)
+        self.__visible_sprites = lists[0]
+        self.__obstacle_sprites = lists[1]
+        self.__item_sprites = lists[2]
+        self.__enemy_sprites = lists[3]
+        self.__projectile_sprites = lists[4]
+        self.__player = lists[5]
         self.__player.loadInventory()
     
     def dump(self):
