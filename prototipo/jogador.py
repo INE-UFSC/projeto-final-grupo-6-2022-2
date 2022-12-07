@@ -8,7 +8,7 @@ from support import import_folder
 from weapon import Weapon
 from math import sqrt
 from hud import Hud
-from debug import debug
+from debug import Debug
 from inventoryTranslator import InventoryTranslator
 
 

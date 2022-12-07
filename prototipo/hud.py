@@ -1,5 +1,5 @@
 import pygame
-from pilha import Pilha
+from debug import Debug
 
 
 class Hud():
@@ -7,13 +7,14 @@ class Hud():
         self.__hud_pilha = pygame.image.load('tiles/hud_pilha.png').convert_alpha()
         self.__hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha()
         self.__display = pygame.display.get_surface()
+        self.__debug = Debug()
 
 
 
-    def draw(self, player):
+    def draw(self, player, sala_atual):
         self.draw_timer_pilha(player.getLight().pilha)
         self.draw_health(player.getHealth())
-
+        self.draw_sala_atual(sala_atual)
 
 
     def draw_timer_pilha(self, pilha):
@@ -41,23 +42,11 @@ class Hud():
         pygame.draw.rect(self.__display, (0, 255, 0), (x_barra, y_barra, (width_barra / vida_maxima) * vida, gordura_da_barra))
         self.__display.blit(self.__hud_vida, (x, y))
 
-    def update(self, pilha, vida):
-        # self.__pilha.contador()
+    def draw_sala_atual(self, sala_atual):
+        self.__debug.debug('Sala', sala_atual, 100, 50)
+
+    def update(self, pilha, vida, sala_atual):
+
         self.draw(pilha, vida)
         self.draw_health(vida)
-
-
-
-'''    def draw_timer(self, surface):
-        
-        if self.__status:
-            pygame.draw.rect(surface, (0, 0, 255), (2, 15, self.tamanho[0] - 10, self.tamanho[1]))
-            pygame.draw.rect(surface, (0, 255, 0), (2, 15, self.tempo_restante/6 - 10, self.tamanho[1]))
-        else:
-            pygame.draw.rect(surface, (255, 0, 0), (2, 15, self.tamanho[0] - 10, self.tamanho[1]))
-
-        x =0
-        y = 0
-        display = pygame.display.get_surface()
-        display.blit(self.hud_pilha, (x, y))
-        '''
+        self.draw_sala_atual(sala_atual)

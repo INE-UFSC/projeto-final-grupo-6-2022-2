@@ -1,6 +1,5 @@
 from item import *
 from levelBuilder import LevelBuilder
-from debug import debug
 from jogador import Jogador
 from levelDAO import LevelDAO
 
@@ -206,12 +205,11 @@ class Level:
         self.chave()
         self.draw_hud()
         
-        debug('Sala', self.__selected_room, 100, 20)
 
 
     def draw_hud(self):
-        self.__lvl_builder.getHud().draw(self.__player)
-
+        self.__lvl_builder.getHud().draw(self.__player, self.__selected_room)
+        
         
     def chave(self):
         inventario = self.__player.getInventory().getItemList()
