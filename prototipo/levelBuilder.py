@@ -10,7 +10,6 @@ from enemyLowDMG import EnemyLowDMG
 from enemyHighDMG import EnemyHighDMG
 from ySortCameraGroup import YSortCameraGroup
 from damageController import DamageController
-from Projectile import Projectile
 from projectileWeapon import ProjectileWeapon
 from meleeWeapon import MeleeWeapon
 
@@ -87,7 +86,7 @@ class LevelBuilder:
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'p':
-                    __player = Jogador((x, y), 100)
+                    __player = Jogador((x, y))
                     __visible_sprites.add(__player)
                 elif col == 'b':
                     battery = Pilha(x, y, 'tiles/pilha.png', 50)
@@ -140,24 +139,6 @@ class LevelBuilder:
 
     def getDoor(self):
         return self.__door
-
-    # def getPlayer(self):
-    #     return self.__player
-    #
-    # def getProjectileSprites(self):
-    #     return __projectile_sprites
-    #
-    # def getVisibleSprites(self):
-    #     return __visible_sprites
-    #
-    # def getObstacleSprites(self):
-    #     return __obstacle_sprites
-
-    # def getItemSprites(self):
-    #     return __item_sprites
-
-    # def getEnemySprites(self):
-    #     return __enemy_sprites
 
     def getHud(self):
         return self.__hud
