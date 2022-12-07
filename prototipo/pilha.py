@@ -6,14 +6,6 @@ mixer.init()
 
 
 class Pilha(Item):
-    # SEGUINTE AMIGOS
-    # ISSO AQUI É UM ITEM QUE FICA NO CHAO
-    # OU SEJA
-    # ELE NAO DEVE GERENCIAR A LANTERNA
-    # ELE DEVE SER SO UM ITEM Q É PEGO DO CHAO
-    # E SO
-    # PORQUE QUE TEM O CONTADOR AQUI?
-    # VCS DEVERIAM CRIAR UMA CLASSE QUE GERENCIA A CARGA DA LANTERNA
     def __init__(self, x, y, sprite, nivel, status = True):
         super().__init__(x, y, sprite)
         self.__som = Sound('pilha')
