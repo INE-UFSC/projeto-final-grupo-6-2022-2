@@ -2,6 +2,7 @@ import pygame, sys
 
 from settings import WIDTH, HEIGTH, FPS
 from screenController import ScreenController
+from sound import Sound
 
 
 class Game:
@@ -10,6 +11,7 @@ class Game:
         pygame.display.set_caption('Flashlight')
         pygame.display.set_icon(icone_do_jogo)
         pygame.init()
+        Sound().setVolume(50)
         self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         self.clock = pygame.time.Clock()
         self.__screen_controller = ScreenController()
