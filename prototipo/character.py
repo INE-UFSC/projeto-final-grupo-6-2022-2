@@ -102,7 +102,7 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def receiveDamage(self, damage: int):
         if isinstance(damage, int):
-            if self.__health <= damage:
+            if damage >= self.__health:
                 self.die()
             else:
                 self.__health -= damage

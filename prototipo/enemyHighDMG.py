@@ -66,20 +66,9 @@ class EnemyHighDMG(Enemy):
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()
-            
-    def die(self):
 
-        self.__enemyLowDMG1 = EnemyLowDMG(self.getPos())
-        self.__enemyLowDMG2 = EnemyLowDMG(pos = (self.getPos()[0] + 20, self.getPos()[1] + 20))
-        self.__enemyLowDMG3 = EnemyLowDMG(pos = (self.getPos()[0] + 30, self.getPos()[1] + 30))
-
-        self.spawn_enemy(self.__enemyLowDMG1)
-        self.spawn_enemy(self.__enemyLowDMG2)
-        self.spawn_enemy(self.__enemyLowDMG3)
-        
-        self.getSpawnEnemy()(self.__enemyLowDMG1)
-        self.getSpawnEnemy()(self.__enemyLowDMG2)
-        self.getSpawnEnemy()(self.__enemyLowDMG3)
-
-        self.kill()
-
+    def getBabies(self):
+        baby1 = EnemyLowDMG((self.getPosX(), self.getPosY()))
+        baby2 = EnemyLowDMG((self.getPosX()+20, self.getPosY()+20))
+        baby3 = EnemyLowDMG((self.getPosX()+30, self.getPosY()+30))
+        return [baby1, baby2, baby3]
