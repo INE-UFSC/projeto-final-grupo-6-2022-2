@@ -1,5 +1,6 @@
 from inventoryDAO import InventoryDAO
 from abstractPickable import AbstractPickable
+from item import Item
 
 class InventoryPickable(AbstractPickable):
     def __init__(self):
@@ -7,9 +8,16 @@ class InventoryPickable(AbstractPickable):
         
     def fromPickles(self):
         inventory = self.getDAO().get('inventory')
-        inventory.setImage(True)
+       
+        for item in inventory.getItemList():
+            if isinstance(item, Item):
+                item.setImage(True)
+        
         return inventory
         
     def toPickles(self, inventory):
-        inventory.setImage(False)
+        for item in inventory.getItemList():
+            if isinstance(item, Item):
+                item.setImage(False)
+                
         self.getDAO().add(inventory)
