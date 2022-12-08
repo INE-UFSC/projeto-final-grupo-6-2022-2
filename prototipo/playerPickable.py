@@ -14,7 +14,8 @@ class PlayerPickable(AbstractPickable):
                 item.setImage(True)
         
         weapon = self.getDAO().get('weapon')
-        weapon.setImage(True)
+        if isinstance(weapon, Item):
+            weapon.setImage(True)
         
         return inventory, weapon
         
@@ -26,7 +27,8 @@ class PlayerPickable(AbstractPickable):
         
         
         weapon = player.get_weapon()
-        weapon.setImage(False)
+        if isinstance(weapon, Item):
+            weapon.setImage(False)
         
         self.getDAO().add('inventory', inventory)
         self.getDAO().add('weapon', weapon)
