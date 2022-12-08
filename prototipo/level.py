@@ -62,6 +62,8 @@ class Level:
     def input(self):
         keys = pygame.key.get_pressed()
 
+
+
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.__player.setDirectionY(-1)
             self.__player.setStatus('up')

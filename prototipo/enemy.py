@@ -73,7 +73,7 @@ class Enemy(Character):
         return self.__light_status
 
     def die(self):
-        self.kill()
+        pass
 
     
 

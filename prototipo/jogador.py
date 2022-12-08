@@ -24,7 +24,7 @@ class Jogador(Character):
         if not self.getAttackingStatus():
             self.setAttackTimer()
             if self.__weapon is None:
-                    dmg_ctrl.melee_attack(self.__damage, 1000)
+                    dmg_ctrl.melee_attack(self.__damage, 100, self.get_status())
             else:
                 projectile = self.__weapon.attack(self.getStatus())
                 if projectile is not None:

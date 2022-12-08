@@ -1,6 +1,7 @@
 from enemy import Enemy
 from assetController import AssetController
 from math import sqrt
+from enemyLowDMG import EnemyLowDMG
 
 
 class EnemyHighDMG(Enemy):
@@ -66,3 +67,9 @@ class EnemyHighDMG(Enemy):
             self.setAttackTimer()
             self.attack()
             
+    def die(self):
+        # Morre e cria instancias do enemylowdmg
+        EnemyLowDMG(self.getPos())
+        EnemyLowDMG(self.getPos())
+        EnemyLowDMG(self.getPos())
+        self.kill()
