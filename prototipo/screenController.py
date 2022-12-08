@@ -4,6 +4,7 @@ from interfaces.gameoverScreen import GameOverScreen
 from interfaces.pauseScreen import PauseScreen
 from interfaces.optionsScreen import OptionsScreen
 from interfaces.controlsScreen import ControlsScreen
+from sound import Sound
 
 class ScreenController:
     def __init__(self):
@@ -48,3 +49,7 @@ class ScreenController:
             return self.__controls
         elif key == 'voltar':
             return self.__last_screen
+        elif key == 'apply':
+            volume = self.__options.getSlider().getValue()
+            Sound().setVolume(volume)
+            return self.__options

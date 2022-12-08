@@ -1,10 +1,12 @@
 from enemy import Enemy
-import pygame
+from assetController import AssetController
 from math import sqrt
+
+
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(700, pos, 3, 'tiles/parede_vertical_direita.png', 100)
+        super().__init__(700, pos, 3, AssetController().get_asset('enemyhighdamage'), 100)
         self.__confusion_counter = 0
 
     def reactToLight(self):

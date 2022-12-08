@@ -17,4 +17,4 @@ class MeleeWeapon(Weapon):
 
     def attack(self, attack_direction):
         dmg_ctrl = DamageController()
-        dmg_ctrl.meele_attack(self.__damage, self.__range, attack_direction)
+        dmg_ctrl.melee_attack(self.__damage, self.__range, attack_direction)

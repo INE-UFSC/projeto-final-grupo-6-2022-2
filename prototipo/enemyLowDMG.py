@@ -1,11 +1,12 @@
 from enemy import Enemy
 from math import sqrt
+from assetController import AssetController
 
 
 class EnemyLowDMG(Enemy):
     # balancear os valores de vida e velocidade:
     def __init__(self, pos):
-        super().__init__(200, pos, 4, 'tiles/porta.png', 20)
+        super().__init__(200, pos, 4, AssetController().get_asset('enemyhighdamage'), 20)
 
     def reactToLight(self):
         posx, posy = self.getPlayerPos()
