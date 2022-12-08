@@ -1,16 +1,18 @@
 import pygame
 from debug import Debug
-
+from settings import HEIGTH, WIDTH
+from item import Item
+from assetController import AssetController
 
 class Hud():
     def __init__(self):
-        self.__hud_pilha = pygame.image.load('tiles/hud_pilha.png').convert_alpha()
-        self.__hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha()
-        self.__key = pygame.image.load('tiles/key.png').convert_alpha()
-        self.__key_indisponivel = pygame.image.load('tiles/key_indisponivel.png').convert_alpha()
+        self.__hud_pilha = AssetController().get_asset('hud_pilha')
+        self.__hud_vida = AssetController().get_asset('hud_vida')
+        self.__key = AssetController().get_asset('key')
+        self.__key_indisponivel = AssetController().get_asset('key_indisponivel')
+        self.__inventario = AssetController().get_asset('inventario')
         self.__display = pygame.display.get_surface()
         self.__debug = Debug()
-
 
 
     def draw(self, player, sala_atual):
@@ -18,6 +20,18 @@ class Hud():
         self.draw_health(player.getHealth())
         self.draw_sala_atual(sala_atual)
         self.draw_se_tiver_chave(player.getKey())
+        self.draw_inventario(self.__display, player.getInventory())
+
+
+    def draw_inventario(self, surface, inventario):
+        self.__rect = self.__inventario.get_rect()
+        x = (WIDTH - self.__rect[2])/2
+        y = HEIGTH - 70
+        surface.blit(self.__inventario, (x, y))
+        valor = self.__rect[2]/9
+        for pos,item in enumerate(inventario.getItemList()):
+            if isinstance(item, Item):
+                item.draw(x, 650, valor, pos, surface)
 
 
     def draw_timer_pilha(self, pilha):

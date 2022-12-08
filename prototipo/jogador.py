@@ -19,7 +19,6 @@ class Jogador(Character):
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
 
-    # EXEMPLO:
     def attack(self):
         dmg_ctrl = DamageController()
         if not self.getAttackingStatus():
@@ -83,20 +82,13 @@ class Jogador(Character):
     def draw(self):
         surface = pygame.display.get_surface()
         self.__light.draw(surface)
-        self.__inventory.draw(surface)
 
-        
 
-    #classe Character(ABC)
     def animate(self):
         animation = self.animations[self.getStatus()]
-        #Loop de animação por frame
         self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed())
-        # Verifica se o frame atual é maior que o número de frames
         if self.getFrameIndex() >= len(animation):
             self.setFrameIndex(0)
-        
-        # Setando o frame atual
         self.image = animation[int(self.getFrameIndex())]
         self.rect = self.image.get_rect(center = self.hitbox.center)
         
