@@ -18,7 +18,7 @@ class Sound(metaclass=SingletonMeta):
     def __init__(self):
         self.__music = pygame.mixer.music
         self.__music_priority = 0
-        self.__sound_channel = pygame.mixer.Channel(id=1)
+        self.__sound_channel = pygame.mixer.Channel(1)
         self.__sounds = {'pilha': pygame.mixer.Sound('sounds/pilha.wav'),
                          'sem_pilha': pygame.mixer.Sound('sounds/sem_pilha.wav'),
                          'key': pygame.mixer.Sound('sounds/key.wav'),
