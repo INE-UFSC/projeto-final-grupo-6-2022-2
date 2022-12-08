@@ -31,13 +31,6 @@ class Character(ABC, pygame.sprite.Sprite):
         if self.__attacking:
             if current_time - self.__attack_time > attack_cooldown:
                 self.__attacking = False
-
-
-    def getPosx(self):
-        return self.__posx
-    
-    def getPosy(self):
-        return self.__posy
     
     def getAttackingStatus(self):
         return self.__attacking

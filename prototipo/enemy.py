@@ -78,6 +78,7 @@ class Enemy(Character):
     def getLightStatus(self):
         return self.__light_status
 
+    @abstractmethod
     def die(self):
         pass
 
