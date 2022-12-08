@@ -19,8 +19,10 @@ class Sound(metaclass=SingletonMeta):
         self.__music = pygame.mixer.music
         self.__music_priority = 0
         self.__sound_channel = pygame.mixer.Channel(id=1)
-        self.__sounds = {'pilha': pygame.mixer.Sound(f'sounds/pilha.wav'),
-                         'sem_pilha': pygame.mixer.Sound(f'sounds/sem_pilha.wav')}
+        self.__sounds = {'pilha': pygame.mixer.Sound('sounds/pilha.wav'),
+                         'sem_pilha': pygame.mixer.Sound('sounds/sem_pilha.wav'),
+                         'key': pygame.mixer.Sound('sounds/key.wav'),
+                         'lanterna': pygame.mixer.Sound('sounds/lanterna.wav')}
 
 
     def playSound(self, sound_name):
@@ -41,3 +43,7 @@ class Sound(metaclass=SingletonMeta):
             self.__music.play()
 
             self.__music_priority = priority
+
+    def setVolume(self, volume: float):
+        self.__music.set_volume(volume/2)
+        self.__sound_channel.set_volume(volume)
