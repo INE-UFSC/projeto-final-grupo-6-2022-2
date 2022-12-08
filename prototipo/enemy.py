@@ -34,7 +34,11 @@ class Enemy(Character):
         self.__light_status = light_status
 
     def import_enemy_assets(self):
-        character_path = 'graphics/enemy/'
+        # Vê se o inimigo é um enemyhighdmg ou um enemylowdmg
+        if self.__class__.__name__ == 'EnemyHighDMG':
+            character_path = 'graphics/enemyhighdmg/'
+        else:
+            character_path = 'graphics/enemylowdmg/'
         self.animations = {'left': [],'right': []}
         for animation in self.animations.keys():
 
@@ -49,8 +53,7 @@ class Enemy(Character):
         if self.getDirectionX() >= 0:
             self.__status = 'right'
         else:
-            self.__status = 'left'
-            
+            self.__status = 'left'            
         animation = self.animations[self.__status]
 
         #Loop de animação por frame

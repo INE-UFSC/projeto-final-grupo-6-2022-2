@@ -60,15 +60,7 @@ class Level:
             enemy.update()
 
     def input(self):
-        # Input de movimento
-        # Se apertar J diminui a vida do player
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_j]:
-            self.__player.tomar_Dano_ou_curar_vida(-1)
-            print(self.__player.getHealth())
-        if keys[pygame.K_k]:
-            self.__player.tomar_Dano_ou_curar_vida(1)
-            print(self.__player.getHealth())
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.__player.setDirectionY(-1)
@@ -233,13 +225,11 @@ class Level:
             inventario.append(None)
             self.__obstacle_sprites.remove(self.__lvl_builder.getDoor())
             self.__player.setKey(True)
-            print(self.__player.have_key)
         if self.__lvl_builder.getDoor() in inventario:
             self.__selected_room += 1
             inventario.remove(self.__lvl_builder.getDoor())
             inventario.append(None)
             self.__player.setKey(False)
-            print(self.__player.have_key)
             self.dump()
             self.load()
 

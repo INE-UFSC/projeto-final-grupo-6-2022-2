@@ -6,7 +6,7 @@ from math import sqrt
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(700, pos, 3, AssetController().get_asset('enemyhighdamage'), 100)
+        super().__init__(700, pos, 3, AssetController().get_asset('enemyhighdmg'), 100)
         self.__confusion_counter = 0
 
     def reactToLight(self):

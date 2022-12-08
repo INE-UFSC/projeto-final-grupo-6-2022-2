@@ -52,10 +52,8 @@ class Hud():
         self.__debug.debug('Chave', '', 180, 50)
         if chave:
             self.__display.blit(self.__key, (50, 170))
-            print(chave)
         else:
             self.__display.blit(self.__key_indisponivel, (50, 170))
-            print(chave)
 
 
 
