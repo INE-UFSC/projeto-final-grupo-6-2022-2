@@ -11,7 +11,7 @@ from inventoryPickable import InventoryPickable
 
 class Jogador(Character):
     def __init__(self, pos):
-        super().__init__(100, pos, 5, AssetController().get_asset('player'))
+        super().__init__(100, pos, 5, 'player')
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None

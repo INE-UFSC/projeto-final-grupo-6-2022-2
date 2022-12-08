@@ -1,5 +1,4 @@
 from enemy import Enemy
-from assetController import AssetController
 from math import sqrt
 from enemyLowDMG import EnemyLowDMG
 
@@ -7,7 +6,7 @@ from enemyLowDMG import EnemyLowDMG
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(700, pos, 3, AssetController().get_asset('enemyhighdmg'), 100)
+        super().__init__(700, pos, 3, 'enemyhighdmg', 100)
         self.__confusion_counter = 0
 
 

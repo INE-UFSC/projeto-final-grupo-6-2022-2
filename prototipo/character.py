@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import pygame
+from assetController import AssetController
 
 
 class Character(ABC, pygame.sprite.Sprite):
@@ -11,7 +12,7 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__posy = pos[1]
         self.have_key = False
         # PLANEJAR COMO LIDAR COM EXCECOES:
-        self.image = sprite
+        self.image = AssetController().get_asset(sprite)
         self.rect = self.image.get_rect(topleft=pos)
         # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
         self.hitbox = self.rect.inflate(0, -25)
