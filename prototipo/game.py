@@ -6,6 +6,9 @@ from screenController import ScreenController
 
 class Game:
     def __init__(self):
+        icone_do_jogo = pygame.image.load('interfaces/icone.png')
+        pygame.display.set_caption('Flashlight')
+        pygame.display.set_icon(icone_do_jogo)
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         self.clock = pygame.time.Clock()
