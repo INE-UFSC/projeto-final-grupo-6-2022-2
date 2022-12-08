@@ -12,6 +12,7 @@ from ySortCameraGroup import YSortCameraGroup
 from damageController import DamageController
 from projectileWeapon import ProjectileWeapon
 from meleeWeapon import MeleeWeapon
+from assetController import AssetController
 
 
 class LevelBuilder:
@@ -42,73 +43,73 @@ class LevelBuilder:
                 x = col_index * TILESIZE
                 y = row_index * TILESIZE
                 if col == 'x':
-                    tile = Tile((x, y), 'parede_vertical_esquerda')
+                    tile = Tile((x, y), AssetController().get_asset('parede_vertical_esquerda'))
                     
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'm':
-                    tile = Tile((x, y), 'parede_quina_direita_cima')
+                    tile = Tile((x, y), AssetController().get_asset('parede_quina_direita_cima'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'n':
-                    tile = Tile((x, y), 'parede_quina_esquerda_baixo')
+                    tile = Tile((x, y), AssetController().get_asset('parede_quina_esquerda_baixo'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'o':
-                    tile = Tile((x, y), 'parede_quina_direita_baixo')
+                    tile = Tile((x, y), AssetController().get_asset('parede_quina_direita_baixo'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'j':
-                    tile = Tile((x, y), 'parede_quina_esquerda_cima')
+                    tile = Tile((x, y), AssetController().get_asset('parede_quina_esquerda_cima'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'a':
-                    tile = Tile((x, y), 'parede')
+                    tile = Tile((x, y), AssetController().get_asset('parede'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'z':
-                    tile = Tile((x, y), 'parede_com_corrente')
+                    tile = Tile((x, y), AssetController().get_asset('parede_com_corrente'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'i':
-                    tile = Tile((x, y), 'parede_com_vaso')
+                    tile = Tile((x, y), AssetController().get_asset('parede_com_vaso'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 if col == 'q':
-                    tile = Tile((x, y), 'parede_vertical_direita')
+                    tile = Tile((x, y), AssetController().get_asset('parede_vertical_direita'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'h':
-                    tile = Tile((x, y), 'parede_horizontal_baixo')
+                    tile = Tile((x, y), AssetController().get_asset('parede_horizontal_baixo'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 if col == 'y':
-                    tile = Tile((x, y), 'parede_horizontal_cima')
+                    tile = Tile((x, y), AssetController().get_asset('parede_horizontal_cima'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'p':
                     __player = Jogador((x, y))
                     __visible_sprites.add(__player)
                 elif col == 'b':
-                    battery = Pilha(x, y, 'tiles/pilha.png', 50)
+                    battery = Pilha(x, y, AssetController().get_asset('pilha'), 50)
                     __item_sprites.append(battery)
                     __visible_sprites.add(battery)
                 elif col == 'l':
-                    door = Door(x, y, 'tiles/porta.png')
+                    door = Door(x, y, AssetController().get_asset('porta'))
                     __visible_sprites.add(door)
                     __obstacle_sprites.add(door)
                     self.__door = door
                     __item_sprites.append(door)
                 elif col == 'v':
-                    tile = Tile((x, y), 'barril')
+                    tile = Tile((x, y), AssetController().get_asset('barril'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'c':
-                    tile = Tile((x, y), 'porta_cima')
+                    tile = Tile((x, y), AssetController().get_asset('porta_cima'))
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'k':
-                    key = Key(x, y, 'tiles/key.png')
+                    key = Key(x, y, AssetController().get_asset('key'))
                     __visible_sprites.add(key)
                     __item_sprites.append(key)
                     self.__key = key

@@ -1,5 +1,5 @@
 import pygame
-
+from assetController import AssetController
 from pilha import Pilha
 from settings import WIDTH, HEIGTH
 from sound import Sound
@@ -11,7 +11,7 @@ class Lanterna(pygame.sprite.Sprite):
         # self.__som = Sound('lanterna')
         self.cor = (0, 255, 255)
         self.__status = status
-        self.pilha = Pilha(pos[0], pos[1], 'tiles/pilha.png', 50)
+        self.pilha = Pilha(pos[0], pos[1], AssetController().get_asset('pilha'), 50)
         self.tempo_ligada = tempo_ligada
 
         self.Onimage = pygame.image.load('tiles/lightOn.png').convert_alpha()

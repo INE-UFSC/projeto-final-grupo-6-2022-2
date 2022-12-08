@@ -1,14 +1,16 @@
 import pygame
 from abc import ABC, abstractmethod
+from assetController import AssetController
+
 
 #Deve ser uma classe Abstrata
 class Item(ABC, pygame.sprite.Sprite):
-    def  __init__(self, x, y, sprite):
+    def __init__(self, x, y, sprite):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
         self.sprite = sprite
-        self.image = pygame.image.load(sprite).convert_alpha()
+        self.image = sprite
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.hitbox = self.rect.inflate(0,0)
         self.posicao = [self.x, self.y]
@@ -21,7 +23,7 @@ class Item(ABC, pygame.sprite.Sprite):
         if not load:
             self.image = None
         else:
-            self.image = pygame.image.load(self.sprite).convert_alpha()
+            self.image = AssetController().get_asset(self.sprite)
 
     def getImage(self):
         return self.image

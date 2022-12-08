@@ -18,13 +18,15 @@ class AssetController(metaclass=SingletonMeta):
                          'parede_com_vaso': pygame.image.load('tiles/parede_com_vaso.png').convert_alpha(),
                          'parede_vertical_direita': pygame.image.load('tiles/parede_vertical_direita.png').convert_alpha(),
                          'parede_horizontal_cima': pygame.image.load('tiles/parede_horizontal_cima.png').convert_alpha(),
+                         'parede_horizontal_baixo': pygame.image.load('tiles/parede_horizontal_baixo.png').convert_alpha(),
                          'pilha': pygame.image.load('tiles/pilha.png').convert_alpha(),
+                         'pilha_projectile': pygame.image.load('tiles/pilha.png').convert_alpha(),
                          'hud_pilha': pygame.image.load('tiles/hud_pilha.png').convert_alpha(),
                          'porta': pygame.image.load('tiles/porta.png').convert_alpha(),
                          'barril': pygame.image.load('tiles/barril.png').convert_alpha(),
                          'porta_cima': pygame.image.load('tiles/porta_cima.png').convert_alpha(),
-                         'key': pygame.image.load('tiles/key.png'),
-                         'key_indisponivel': pygame.image.load('tiles/key_indisponivel.png'),
+                         'key': pygame.image.load('tiles/key.png').convert_alpha(),
+                         'key_indisponivel': pygame.image.load('tiles/key_indisponivel.png').convert_alpha(),
                          'enemyhighdmg': pygame.image.load('tiles/parede_vertical_direita.png').convert_alpha(),
                          'enemylowdmg': pygame.image.load('tiles/porta.png').convert_alpha()
                          }

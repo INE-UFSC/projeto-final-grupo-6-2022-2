@@ -1,11 +1,12 @@
 from weapon import Weapon
 from Projectile import Projectile
+from assetController import AssetController
 
 
 class ProjectileWeapon(Weapon):
 
     def __init__(self, x, y, name, damage, shot_speed, cooldown):
-        super().__init__(x, y, f'tiles/{name}.png', cooldown)
+        super().__init__(x, y, AssetController().get_asset(name), cooldown)
         self.__name = name
         self.__damage = damage
         self.__shot_speed = shot_speed
@@ -19,4 +20,4 @@ class ProjectileWeapon(Weapon):
             direction = (-1, 0)
         elif attack_direction == 'right' or attack_direction == 'right_idle':
             direction = (1, 0)
-        return Projectile(f'tiles/{self.__name}_projectile.png', direction, self.__damage, self.__shot_speed)
+        return Projectile(f'{self.__name}_projectile', direction, self.__damage, self.__shot_speed)

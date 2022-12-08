@@ -1,12 +1,13 @@
 import pygame
 from damageController import DamageController
+from assetController import AssetController
 
 
 class Projectile(pygame.sprite.Sprite):
 
     def __init__(self, sprite, direction, damage, speed):
         super().__init__()
-        self.__sprite = self.image = pygame.image.load(sprite).convert_alpha()
+        self.__sprite = self.image = AssetController().get_asset(sprite)
         self.__damage = damage
         self.__direction = pygame.math.Vector2()
         self.__direction.x = direction[0]
