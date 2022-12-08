@@ -46,6 +46,7 @@ class ScreenController:
             self.__last_screen = screen
             return self.__options
         elif key == 'controls':
+            self.__last_screen = screen
             return self.__controls
         elif key == 'voltar':
             return self.__last_screen

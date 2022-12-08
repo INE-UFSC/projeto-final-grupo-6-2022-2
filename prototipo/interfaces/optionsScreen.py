@@ -8,9 +8,9 @@ from sound import Sound
 
 class OptionsScreen(AbstractScreen):
     def __init__(self):
-        buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
-                                                       'interfaces\Botoes\\botao_mainmenu.png',
-                                                       'interfaces\Botoes\\botao_mainmenu_pressed.png', 'voltar')],
+        buttons = pygame.sprite.Group([Button(150, 75, 'interfaces\Botoes\\botao_voltar_hover.png', 
+                                                       'interfaces\Botoes\\botao_voltar.png',
+                                                       'interfaces\Botoes\\botao_voltar_pressed.png', 'voltar')],
                                       [Button(375, 600, 'interfaces\Botoes\\botao_apply_hover.png', 
                                                        'interfaces\Botoes\\botao_apply.png',
                                                        'interfaces\Botoes\\botao_apply_pressed.png', 'apply')])

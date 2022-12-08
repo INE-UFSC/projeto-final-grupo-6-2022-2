@@ -6,9 +6,9 @@ from interfaces.button import Button
 
 class ControlsScreen(AbstractScreen):
     def __init__(self):
-        buttons = pygame.sprite.Group([Button(150, 50, 'interfaces\Botoes\\botao_mainmenu_hover.png', 
-                                                       'interfaces\Botoes\\botao_mainmenu.png',
-                                                       'interfaces\Botoes\\botao_mainmenu_pressed.png', 'mainmenu')])
+        buttons = pygame.sprite.Group([Button(150, 75, 'interfaces\Botoes\\botao_voltar_hover.png', 
+                                                       'interfaces\Botoes\\botao_voltar.png',
+                                                       'interfaces\Botoes\\botao_voltar_pressed.png', 'voltar')])
         super().__init__(pygame.display.get_surface(), 'interfaces\\telaControles.png', buttons)
 
     def update(self):
