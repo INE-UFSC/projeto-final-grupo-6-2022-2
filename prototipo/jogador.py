@@ -15,6 +15,7 @@ class Jogador(Character):
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None
+        self.__dead = False
         self.tamanho = [500, 10]
         self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
         self.__damage = 100
@@ -113,6 +114,9 @@ class Jogador(Character):
     def get_weapon(self):
         return self.__weapon
     
+    def getDead(self):
+        return self.__dead
+    
     def die(self):
-        pass
+        self.__dead = True
     

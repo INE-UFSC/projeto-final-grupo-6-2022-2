@@ -50,9 +50,7 @@ class Level:
     
     #RETIRAR ESSA FUNÇÂO DPS
     def getPlayerDead(self):
-        if self.__player.getHealth() <= 50:
-            return True
-        return False
+        return self.__player.getDead()
 
     # # Pega a instancia que criamos no enemyHighDMG e passa para o level
     # def spawn_enemy(self, enemy):

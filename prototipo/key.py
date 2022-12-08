@@ -13,5 +13,5 @@ class Key(Item):
         self.kill()
     
     def exclui(self):
-        #self.__som.play()        
+        Sound().playSound('key')       
         self.kill()
