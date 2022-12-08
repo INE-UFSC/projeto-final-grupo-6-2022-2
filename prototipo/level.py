@@ -62,7 +62,8 @@ class Level:
 
     def enemy_update(self):
         for enemy in self.__enemy_sprites:
-            enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())
+            enemy.spawn_enemy = self.spawn_enemy
+            enemy.light_info_update((self.__player.getPosx(), self.__player.getPosy()), self.__player.getLight().getStatus())
             enemy.update()
 
 
