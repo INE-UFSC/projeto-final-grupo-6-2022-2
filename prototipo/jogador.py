@@ -6,10 +6,7 @@ from damageController import DamageController
 from settings import *
 from support import import_folder
 from weapon import Weapon
-from math import sqrt
-from hud import Hud
-from debug import Debug
-from inventoryTranslator import InventoryTranslator
+from inventoryPickable import InventoryPickable
 
 
 class Jogador(Character):
@@ -112,10 +109,10 @@ class Jogador(Character):
         self.__light.update()
     
     def loadInventory(self):
-        self.__inventory.setItemList(InventoryTranslator().loadInventory())
+        self.__inventory = InventoryPickable().fromPickles()
 
     def saveInventory(self):
-        InventoryTranslator().saveInventory(self.__inventory.getItemList())
+        InventoryPickable().toPickles(self.__inventory)
 
     def getLight(self):
         return self.__light

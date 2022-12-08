@@ -16,7 +16,16 @@ class Item(ABC, pygame.sprite.Sprite):
     @abstractmethod
     def use(self, jogador):
         pass
-        
+    
+    def setImage(self, load):
+        if not load:
+            self.image = None
+        else:
+            self.image = pygame.image.load(self.sprite).convert_alpha()
+
+    def getImage(self):
+        return self.image
+    
     def exclui(self):
         self.kill()
 
