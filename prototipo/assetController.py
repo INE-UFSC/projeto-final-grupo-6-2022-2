@@ -21,6 +21,7 @@ class AssetController(metaclass=SingletonMeta):
                          'barril': pygame.image.load('tiles/barril.png').convert_alpha(),
                          'porta_cima': pygame.image.load('tiles/porta_cima.png').convert_alpha(),
                          'key': pygame.image.load('tiles/key.png'),
+                         'key_indisponivel': pygame.image.load('tiles/key_indisponivel.png'),
                          'enemyhighdmg': pygame.image.load('tiles/parede_vertical_direita.png').convert_alpha(),
                          'enemylowdmg': pygame.image.load('tiles/porta.png').convert_alpha()
                          }
