@@ -6,7 +6,7 @@ from enemyLowDMG import EnemyLowDMG
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(700, pos, 3, 'enemyhighdmg', 70)
+        super().__init__(700, pos, 3, 'enemyhighdmg', 100)
         self.__confusion_counter = 0
 
 

@@ -113,6 +113,14 @@ class LevelBuilder:
                     __visible_sprites.add(key)
                     __item_sprites.append(key)
                     self.__key = key
+                elif col == 'f':
+                    tile = Tile((x, y), AssetController().get_asset('porta_aberta_cima'))
+                    __visible_sprites.add(tile)
+                    __obstacle_sprites.add(tile)
+                elif col == 'w':
+                    tile = Tile((x, y), AssetController().get_asset('porta_aberta'))
+                    __visible_sprites.add(tile)
+                    __obstacle_sprites.add(tile)
                 elif col == 'el':
                     enemy = EnemyLowDMG((x, y))
                     __visible_sprites.add(enemy)
