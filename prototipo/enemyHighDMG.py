@@ -10,7 +10,6 @@ class EnemyHighDMG(Enemy):
         self.__confusion_counter = 0
 
 
-
     def reactToLight(self):
         posx, posy = self.getPlayerPos()
         diffx = posx - self.getPos()[0]
@@ -69,9 +68,15 @@ class EnemyHighDMG(Enemy):
             self.attack()
             
     def die(self):
-        # Cria instancias e envia para o level.py
-        self.__enemyLowDMG = EnemyLowDMG(self.getPos())
-        self.spawn_enemy(self.__enemyLowDMG)
-        self.getSpawnEnemy()(self.__enemyLowDMG)
+
+        self.__enemyLowDMG1 = EnemyLowDMG(self.getPos())
+        self.__enemyLowDMG2 = EnemyLowDMG(pos = (self.getPos()[0] + 20, self.getPos()[1] + 20))
+
+        self.spawn_enemy(self.__enemyLowDMG1)
+        self.spawn_enemy(self.__enemyLowDMG2)
+        
+        self.getSpawnEnemy()(self.__enemyLowDMG1)
+        self.getSpawnEnemy()(self.__enemyLowDMG2)
+
         self.kill()
 
