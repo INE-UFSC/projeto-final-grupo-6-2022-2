@@ -45,7 +45,13 @@ class Character(ABC, pygame.sprite.Sprite):
         return self.__speed
     
     def getPos(self):
-        return (self.hitbox.x, self.hitbox.y)
+        return self.hitbox.x, self.hitbox.y
+
+    def getPosX(self):
+        return self.hitbox.x
+
+    def getPosY(self):
+        return self.hitbox.y
 
     def getHealth(self):
         return self.__health
@@ -96,7 +102,7 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def receiveDamage(self, damage: int):
         if isinstance(damage, int):
-            if self.__health <= damage:
+            if damage >= self.__health:
                 self.die()
             else:
                 self.__health -= damage

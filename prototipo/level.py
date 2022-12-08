@@ -1,6 +1,7 @@
 from item import *
 from levelBuilder import LevelBuilder
 from jogador import Jogador
+from enemyHighDMG import EnemyHighDMG
 from levelDAO import LevelDAO
 
 class Level:
@@ -46,31 +47,30 @@ class Level:
     def dump(self):
         self.__player.saveInventory()
         self.__dao.add(self)
-        
     
     #RETIRAR ESSA FUNÇÂO DPS
     def getPlayerDead(self):
-        if self.__player.getHealth() <= 50:
-            return True
-        return False
+        return self.__player.getDead()
 
-    # Pega a instancia que criamos no enemyHighDMG e passa para o level
-    def spawn_enemy(self, enemy):
-        self.__enemy_sprites.add(enemy)
-        self.__visible_sprites.add(enemy)
-
+    # # Pega a instancia que criamos no enemyHighDMG e passa para o level
+    # def spawn_enemy(self, enemy):
+    #     self.__enemy_sprites.add(enemy)
+    #     self.__visible_sprites.add(enemy)
 
     def enemy_update(self):
         for enemy in self.__enemy_sprites:
-            enemy.spawn_enemy = self.spawn_enemy
+            if enemy.getDead():
+                if isinstance(enemy, EnemyHighDMG):
+                    for bb in enemy.getBabies():
+                        self.__enemy_sprites.add(bb)
+                        self.__visible_sprites.add(bb)
+                enemy.kill()
+                continue
             enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())
             enemy.update()
 
-
     def input(self):
         keys = pygame.key.get_pressed()
-
-
 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.__player.setDirectionY(-1)
@@ -206,9 +206,6 @@ class Level:
                         item_sprites.remove(item)
                         item.exclui()
 
-
-
-
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.enemy_update()
@@ -221,12 +218,9 @@ class Level:
         self.move_projectile()
         self.chave()
         self.draw_hud()
-        
-
 
     def draw_hud(self):
         self.__lvl_builder.getHud().draw(self.__player, self.__selected_room)
-        
         
     def chave(self):
         inventario = self.__player.getInventory().getItemList()

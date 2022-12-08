@@ -45,5 +45,5 @@ class Sound(metaclass=SingletonMeta):
             self.__music_priority = priority
 
     def setVolume(self, volume: float):
-        self.__music.set_volume(volume/2)
-        self.__sound_channel.set_volume(volume)
+        self.__music.set_volume(volume/200)
+        self.__sound_channel.set_volume(volume/100)

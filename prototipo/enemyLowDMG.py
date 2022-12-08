@@ -5,7 +5,7 @@ from math import sqrt
 class EnemyLowDMG(Enemy):
     # balancear os valores de vida e velocidade:
     def __init__(self, pos):
-        super().__init__(200, pos, 4, 'enemylowdmg', 20)
+        super().__init__(400, pos, 4, 'enemylowdmg', 20)
 
     def reactToLight(self):
         posx, posy = self.getPlayerPos()
@@ -42,7 +42,3 @@ class EnemyLowDMG(Enemy):
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()
-
-
-    def die(self):
-        self.kill()

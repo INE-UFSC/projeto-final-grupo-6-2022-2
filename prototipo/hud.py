@@ -16,7 +16,7 @@ class Hud():
 
 
     def draw(self, player, sala_atual):
-        self.draw_timer_pilha(player.getLight().pilha)
+        self.draw_timer_pilha(player.getLight().getPilha())
         self.draw_health(player.getHealth())
         self.draw_sala_atual(sala_atual)
         self.draw_se_tiver_chave(player.getKey())
@@ -36,8 +36,8 @@ class Hud():
 
     def draw_timer_pilha(self, pilha):
         if pilha.getStatus():
-            pygame.draw.rect(self.__display, (0, 0, 255), (2, 15, pilha.tamanho[0] - 10, pilha.tamanho[1]))
-            pygame.draw.rect(self.__display, (0, 255, 0), (2, 15, pilha.tempo_restante/6 - 10, pilha.tamanho[1]))
+            pygame.draw.rect(self.__display, (0, 0, 255), (2, 15, pilha.getTamanho()[0] - 10, pilha.getTamanho()[1]))
+            pygame.draw.rect(self.__display, (0, 255, 0), (2, 15, pilha.getTempoRestante()/6 - 10, pilha.getTamanho()[1]))
         else:
             pygame.draw.rect(self.__display, (255, 0, 0), (2, 15, pilha.tamanho[0] - 10, pilha.tamanho[1]))
         

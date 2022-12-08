@@ -9,17 +9,16 @@ class Lanterna(pygame.sprite.Sprite):
     def __init__(self, pos, status=False, tempo_ligada=0):
         super().__init__(pygame.sprite.Group())
         # self.__som = Sound('lanterna')
-        self.cor = (0, 255, 255)
         self.__status = status
-        self.pilha = Pilha(pos[0], pos[1], 'pilha', 50)
-        self.tempo_ligada = tempo_ligada
+        self.__pilha = Pilha(pos[0], pos[1], 'pilha', 50)
+        self.__tempo_ligada = tempo_ligada
 
-        self.Onimage = pygame.image.load('tiles/lightOn.png').convert_alpha()
-        self.Offimage = pygame.image.load('tiles/lightOff.png').convert_alpha()
-        self.rect = self.Onimage.get_rect()
+        self.__Onimage = pygame.image.load('tiles/lightOn.png').convert_alpha()
+        self.__Offimage = pygame.image.load('tiles/lightOff.png').convert_alpha()
+        self.__rect = self.__Onimage.get_rect()
 
-        self.__x = (WIDTH - self.rect[2]) / 2
-        self.__y = (HEIGTH - self.rect[3]) / 2
+        self.__x = (WIDTH - self.__rect[2]) / 2
+        self.__y = (HEIGTH - self.__rect[3]) / 2
         # self.hitbox = self.rect.inflate(0,-26)
 
         self.__toggle_timer = 0  # timer para impedir que a pilha fique ligando ou desligando se o jogador segurar CTRL
@@ -31,15 +30,14 @@ class Lanterna(pygame.sprite.Sprite):
 
     def update(self):
         self.cooldown()
-        self.pilha.contador()
+        self.__pilha.contador()
 
-    def setPos(self, x, y):
-        self.hitbox.x = x
-        self.hitbox.y = y
-
+    def getPilha(self):
+        return self.__pilha
+    
     def setPilha(self, pilha: Pilha):
-        self.pilha = pilha
-        self.pilha.setUsando(self.__status)
+        self.__pilha = pilha
+        self.__pilha.setUsando(self.__status)
 
     def getStatus(self):
         return self.__status
@@ -50,12 +48,12 @@ class Lanterna(pygame.sprite.Sprite):
         if self.__toggle_timer <= 0:
             self.__status = not self.__status
             # self.__som.play()
-            self.pilha.setUsando(self.__status)
+            self.__pilha.setUsando(self.__status)
 
         self.__toggle_timer = self.__toggle_cooldown
 
     def draw(self, tela):
-        if self.__status and self.pilha.getUsando() and self.pilha.getStatus():
-            tela.blit(self.Onimage, (self.__x, self.__y))
+        if self.__status and self.__pilha.getUsando() and self.__pilha.getStatus():
+            tela.blit(self.__Onimage, (self.__x, self.__y))
         else:
-            tela.blit(self.Offimage, (self.__x, self.__y))
+            tela.blit(self.__Offimage, (self.__x, self.__y))
