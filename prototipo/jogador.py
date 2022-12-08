@@ -3,7 +3,7 @@ from inventory import Inventory
 from lanterna import Lanterna
 from character import Character
 from damageController import DamageController
-from settings import *
+from assetController import AssetController
 from support import import_folder
 from weapon import Weapon
 from inventoryPickable import InventoryPickable
@@ -11,7 +11,7 @@ from inventoryPickable import InventoryPickable
 
 class Jogador(Character):
     def __init__(self, pos):
-        super().__init__(100, pos, 5, 'tiles/player.png')
+        super().__init__(100, pos, 5, AssetController().get_asset('player'))
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None

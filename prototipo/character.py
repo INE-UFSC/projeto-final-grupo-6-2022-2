@@ -3,14 +3,14 @@ import pygame
 
 
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str):
+    def __init__(self, health: int, pos: tuple, speed: int, sprite):
         super().__init__()
         self.__health = health
         self.__speed = speed
         self.__posx = pos[0]
         self.__posy = pos[1]
         # PLANEJAR COMO LIDAR COM EXCECOES:
-        self.__sprite = self.image = pygame.image.load(sprite).convert_alpha()
+        self.__sprite = self.image = sprite
         self.rect = self.image.get_rect(topleft=pos)
         # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
         self.hitbox = self.rect.inflate(0, -26)
