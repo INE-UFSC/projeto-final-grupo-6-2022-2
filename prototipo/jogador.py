@@ -6,7 +6,7 @@ from damageController import DamageController
 from assetController import AssetController
 from support import import_folder
 from weapon import Weapon
-from inventoryPickable import InventoryPickable
+from playerPickable import PlayerPickable
 
 
 class Jogador(Character):
@@ -102,10 +102,10 @@ class Jogador(Character):
         self.__light.update()
     
     def loadInventory(self):
-        self.__inventory = InventoryPickable().fromPickles()
+        self.__inventory, self.__weapon = PlayerPickable().fromPickles()
 
     def saveInventory(self):
-        InventoryPickable().toPickles(self.__inventory)
+        PlayerPickable().toPickles(self)
 
     def getLight(self):
         return self.__light
