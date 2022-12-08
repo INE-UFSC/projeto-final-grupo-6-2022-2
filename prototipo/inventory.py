@@ -1,22 +1,23 @@
 import pygame
 from item import Item
 from settings import HEIGTH, WIDTH
+from assetController import AssetController
 
 
 class Inventory():
     def __init__(self):
         self.__item_list = [None]*9
+        
 
     def setImage(self, load: bool):
         if not load:
             self.__image = None
         else:
-            self.__image = pygame.image.load(self.__datasource).convert_alpha()
+            self.__image = AssetController().get_asset('inventario')
 
         for item in self.__item_list:
             if isinstance(item, Item):
                 item.setImage(load)
-    
     
     def getImage(self):
         return self.__image
