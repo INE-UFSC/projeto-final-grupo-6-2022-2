@@ -54,10 +54,17 @@ class Level:
             return True
         return False
 
+    # Pega a instancia que criamos no enemyHighDMG e passa para o level
+    def spawn_enemy(self, enemy):
+        self.__enemy_sprites.add(enemy)
+        self.__visible_sprites.add(enemy)
+
+
     def enemy_update(self):
         for enemy in self.__enemy_sprites:
             enemy.light_info_update(self.__player.getPos(), self.__player.getLight().getStatus())
             enemy.update()
+
 
     def input(self):
         keys = pygame.key.get_pressed()
