@@ -80,6 +80,7 @@ class EnemyHighDMG(Enemy):
         self.getSpawnEnemy()(self.__enemyLowDMG1)
         self.getSpawnEnemy()(self.__enemyLowDMG2)
         self.getSpawnEnemy()(self.__enemyLowDMG3)
-
+        
         self.kill()
+
 
