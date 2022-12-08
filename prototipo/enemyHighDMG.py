@@ -6,7 +6,7 @@ from enemyLowDMG import EnemyLowDMG
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(700, pos, 3, 'enemyhighdmg', 100)
+        super().__init__(700, pos, 3, 'enemyhighdmg', 70)
         self.__confusion_counter = 0
 
 
@@ -63,20 +63,11 @@ class EnemyHighDMG(Enemy):
             self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE (INACABADO - NAO ATACA COM A LANTERNA LIGADA):
         if dist < self.getRange() and not self.getLightStatus() and not self.getAttackingStatus():
+            print('foi')
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()
-            
-    def die(self):
 
-        self.__enemyLowDMG1 = EnemyLowDMG(self.getPos())
-        self.__enemyLowDMG2 = EnemyLowDMG(pos = (self.getPos()[0] + 20, self.getPos()[1] + 20))
-
-        self.spawn_enemy(self.__enemyLowDMG1)
-        self.spawn_enemy(self.__enemyLowDMG2)
-        
-        self.getSpawnEnemy()(self.__enemyLowDMG1)
-        self.getSpawnEnemy()(self.__enemyLowDMG2)
-
-        self.kill()
-
+    def getBabies(self):
+        baby1 = EnemyLowDMG((self.getPosX(), self.getPosY()))
+        return [baby1]
