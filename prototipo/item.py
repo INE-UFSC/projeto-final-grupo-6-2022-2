@@ -10,7 +10,7 @@ class Item(ABC, pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.sprite = sprite
-        self.image = sprite
+        self.image = AssetController().get_asset(self.sprite)
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.hitbox = self.rect.inflate(0,0)
         self.posicao = [self.x, self.y]

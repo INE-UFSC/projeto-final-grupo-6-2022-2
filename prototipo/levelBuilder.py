@@ -91,11 +91,11 @@ class LevelBuilder:
                     __player = Jogador((x, y))
                     __visible_sprites.add(__player)
                 elif col == 'b':
-                    battery = Pilha(x, y, AssetController().get_asset('pilha'), 50)
+                    battery = Pilha(x, y, 'pilha', 50)
                     __item_sprites.append(battery)
                     __visible_sprites.add(battery)
                 elif col == 'l':
-                    door = Door(x, y, AssetController().get_asset('porta'))
+                    door = Door(x, y)
                     __visible_sprites.add(door)
                     __obstacle_sprites.add(door)
                     self.__door = door
@@ -109,7 +109,7 @@ class LevelBuilder:
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'k':
-                    key = Key(x, y, AssetController().get_asset('key'))
+                    key = Key(x, y)
                     __visible_sprites.add(key)
                     __item_sprites.append(key)
                     self.__key = key

@@ -1,12 +1,11 @@
 from weapon import Weapon
 from Projectile import Projectile
-from assetController import AssetController
 
 
 class ProjectileWeapon(Weapon):
 
     def __init__(self, x, y, name, damage, shot_speed, cooldown):
-        super().__init__(x, y, AssetController().get_asset(name), cooldown)
+        super().__init__(x, y, name, cooldown)
         self.__name = name
         self.__damage = damage
         self.__shot_speed = shot_speed
