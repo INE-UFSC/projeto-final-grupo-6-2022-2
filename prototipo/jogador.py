@@ -63,6 +63,7 @@ class Jogador(Character):
         elif self.getHealth() > 100:
             self.setHealth(100)
             
+    
     def get_status(self):
         #Idle status
         if self.getDirectionX() == 0 and self.getDirectionY() == 0:
