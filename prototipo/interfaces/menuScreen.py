@@ -17,10 +17,7 @@ class MenuScreen(AbstractScreen):
                              'interfaces\Botoes\\botao_options_pressed.png', 'options')],
             [Button(1030, 550, 'interfaces\Botoes\\botao_controls_hover.png',
                              'interfaces\Botoes\\botao_controls.png', 
-                             'interfaces\Botoes\\botao_controls_pressed.png', 'controls')],
-            [Button(830, 650, 'interfaces\Botoes\\botao_exit_hover.png',
-                             'interfaces\Botoes\\botao_exit.png', 
-                             'interfaces\Botoes\\botao_exit_pressed.png', 'exit')])
+                             'interfaces\Botoes\\botao_controls_pressed.png', 'controls')])
         
         super().__init__(pygame.display.get_surface(), 'interfaces\menu_jogo.png', buttons)
 

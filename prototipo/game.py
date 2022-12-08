@@ -25,9 +25,6 @@ class Game:
             key = self.__actualScreen.run()
             
             if key != None:
-                if key == 'exit':
-                    pygame.quit()
-                    sys.exit()
                 self.__actualScreen = self.__screen_controller.nextScreen(key, self.__actualScreen)
             
             self.clock.tick(FPS)
