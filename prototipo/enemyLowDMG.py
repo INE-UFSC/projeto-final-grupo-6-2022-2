@@ -42,3 +42,7 @@ class EnemyLowDMG(Enemy):
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()
+
+
+    def die(self):
+        self.kill()
