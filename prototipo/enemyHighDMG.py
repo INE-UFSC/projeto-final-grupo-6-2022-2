@@ -71,12 +71,15 @@ class EnemyHighDMG(Enemy):
 
         self.__enemyLowDMG1 = EnemyLowDMG(self.getPos())
         self.__enemyLowDMG2 = EnemyLowDMG(pos = (self.getPos()[0] + 20, self.getPos()[1] + 20))
+        self.__enemyLowDMG3 = EnemyLowDMG(pos = (self.getPos()[0] + 30, self.getPos()[1] + 30))
 
         self.spawn_enemy(self.__enemyLowDMG1)
         self.spawn_enemy(self.__enemyLowDMG2)
+        self.spawn_enemy(self.__enemyLowDMG3)
         
         self.getSpawnEnemy()(self.__enemyLowDMG1)
         self.getSpawnEnemy()(self.__enemyLowDMG2)
+        self.getSpawnEnemy()(self.__enemyLowDMG3)
 
         self.kill()
 
