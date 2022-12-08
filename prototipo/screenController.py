@@ -27,11 +27,13 @@ class ScreenController:
             self.__ingame = InGame()
             return self.__ingame
         elif key == 'continue':
-            if isinstance(screen, PauseScreen):
-                return self.__ingame
-            else:
+            return self.__ingame
+        elif key == 'loadgame':
+            try:
                 self.__ingame.loadgame()
-                return self.__ingame
+            except:
+                self.__ingame = InGame()
+            return self.__ingame
         elif key == 'morreu':
             return self.__gameover
         elif key == 'pause':
