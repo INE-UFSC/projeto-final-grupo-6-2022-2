@@ -43,6 +43,7 @@ class LevelBuilder:
                 y = row_index * TILESIZE
                 if col == 'x':
                     tile = Tile((x, y), 'parede_vertical_esquerda')
+                    
                     __visible_sprites.add(tile)
                     __obstacle_sprites.add(tile)
                 elif col == 'm':

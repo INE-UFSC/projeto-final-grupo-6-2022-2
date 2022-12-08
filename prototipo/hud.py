@@ -6,6 +6,8 @@ class Hud():
     def __init__(self):
         self.__hud_pilha = pygame.image.load('tiles/hud_pilha.png').convert_alpha()
         self.__hud_vida = pygame.image.load('tiles/hud_vida.png').convert_alpha()
+        self.__key = pygame.image.load('tiles/key.png').convert_alpha()
+        self.__key_indisponivel = pygame.image.load('tiles/key_indisponivel.png').convert_alpha()
         self.__display = pygame.display.get_surface()
         self.__debug = Debug()
 
@@ -15,6 +17,7 @@ class Hud():
         self.draw_timer_pilha(player.getLight().pilha)
         self.draw_health(player.getHealth())
         self.draw_sala_atual(sala_atual)
+        self.draw_se_tiver_chave(player.getKey())
 
 
     def draw_timer_pilha(self, pilha):
@@ -43,10 +46,22 @@ class Hud():
         self.__display.blit(self.__hud_vida, (x, y))
 
     def draw_sala_atual(self, sala_atual):
-        self.__debug.debug('Sala', sala_atual, 100, 50)
+        self.__debug.debug('Sala', sala_atual, 110, 50)
 
-    def update(self, pilha, vida, sala_atual):
+    def draw_se_tiver_chave(self, chave):
+        self.__debug.debug('Chave', '', 180, 50)
+        if chave:
+            self.__display.blit(self.__key, (50, 170))
+            print(chave)
+        else:
+            self.__display.blit(self.__key_indisponivel, (50, 170))
+            print(chave)
 
+
+
+    def update(self, pilha, vida, sala_atual, player):
         self.draw(pilha, vida)
         self.draw_health(vida)
         self.draw_sala_atual(sala_atual)
+        self.draw_se_tiver_chave(player.getKey())
+

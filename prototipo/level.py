@@ -204,14 +204,17 @@ class Level:
                         item_sprites.remove(item)
                         item.exclui()
 
+
+
+
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.enemy_update()
         # self.__player = self.__player
         self.input()
         self.__visible_sprites.custom_draw(self.__player)
-        self.__player.draw()
         self.__visible_sprites.update()
+        self.__player.draw()
         self.move_character()
         self.move_projectile()
         self.chave()
@@ -229,10 +232,14 @@ class Level:
             inventario.remove(self.__lvl_builder.getKey())
             inventario.append(None)
             self.__obstacle_sprites.remove(self.__lvl_builder.getDoor())
+            self.__player.setKey(True)
+            print(self.__player.have_key)
         if self.__lvl_builder.getDoor() in inventario:
             self.__selected_room += 1
             inventario.remove(self.__lvl_builder.getDoor())
             inventario.append(None)
+            self.__player.setKey(False)
+            print(self.__player.have_key)
             self.dump()
             self.load()
 
