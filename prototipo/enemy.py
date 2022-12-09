@@ -13,7 +13,6 @@ class Enemy(Character):
         self.__dead = False
         self.__light_status = False
         self.__animation_speed = 0.04
-        self.__awake = False
         self.__damage = damage
         self.__range = 100
     
@@ -63,7 +62,7 @@ class Enemy(Character):
         
         # Setando o frame atual
         self.image = animation[int(self.getFrameIndex())]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center = self.getHitbox().center)
 
     def getPlayerPos(self):
         return self.__player_pos

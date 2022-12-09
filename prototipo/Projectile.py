@@ -19,7 +19,7 @@ class Projectile(pygame.sprite.Sprite):
         pos[0] += self.__direction.x * 25
         pos[1] += self.__direction.y * 50
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(0, -5)
+        self.__hitbox = self.rect.inflate(0, -5)
 
     def getDamage(self):
         return self.__damage
@@ -39,3 +39,6 @@ class Projectile(pygame.sprite.Sprite):
     def hit(self, enemy):
         DamageController().projectile_damage(self, enemy)
         self.kill()
+        
+    def getHitbox(self):
+        return self.__hitbox

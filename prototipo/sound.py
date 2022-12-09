@@ -16,6 +16,7 @@ from singletonMeta import SingletonMeta
 class Sound(metaclass=SingletonMeta):
 
     def __init__(self):
+        self.__current_requestor = None
         self.__music = pygame.mixer.music
         self.__music_priority = 0
         self.__sound_channel = pygame.mixer.Channel(1)
@@ -23,6 +24,8 @@ class Sound(metaclass=SingletonMeta):
                          'sem_pilha': pygame.mixer.Sound('sounds/sem_pilha.wav'),
                          'key': pygame.mixer.Sound('sounds/key.wav'),
                          'lanterna': pygame.mixer.Sound('sounds/lanterna.wav')}
+        self.__songs = {}
+        self.__priorities = {}
 
 
     def playSound(self, sound_name):
@@ -32,17 +35,27 @@ class Sound(metaclass=SingletonMeta):
         if self.__sound_channel.get_busy():
             self.__sound_channel.stop()
 
-    def play_music(self, music_name, priority):
-        if not self.__music.get_busy():
-            self.__music.load(music_name)
-            self.__music.play()
-        elif priority >= self.__music_priority:
-            self.__music.stop()
-            self.__music.unload()
-            self.__music.load(music_name)
-            self.__music.play()
+    def playMusic(self, requestor):
+        try:
+            if not self.__music.get_busy():
+                self.__music.unload()
+                self.__music.load(self.__songs[requestor])
+                self.__music.play()
+            elif self.__priorities[requestor] >= self.__music_priority:
+                self.__music.fadeout(2000)
+                self.__music.unload()
+                self.__music.load(self.__songs[requestor])
+                self.__music.play(loops=-1)
 
-            self.__music_priority = priority
+                self.__music_priority = self.__priorities[requestor]
+        except KeyError:
+            print('Chave Invalida!')
+            return 0
+        self.__current_requestor = requestor
+
+    def stopMusic(self, requestor):
+        if requestor == self.__current_requestor:
+            self.__music.stop()
 
     def setVolume(self, volume: float):
         self.__music.set_volume(volume/200)

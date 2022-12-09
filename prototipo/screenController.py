@@ -40,7 +40,7 @@ class ScreenController:
         elif key == 'pause':
             return self.__pause 
         elif key == 'restart':
-            self.__ingame.level.restart()
+            self.__ingame = InGame()
             return self.__ingame
         elif key == 'options':
             self.__last_screen = screen
