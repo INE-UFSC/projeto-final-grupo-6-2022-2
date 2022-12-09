@@ -11,7 +11,7 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__have_key = False
         self.image = AssetController().get_asset(sprite)
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(0, -25)
+        self.__hitbox = self.rect.inflate(0, -25)
         self.__status = 'down'
         self.__frame_index = 0
         self.__animation_speed = 0.15
@@ -29,7 +29,7 @@ class Character(ABC, pygame.sprite.Sprite):
                 self.__attacking = False
     
     def getHitbox(self):
-        return self.hitbox
+        return self.__hitbox
     
     def getAttackingStatus(self):
         return self.__attacking
@@ -44,13 +44,13 @@ class Character(ABC, pygame.sprite.Sprite):
         return self.__speed
     
     def getPos(self):
-        return self.hitbox.x, self.hitbox.y
+        return self.getHitbox().x, self.getHitbox().y
 
     def getPosX(self):
-        return self.hitbox.x
+        return self.getHitbox().x
 
     def getPosY(self):
-        return self.hitbox.y
+        return self.getHitbox().y
 
     def getHealth(self):
         return self.__health

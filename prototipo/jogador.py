@@ -17,7 +17,7 @@ class Jogador(Character):
         self.__weapon = None
         self.__dead = False
         self.tamanho = [500, 10]
-        self.__light = Lanterna((self.hitbox.x, self.hitbox.y))
+        self.__light = Lanterna((self.getHitbox().x, self.getHitbox().y))
         self.__damage = 100
 
     def attack(self):
@@ -91,7 +91,7 @@ class Jogador(Character):
         if self.getFrameIndex() >= len(animation):
             self.setFrameIndex(0)
         self.image = animation[int(self.getFrameIndex())]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center = self.getHitbox().center)
         
     def update(self):
         if self.__weapon is not None:

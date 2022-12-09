@@ -12,14 +12,14 @@ class Item(ABC, pygame.sprite.Sprite):
         self.sprite = sprite
         self.image = AssetController().get_asset(self.sprite)
         self.rect = self.image.get_rect(topleft = (self.__x, self.__y))
-        self.hitbox = self.rect.inflate(0,0)
+        self.__hitbox = self.rect.inflate(0,0)
     
     @abstractmethod
     def use(self, jogador):
         pass
     
     def getHitbox(self):
-        return self.hitbox
+        return self.__hitbox
     
     def setImage(self, load):
         if not load:
