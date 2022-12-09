@@ -137,18 +137,18 @@ class Level:
             speed = proj.getSpeed()
             if proj.getDirectionMagnitude() != 0:
                 proj.directionNormalize()
-            proj.hitbox.x += dirx * speed
-            proj.hitbox.y += diry * speed
+            proj.getHitbox().x += dirx * speed
+            proj.getHitbox().y += diry * speed
             self.projectile_collision(proj)
-            proj.rect.center = proj.hitbox.center
+            proj.rect.center = proj.getHitbox().center
 
     def projectile_collision(self, projectile):
         for sprite in self.__enemy_sprites:
-            if sprite.getHitbox().colliderect(projectile.hitbox):
+            if sprite.getHitbox().colliderect(projectile.getHitbox()):
                 projectile.hit(sprite)
 
         for sprite in self.__obstacle_sprites:
-            if sprite.getHitbox().colliderect(projectile.hitbox):
+            if sprite.getHitbox().colliderect(projectile.getHitbox()):
                 projectile.kill()
 
     def collision(self, direction, character):
