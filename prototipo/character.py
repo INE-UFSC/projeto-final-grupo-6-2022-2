@@ -4,7 +4,7 @@ from assetController import AssetController
 
 
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite):
+    def __init__(self, health: int, pos: tuple, speed: int, sprite, damage: int, _range: int):
         super().__init__()
         self.__health = health
         self.__speed = speed
@@ -16,6 +16,8 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__frame_index = 0
         self.__animation_speed = 0.15
         self.__direction = pygame.math.Vector2()
+        self.__damage = damage
+        self.__range = _range
         
         self.__attacking = False
         self.__attack_cooldown = 400
@@ -26,6 +28,12 @@ class Character(ABC, pygame.sprite.Sprite):
         if self.__attacking:
             if current_time - self.__attack_time > attack_cooldown:
                 self.__attacking = False
+
+    def getRange(self):
+        return self.__range
+
+    def getDamage(self):
+        return self.__damage
 
     def setImage(self, image):
         self.__image = image

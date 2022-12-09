@@ -6,7 +6,7 @@ from sound import Sound
 class EnemyLowDMG(Enemy):
     # balancear os valores de vida e velocidade:
     def __init__(self, pos):
-        super().__init__(health=400, pos=pos, speed=5, sprite='enemylowdmg', damage=15)
+        super().__init__(health=400, pos=pos, speed=5, sprite='enemylowdmg', damage=15, _range=85)
 
     def reactToLight(self):
         posx, posy = self.getPlayerPos()

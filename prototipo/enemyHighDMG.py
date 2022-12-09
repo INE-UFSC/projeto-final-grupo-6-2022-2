@@ -7,7 +7,7 @@ from sound import Sound
 class EnemyHighDMG(Enemy):
 
     def __init__(self, pos):
-        super().__init__(health=1000, pos=pos, speed=3, sprite='enemyhighdmg', damage=100)
+        super().__init__(health=1000, pos=pos, speed=3, sprite='enemyhighdmg', damage=100, _range=100)
         self.__confusion_counter = 0
 
 

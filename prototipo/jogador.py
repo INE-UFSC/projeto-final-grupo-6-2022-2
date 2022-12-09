@@ -12,20 +12,19 @@ from playerPickable import PlayerPickable
 
 class Jogador(Character):
     def __init__(self, pos):
-        super().__init__(health=100, pos=pos, speed=5, sprite='player')
+        super().__init__(health=100, pos=pos, speed=5, sprite='player', damage=100, _range=100)
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None
         self.__dead = False
         self.__light = Lanterna((self.getHitbox().x, self.getHitbox().y))
-        self.__damage = 100
 
     def attack(self):
         dmg_ctrl = DamageController()
         if not self.getAttackingStatus():
             self.setAttackTimer()
             if self.__weapon is None:
-                    dmg_ctrl.melee_attack(self.__damage, 100, self.get_status())
+                    dmg_ctrl.melee_attack(self.getDamage(), self.getRange(), self.get_status())
             else:
                 projectile = self.__weapon.attack(self.getStatus())
                 if projectile is not None:

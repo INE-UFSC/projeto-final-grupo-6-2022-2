@@ -5,20 +5,18 @@ from damageController import DamageController
 
 
 class Enemy(Character):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int):
-        super().__init__(health, pos, speed, sprite)
+    def __init__(self, health: int, pos: tuple, speed: int, sprite: str, damage: int, _range: int):
+        super().__init__(health, pos, speed, sprite, damage, _range)
         self.__player_pos = [10, 10]
         self.__status = Character.getStatus(self)
         self.import_enemy_assets()
         self.__dead = False
         self.__light_status = False
         self.__animation_speed = 0.04
-        self.__damage = damage
-        self.__range = 100
     
     def attack(self):
         dmg_ctrl = DamageController()
-        dmg_ctrl.melee_attack(self.__damage, self.__range, self.getStatus(), self)
+        dmg_ctrl.melee_attack(self.getDamage(), self.getRange(), self.getStatus(), self)
 
     def update(self):
         self.cooldowns()
@@ -69,9 +67,6 @@ class Enemy(Character):
 
     def getLightStatus(self):
         return self.__light_status
-
-    def getRange(self):
-        return self.__range
 
     def die(self):
         self.__dead = True
