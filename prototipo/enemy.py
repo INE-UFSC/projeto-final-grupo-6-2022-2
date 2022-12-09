@@ -59,8 +59,8 @@ class Enemy(Character):
             self.setFrameIndex(0)
         
         # Setando o frame atual
-        self.image = animation[int(self.getFrameIndex())]
-        self.rect = self.image.get_rect(center = self.getHitbox().center)
+        self.setImage(animation[int(self.getFrameIndex())])
+        self.setRect(self.getImage().get_rect(center = self.getHitbox().center))
 
     def getPlayerPos(self):
         return self.__player_pos

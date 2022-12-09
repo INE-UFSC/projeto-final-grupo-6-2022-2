@@ -44,6 +44,9 @@ class Character(ABC, pygame.sprite.Sprite):
     def getRect(self):
         return self.__rect
     
+    def setRect(self, rect):
+        self.__rect = rect
+    
     def getHitbox(self):
         return self.__hitbox
     
