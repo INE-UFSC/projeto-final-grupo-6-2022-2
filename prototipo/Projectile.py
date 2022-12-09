@@ -39,3 +39,6 @@ class Projectile(pygame.sprite.Sprite):
     def hit(self, enemy):
         DamageController().projectile_damage(self, enemy)
         self.kill()
+        
+    def getHitbox(self):
+        return self.hitbox
