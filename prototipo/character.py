@@ -4,7 +4,7 @@ from assetController import AssetController
 
 
 class Character(ABC, pygame.sprite.Sprite):
-    def __init__(self, health: int, pos: tuple, speed: int, sprite, damage: int, _range: int):
+    def __init__(self, health: int, pos: tuple, speed: float, sprite, damage: int, _range: int):
         super().__init__()
         self.__health = health
         self.__speed = speed
