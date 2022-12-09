@@ -21,7 +21,6 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__attack_cooldown = 400
         self.__attack_time = 0
 
-    # arrumar para que cada tipo de personagem tenha seu proprio self.__attack_cooldown
     def cooldowns(self, attack_cooldown=400):
         current_time = pygame.time.get_ticks()
         if self.__attacking:
@@ -39,6 +38,9 @@ class Character(ABC, pygame.sprite.Sprite):
 
     def setAttackTimer(self):
         self.__attack_time = pygame.time.get_ticks()
+
+    def getAttackTimer(self):
+        return self.__attack_time
 
     def getSpeed(self):
         return self.__speed

@@ -43,7 +43,8 @@ class Jogador(Character):
         self.animations = {'up': [],'down': [],'left': [],'right': [],
             'right_idle':[],'left_idle':[],'up_idle':[],'down_idle':[],
             'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[],
-            'right_attack_pistol':[],'left_attack_pistol':[],'up_attack_pistol':[],'down_attack_pistol':[]}
+            'right_attack_pistol':[],'left_attack_pistol':[],'up_attack_pistol':[],'down_attack_pistol':[],
+            'right_attack_knife':[],'left_attack_knife':[],'up_attack_knife':[],'down_attack_knife':[]}
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
@@ -79,19 +80,24 @@ class Jogador(Character):
                         self.setStatus(self.getStatus().replace('_idle','_attack_pistol'))
                     elif self.__weapon is not None and isinstance(self.__weapon, MeleeWeapon):
                         self.setStatus(self.getStatus().replace('_idle','_attack_knife'))
+                    elif self.__weapon is None:
+                        self.setStatus(self.getStatus().replace('_idle','_attack'))
                 else:
                     if self.__weapon is not None and isinstance(self.__weapon, ProjectileWeapon):
                         self.setStatus(self.getStatus() + '_attack_pistol')
                     elif self.__weapon is not None and isinstance(self.__weapon, MeleeWeapon):
-                        self.setStatus(self.getStatus() + '_attack_pistol')
-                
+                        self.setStatus(self.getStatus() + '_attack_knife')
+                    elif self.__weapon is None:
+                        self.setStatus(self.getStatus() + '_attack')
+            ## 
         else:
-            if 'attack' in self.getStatus():
+            if 'attack_pistol' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack_pistol',''))
+            elif 'attack_knife' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack_knife',''))
+            if 'attack' in self.getStatus():
                 self.setStatus(self.getStatus().replace('_attack',''))
-
-
+      
         
     def draw(self):
         surface = pygame.display.get_surface()
