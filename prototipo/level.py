@@ -10,7 +10,7 @@ class Level:
         # Pegar a tela
         self.__lvl_builder = LevelBuilder()
         self.__dao = LevelDAO()
-        self.__selected_room = 1
+        self.__selected_room = 0
         self.display_surface = pygame.display.get_surface()
         lists = self.__lvl_builder.create_map(self.__selected_room)
         self.__visible_sprites = lists[0]
@@ -125,11 +125,11 @@ class Level:
         for character in list(self.__enemy_sprites) + [self.__player]:
             if character.getDirectionMagnitude() != 0:
                 character.directionNormalize()
-            character.hitbox.x += character.getDirectionX() * character.getSpeed()
+            character.getHitbox().x += character.getDirectionX() * character.getSpeed()
             self.collision('horizontal', character) # passar colisao para level
-            character.hitbox.y += character.getDirectionY() * character.getSpeed()
+            character.getHitbox().y += character.getDirectionY() * character.getSpeed()
             self.collision('vertical', character) # passar colisao para level
-            character.rect.center = character.hitbox.center
+            character.rect.center = character.getHitbox().center
 
     def move_projectile(self):
         for proj in list(self.__projectile_sprites):
@@ -144,11 +144,11 @@ class Level:
 
     def projectile_collision(self, projectile):
         for sprite in self.__enemy_sprites:
-            if sprite.hitbox.colliderect(projectile.hitbox):
+            if sprite.getHitbox().colliderect(projectile.hitbox):
                 projectile.hit(sprite)
 
         for sprite in self.__obstacle_sprites:
-            if sprite.hitbox.colliderect(projectile.hitbox):
+            if sprite.getHitbox().colliderect(projectile.hitbox):
                 projectile.kill()
 
     def collision(self, direction, character):
@@ -164,21 +164,21 @@ class Level:
 
         if direction == 'horizontal':
             for sprite in obstacle_sprites:
-                if sprite.hitbox.colliderect(character.hitbox):
+                if sprite.getHitbox().colliderect(character.getHitbox()):
                     if character.getDirectionX() > 0:  # Se mover para a direita
-                        character.hitbox.right = sprite.hitbox.left  # left
+                        character.getHitbox().right = sprite.getHitbox().left  # left
                     if character.getDirectionX() < 0:  # Se mover para a esquerda
-                        character.hitbox.left = sprite.hitbox.right  # right
+                        character.getHitbox().left = sprite.getHitbox().right  # right
 
             for sprite in enemy_sprites:
-                if sprite.hitbox.colliderect(character.hitbox):
+                if sprite.getHitbox().colliderect(character.getHitbox()):
                     if character.getDirectionX() > 0:  # Se mover para a direita
-                        character.hitbox.right = sprite.hitbox.left  # left
+                        character.getHitbox().right = sprite.getHitbox().left  # left
                     if character.getDirectionX() < 0:  # Se mover para a esquerda
-                        character.hitbox.left = sprite.hitbox.right  # right
+                        character.getHitbox().left = sprite.getHitbox().right  # right
 
             for item in item_sprites:
-                if item.hitbox.colliderect(character.hitbox):
+                if item.getHitbox().colliderect(character.getHitbox()):
                     add = character.getInventory().add_item(item)
                     if add:
                         item_sprites.remove(item)
@@ -186,21 +186,21 @@ class Level:
 
         if direction == 'vertical':
             for sprite in obstacle_sprites:
-                if sprite.hitbox.colliderect(character.hitbox):
+                if sprite.getHitbox().colliderect(character.getHitbox()):
                     if character.getDirectionY() > 0:  # Se mover para baixo
-                        character.hitbox.bottom = sprite.hitbox.top  # top
+                        character.getHitbox().bottom = sprite.getHitbox().top  # top
                     if character.getDirectionY() < 0:  # Se mover para cima
-                        character.hitbox.top = sprite.hitbox.bottom  # bottom
+                        character.getHitbox().top = sprite.getHitbox().bottom  # bottom
 
             for sprite in enemy_sprites:
-                if sprite.hitbox.colliderect(character.hitbox):
+                if sprite.getHitbox().colliderect(character.getHitbox()):
                     if character.getDirectionY() > 0:  # Se mover para baixo
-                        character.hitbox.bottom = sprite.hitbox.top  # top
+                        character.getHitbox().bottom = sprite.getHitbox().top  # top
                     if character.getDirectionY() < 0:  # Se mover para cima
-                        character.hitbox.top = sprite.hitbox.bottom  # bottom
+                        character.getHitbox().top = sprite.getHitbox().bottom  # bottom
 
             for item in item_sprites:
-                if item.hitbox.colliderect(character.hitbox):
+                if item.getHitbox().colliderect(character.getHitbox()):
                     add = character.getInventory().add_item(item)
                     if add:
                         item_sprites.remove(item)
