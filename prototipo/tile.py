@@ -16,8 +16,8 @@ class Chao(pygame.sprite.Sprite):
     def __init__(self, pos, filepath):
         super().__init__()
 
-        self.__image = pygame.image.load(filepath).convert_alpha()
-        self.__rect = self.image.get_rect(topleft = pos)
+        self.__image = pygame.__image.load(filepath).convert_alpha()
+        self.__rect = self.__image.get_rect(topleft = pos)
 
     def getRect(self):
         return self.__rect
