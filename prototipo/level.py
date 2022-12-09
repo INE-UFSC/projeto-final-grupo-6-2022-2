@@ -3,6 +3,8 @@ from levelBuilder import LevelBuilder
 from jogador import Jogador
 from enemyHighDMG import EnemyHighDMG
 from levelDAO import LevelDAO
+from sound import Sound
+
 
 class Level:
     def __init__(self):
@@ -209,6 +211,7 @@ class Level:
 
     def run(self):
         # Atualizar e desenhar sprites/jogo
+        Sound().songUpdate()
         self.enemy_update()
         # self.__player = self.__player
         self.input()

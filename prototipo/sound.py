@@ -1,22 +1,11 @@
 import pygame
 from singletonMeta import SingletonMeta
-# class Sound:
-#     def __init__(self, filename):
-#         self.filename = filename
-#         self.sound = pygame.mixer.Sound('sounds/' + filename + '.wav')
-#         self.sound.set_volume(0.1)
-#
-#     def play(self):
-#         self.sound.play()
-#
-#     def stop(self):
-#         self.sound.stop()
 
 
 class Sound(metaclass=SingletonMeta):
 
     def __init__(self):
-        self.__current_requestor = None
+        self.__current_requestor = 'main'
         self.__music = pygame.mixer.music
         self.__music_priority = 0
         self.__sound_channel = pygame.mixer.Channel(1)
@@ -24,9 +13,14 @@ class Sound(metaclass=SingletonMeta):
                          'sem_pilha': pygame.mixer.Sound('sounds/sem_pilha.wav'),
                          'key': pygame.mixer.Sound('sounds/key.wav'),
                          'lanterna': pygame.mixer.Sound('sounds/lanterna.wav')}
-        self.__songs = {}
-        self.__priorities = {}
-
+        self.__songs = {'main': 'sounds/musica-tema.wav',
+                        'el': 'sounds/musica-enemylowdmg.wav',
+                        'eh': 'sounds/musica-enemyhighdmg.wav',
+                        'pilha': 'sounds/musica-sem-pilha.wav'}
+        self.__priorities = {'main': 0,
+                        'el': 2,
+                        'eh': 3,
+                        'pilha': 1}
 
     def playSound(self, sound_name):
         self.__sound_channel.play(self.__sounds[sound_name])
@@ -37,12 +31,8 @@ class Sound(metaclass=SingletonMeta):
 
     def playMusic(self, requestor):
         try:
-            if not self.__music.get_busy():
-                self.__music.unload()
-                self.__music.load(self.__songs[requestor])
-                self.__music.play()
-            elif self.__priorities[requestor] >= self.__music_priority:
-                self.__music.fadeout(2000)
+            if self.__priorities[requestor] > self.__music_priority:
+                self.__music.stop()
                 self.__music.unload()
                 self.__music.load(self.__songs[requestor])
                 self.__music.play(loops=-1)
@@ -52,6 +42,12 @@ class Sound(metaclass=SingletonMeta):
             print('Chave Invalida!')
             return 0
         self.__current_requestor = requestor
+
+    def songUpdate(self):
+        if not self.__music.get_busy():
+            self.__music.unload()
+            self.__music.load(self.__songs['main'])
+            self.__music.play()
 
     def stopMusic(self, requestor):
         if requestor == self.__current_requestor:

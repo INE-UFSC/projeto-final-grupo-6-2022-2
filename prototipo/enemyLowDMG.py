@@ -1,5 +1,6 @@
 from enemy import Enemy
 from math import sqrt
+from sound import Sound
 
 
 class EnemyLowDMG(Enemy):
@@ -13,7 +14,8 @@ class EnemyLowDMG(Enemy):
         diffy = posy - self.getPos()[1]
         dist = sqrt(diffx**2 + diffy**2)
         # RANGE DA VISAO DO INIMIGO:
-        if dist < 110 and self.getLightStatus():
+        if dist < 400 and self.getLightStatus():
+            Sound().playMusic(requestor='el')
         # DECISAO EM Y:
             if diffy > 0:
                 self.setDirectionY(1)
@@ -32,7 +34,8 @@ class EnemyLowDMG(Enemy):
             else:
                 self.setDirectionX(-1)
                 self.setStatus('left')
-        else: 
+        else:
+            Sound().stopMusic(requestor='el')
             self.setDirectionX(0)
             self.setDirectionY(0)
         # DETECCAO DO AUTO_ATAQUE:
@@ -40,3 +43,7 @@ class EnemyLowDMG(Enemy):
             self.setAttackingStatus()
             self.setAttackTimer()
             self.attack()
+
+    def die(self):
+        Sound().stopMusic(requestor='el')
+        super().die()

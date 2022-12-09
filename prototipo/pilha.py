@@ -1,8 +1,5 @@
-import pygame
 from item import Item
-from pygame import mixer 
 from sound import Sound
-mixer.init()
 
 
 class Pilha(Item):
@@ -31,6 +28,7 @@ class Pilha(Item):
     def use(self, jogador):
         jogador.getLight().setPilha(self)
         Sound().playSound('pilha')
+        Sound().stopMusic(requestor='pilha')
         self.kill()
         return True
     
@@ -41,4 +39,5 @@ class Pilha(Item):
         if self.__tempo_restante == 0:
             self.__status = False
             Sound().playSound('sem_pilha')
+            Sound().playMusic(requestor='pilha')
             return self.__status
