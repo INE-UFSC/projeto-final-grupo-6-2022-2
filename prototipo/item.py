@@ -7,13 +7,12 @@ from assetController import AssetController
 class Item(ABC, pygame.sprite.Sprite):
     def __init__(self, x, y, sprite):
         pygame.sprite.Sprite.__init__(self)
-        self.x = x
-        self.y = y
+        self.__x = x
+        self.__y = y
         self.sprite = sprite
         self.image = AssetController().get_asset(self.sprite)
-        self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.rect = self.image.get_rect(topleft = (self.__x, self.__y))
         self.hitbox = self.rect.inflate(0,0)
-        self.posicao = [self.x, self.y]
     
     @abstractmethod
     def use(self, jogador):

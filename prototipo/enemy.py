@@ -13,7 +13,6 @@ class Enemy(Character):
         self.__dead = False
         self.__light_status = False
         self.__animation_speed = 0.04
-        self.__awake = False
         self.__damage = damage
         self.__range = 100
     

@@ -8,13 +8,9 @@ class Character(ABC, pygame.sprite.Sprite):
         super().__init__()
         self.__health = health
         self.__speed = speed
-        self.__posx = pos[0]
-        self.__posy = pos[1]
-        self.have_key = False
-        # PLANEJAR COMO LIDAR COM EXCECOES:
+        self.__have_key = False
         self.image = AssetController().get_asset(sprite)
         self.rect = self.image.get_rect(topleft=pos)
-        # CONFERIR COMO LIDAR COM OS PARAMETROS DE INFLATE:
         self.hitbox = self.rect.inflate(0, -25)
         self.__status = 'down'
         self.__frame_index = 0
@@ -57,10 +53,10 @@ class Character(ABC, pygame.sprite.Sprite):
         return self.__health
     
     def getKey(self):
-        return self.have_key       
+        return self.__have_key       
     
     def setKey(self, key):
-        self.have_key = key
+        self.__have_key = key
 
     def setHealth(self, health):
         if isinstance(health, int):

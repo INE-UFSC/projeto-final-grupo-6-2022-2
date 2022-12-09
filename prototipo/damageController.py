@@ -4,9 +4,11 @@ from character import Character
 
 
 class DamageController(metaclass=SingletonMeta):
+    
     def __init__(self):
         self.__enemies = None
         self.__player = None
+
     def update_characters(self, enemies, player):
         self.__enemies = enemies
         self.__player = player

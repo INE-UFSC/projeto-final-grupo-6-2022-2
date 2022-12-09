@@ -7,18 +7,18 @@ from level import Level
 class InGame:
     def __init__(self):
         # Configuração inicial
-        self.screen = pygame.display.get_surface()
-        self.level = Level()
+        self.__screen = pygame.display.get_surface()
+        self.__level = Level()
         
     def loadgame(self):
-        self.level.load()
+        self.__level.load()
         
 
     def run(self):
-        self.screen.fill((0, 0, 0))
-        self.level.run()
+        self.__screen.fill((0, 0, 0))
+        self.__level.run()
         
-        if self.level.getPlayerDead():
+        if self.__level.getPlayerDead():
             return 'morreu'
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             return 'pause'

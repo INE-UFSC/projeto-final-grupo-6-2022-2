@@ -3,26 +3,26 @@ from abc import ABC, abstractmethod
 
 class DAO(ABC):
     def __init__(self, datasource):
-        self.datasource = datasource
-        self.objectCache = {}
+        self.__datasource = datasource
+        self.__objectCache = {}
         try:
             self.load()
         except FileNotFoundError:
             self.dump()
     
     def dump(self):
-        pickle.dump(self.objectCache, open(self.datasource, 'wb'))
+        pickle.dump(self.__objectCache, open(self.__datasource, 'wb'))
     
     def load(self):
-        self.objectCache = pickle.load(open(self.datasource, 'rb'))
+        self.__objectCache = pickle.load(open(self.__datasource, 'rb'))
 
     def add(self, key, obj):
-        self.objectCache[key] = obj
+        self.__objectCache[key] = obj
         self.dump()
 
     def get(self, key):
         try:
-            return self.objectCache[key]
+            return self.__objectCache[key]
         except KeyError as e:
             print(e)
 
@@ -30,4 +30,4 @@ class DAO(ABC):
         pass
     
     def get_all(self):
-        return self.objectCache.values()
+        return self.__objectCache.values()

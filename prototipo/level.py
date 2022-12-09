@@ -6,12 +6,10 @@ from levelDAO import LevelDAO
 
 class Level:
     def __init__(self):
-        
-        # Pegar a tela
+
         self.__lvl_builder = LevelBuilder()
         self.__dao = LevelDAO()
-        self.__selected_room = 1
-        self.display_surface = pygame.display.get_surface()
+        self.__selected_room = 0
         lists = self.__lvl_builder.create_map(self.__selected_room)
         self.__visible_sprites = lists[0]
         self.__obstacle_sprites = lists[1]
@@ -20,7 +18,6 @@ class Level:
         self.__projectile_sprites = lists[4]
         self.__player = lists[5]
         self.enemy_update()
-        # Cria grupos de sprites
 
     def restart(self):
         lists = self.__lvl_builder.create_map(self.__selected_room)
@@ -47,15 +44,9 @@ class Level:
     def dump(self):
         self.__player.saveInventory()
         self.__dao.add(self)
-    
-    #RETIRAR ESSA FUNÇÂO DPS
+
     def getPlayerDead(self):
         return self.__player.getDead()
-
-    # # Pega a instancia que criamos no enemyHighDMG e passa para o level
-    # def spawn_enemy(self, enemy):
-    #     self.__enemy_sprites.add(enemy)
-    #     self.__visible_sprites.add(enemy)
 
     def enemy_update(self):
         for enemy in self.__enemy_sprites:
@@ -209,7 +200,6 @@ class Level:
     def run(self):
         # Atualizar e desenhar sprites/jogo
         self.enemy_update()
-        # self.__player = self.__player
         self.input()
         self.__visible_sprites.custom_draw(self.__player)
         self.__visible_sprites.update()

@@ -8,9 +8,6 @@ mixer.init()
 class Pilha(Item):
     def __init__(self, x, y, sprite, nivel, status = True):
         super().__init__(x, y, sprite)
-        #self.__som = Sound('pilha')
-        #self.__sem_pilha = Sound('sem_pilha')
-        self.__nivel = nivel
         self.__tempo_restante = nivel*30
         self.__tamanho = [nivel*5,10]
         self.__status = status
