@@ -28,6 +28,9 @@ class Character(ABC, pygame.sprite.Sprite):
             if current_time - self.__attack_time > attack_cooldown:
                 self.__attacking = False
     
+    def getHitbox(self):
+        return self.hitbox
+    
     def getAttackingStatus(self):
         return self.__attacking
 

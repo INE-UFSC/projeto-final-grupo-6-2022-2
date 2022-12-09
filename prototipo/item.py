@@ -18,6 +18,9 @@ class Item(ABC, pygame.sprite.Sprite):
     def use(self, jogador):
         pass
     
+    def getHitbox(self):
+        return self.hitbox
+    
     def setImage(self, load):
         if not load:
             self.image = None
