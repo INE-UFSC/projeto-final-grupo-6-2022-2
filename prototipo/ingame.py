@@ -13,6 +13,8 @@ class InGame:
     def loadgame(self):
         self.__level.load()
         
+    def getLevel(self):
+        return self.__level
 
     def run(self):
         self.__screen.fill((0, 0, 0))
