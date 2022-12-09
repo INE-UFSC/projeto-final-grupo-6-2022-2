@@ -31,6 +31,8 @@ class LevelBuilder:
     def create_map(self, selected_room):
         self.__dmg_ctrl = DamageController()
         self.__hud = Hud()
+        self.__key = ''
+        self.__door = ''
         __chao = Chao((0, 0), f'tiles/chao{selected_room}.png')
         __visible_sprites = YSortCameraGroup()
         __obstacle_sprites = pygame.sprite.Group()
