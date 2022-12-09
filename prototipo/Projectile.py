@@ -3,10 +3,12 @@ from damageController import DamageController
 from assetController import AssetController
 
 
+
 class Projectile(pygame.sprite.Sprite):
 
     def __init__(self, sprite, direction, damage, speed):
         super().__init__()
+        self.explosion_group = pygame.sprite.Group()
         self.__sprite = self.image = AssetController().get_asset(sprite)
         self.__damage = damage
         self.__direction = pygame.math.Vector2()
@@ -26,6 +28,9 @@ class Projectile(pygame.sprite.Sprite):
 
     def getSpeed(self):
         return self.__speed
+    
+    def getPos(self):
+        return self.getHitbox().x, self.getHitbox().y
 
     def getDirectionMagnitude(self):
         return self.__direction.magnitude()
@@ -38,6 +43,7 @@ class Projectile(pygame.sprite.Sprite):
 
     def hit(self, enemy):
         DamageController().projectile_damage(self, enemy)
+
         self.kill()
         
     def getHitbox(self):

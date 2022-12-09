@@ -3,7 +3,9 @@ from inventory import Inventory
 from lanterna import Lanterna
 from character import Character
 from damageController import DamageController
+from meleeWeapon import MeleeWeapon
 from assetController import AssetController
+from projectileWeapon import ProjectileWeapon
 from support import import_folder
 from weapon import Weapon
 from playerPickable import PlayerPickable
@@ -40,7 +42,8 @@ class Jogador(Character):
         character_path = 'graphics/player/'
         self.animations = {'up': [],'down': [],'left': [],'right': [],
             'right_idle':[],'left_idle':[],'up_idle':[],'down_idle':[],
-            'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[]}
+            'right_attack':[],'left_attack':[],'up_attack':[],'down_attack':[],
+            'right_attack_pistol':[],'left_attack_pistol':[],'up_attack_pistol':[],'down_attack_pistol':[]}
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
@@ -59,7 +62,7 @@ class Jogador(Character):
             self.die()
         elif self.getHealth() > 100:
             self.setHealth(100)
-            
+            #attack_pistol_left.png
     
     def get_status(self):
         #Idle status
@@ -72,12 +75,22 @@ class Jogador(Character):
             self.setDirectionY(0)
             if not 'attack' in self.getStatus():
                 if 'idle' in self.getStatus():
-                    self.setStatus(self.getStatus().replace('_idle','_attack'))
+                    if self.__weapon is not None and isinstance(self.__weapon, ProjectileWeapon):
+                        self.setStatus(self.getStatus().replace('_idle','_attack_pistol'))
+                    elif self.__weapon is not None and isinstance(self.__weapon, MeleeWeapon):
+                        self.setStatus(self.getStatus().replace('_idle','_attack_knife'))
                 else:
-                    self.setStatus(self.getStatus() + '_attack')
+                    if self.__weapon is not None and isinstance(self.__weapon, ProjectileWeapon):
+                        self.setStatus(self.getStatus() + '_attack_pistol')
+                    elif self.__weapon is not None and isinstance(self.__weapon, MeleeWeapon):
+                        self.setStatus(self.getStatus() + '_attack_pistol')
+                
         else:
             if 'attack' in self.getStatus():
+                self.setStatus(self.getStatus().replace('_attack_pistol',''))
+                self.setStatus(self.getStatus().replace('_attack_knife',''))
                 self.setStatus(self.getStatus().replace('_attack',''))
+
 
         
     def draw(self):

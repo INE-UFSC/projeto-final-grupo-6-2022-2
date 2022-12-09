@@ -19,6 +19,7 @@ class Level:
         self.__player = lists[5]
         self.enemy_update()
 
+
     def restart(self):
         lists = self.__lvl_builder.create_map(self.__selected_room)
         self.__visible_sprites = lists[0]

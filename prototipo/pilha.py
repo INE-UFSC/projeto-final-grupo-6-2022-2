@@ -32,6 +32,7 @@ class Pilha(Item):
         jogador.getLight().setPilha(self)
         Sound().playSound('pilha')
         self.kill()
+        return True
     
     def contador(self):
         if self.__usando:
@@ -40,3 +41,4 @@ class Pilha(Item):
         if self.__tempo_restante == 0:
             self.__status = False
             Sound().playSound('sem_pilha')
+            return self.__status

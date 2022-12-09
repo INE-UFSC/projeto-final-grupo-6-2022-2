@@ -3,6 +3,8 @@ from debug import Debug
 from settings import HEIGTH, WIDTH
 from item import Item
 from assetController import AssetController
+from projectileWeapon import ProjectileWeapon
+from meleeWeapon import MeleeWeapon
 
 class Hud():
     def __init__(self):
@@ -10,6 +12,11 @@ class Hud():
         self.__hud_vida = AssetController().get_asset('hud_vida')
         self.__key = AssetController().get_asset('key')
         self.__key_indisponivel = AssetController().get_asset('key_indisponivel')
+        self.__luva = AssetController().get_asset('luva')
+        self.__luva_indisponivel = AssetController().get_asset('luva_indisponivel')
+        self.__faca = AssetController().get_asset('faca')
+        self.__faca_indisponivel = AssetController().get_asset('faca_indisponivel')
+        self.__seletor = AssetController().get_asset('seletor')
         self.__inventario = AssetController().get_asset('inventario')
         self.__display = pygame.display.get_surface()
         self.__debug = Debug()
@@ -21,6 +28,23 @@ class Hud():
         self.draw_sala_atual(sala_atual)
         self.draw_se_tiver_chave(player.getKey())
         self.draw_inventario(self.__display, player.getInventory())
+        self.draw_se_tiver_arma(player.get_weapon())
+
+    def draw_se_tiver_arma(self, arma):
+       # if isinstance(arma, ProjectileWeapon):
+           # self.__display.blit(arma.getSprite(), (WIDTH - 100, HEIGTH - 100))
+        # Desenha a luva
+        self.__display.blit(self.__luva_indisponivel, (WIDTH - 100, HEIGTH - 100))
+        self.__display.blit(self.__faca_indisponivel, (WIDTH - 100, HEIGTH - 200))
+        if arma is not None and isinstance(arma, ProjectileWeapon):
+            self.__display.blit(self.__luva, (WIDTH - 100, HEIGTH - 100))
+            self.__display.blit(self.__seletor, (WIDTH - 100, HEIGTH - 100))
+        elif arma is not None and isinstance(arma, MeleeWeapon):
+            self.__display.blit(self.__faca, (WIDTH - 100, HEIGTH - 200))
+            self.__display.blit(self.__seletor, (WIDTH - 100, HEIGTH - 200))
+
+
+
 
 
     def draw_inventario(self, surface, inventario):
@@ -60,15 +84,19 @@ class Hud():
         self.__display.blit(self.__hud_vida, (x, y))
 
     def draw_sala_atual(self, sala_atual):
-        self.__debug.debug('Sala', sala_atual, 110, 50)
+        x = 40
+        y = 100
+        self.__debug.debug('Sala', sala_atual , y, x, (255, 255, 255), (255, 255, 255))
+
 
     def draw_se_tiver_chave(self, chave):
-        self.__debug.debug('Chave', '', 180, 50)
+        x = 40
+        y = 160
+        self.__debug.debug('Chave', '', y, x, (255, 255, 255), (255, 255, 255))
         if chave:
-            self.__display.blit(self.__key, (50, 170))
+            self.__display.blit(self.__key, (x-8, y-15))
         else:
-            self.__display.blit(self.__key_indisponivel, (50, 170))
-
+            self.__display.blit(self.__key_indisponivel, (x-8, y-15))
 
 
     def update(self, pilha, vida, sala_atual, player):
