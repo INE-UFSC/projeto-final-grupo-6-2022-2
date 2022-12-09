@@ -23,9 +23,9 @@ class Item(ABC, pygame.sprite.Sprite):
     
     def setImage(self, load):
         if not load:
-            self.image = None
+            self.__image = None
         else:
-            self.image = AssetController().get_asset(self.__sprite)
+            self.__image = AssetController().get_asset(self.__sprite)
 
     def getImage(self):
         return self.__image
