@@ -9,10 +9,10 @@ class Item(ABC, pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.__x = x
         self.__y = y
-        self.sprite = sprite
-        self.image = AssetController().get_asset(self.sprite)
-        self.rect = self.image.get_rect(topleft = (self.__x, self.__y))
-        self.__hitbox = self.rect.inflate(0,0)
+        self.__sprite = sprite
+        self.__image = AssetController().get_asset(self.__sprite)
+        self.__rect = self.__image.get_rect(topleft = (self.__x, self.__y))
+        self.__hitbox = self.__rect.inflate(0,0)
     
     @abstractmethod
     def use(self, jogador):
@@ -25,13 +25,16 @@ class Item(ABC, pygame.sprite.Sprite):
         if not load:
             self.image = None
         else:
-            self.image = AssetController().get_asset(self.sprite)
+            self.image = AssetController().get_asset(self.__sprite)
 
     def getImage(self):
-        return self.image
+        return self.__image
+    
+    def getRect(self):
+        return self.__rect
     
     def exclui(self):
         self.kill()
 
     def draw(self, x, y, valor, pos, surface):
-        surface.blit(self.image, (valor*pos+x, y-4))
+        surface.blit(self.__image, (valor*pos+x, y-4))
