@@ -4,7 +4,6 @@ from lanterna import Lanterna
 from character import Character
 from damageController import DamageController
 from meleeWeapon import MeleeWeapon
-from assetController import AssetController
 from projectileWeapon import ProjectileWeapon
 from support import import_folder
 from weapon import Weapon
@@ -13,12 +12,11 @@ from playerPickable import PlayerPickable
 
 class Jogador(Character):
     def __init__(self, pos):
-        super().__init__(100, pos, 5, 'player')
+        super().__init__(health=100, pos=pos, speed=5, sprite='player')
         self.import_player_assets()
         self.__inventory = Inventory()
         self.__weapon = None
         self.__dead = False
-        self.tamanho = [500, 10]
         self.__light = Lanterna((self.getHitbox().x, self.getHitbox().y))
         self.__damage = 100
 
@@ -109,8 +107,8 @@ class Jogador(Character):
         self.setFrameIndex(self.getFrameIndex() + self.getAnimationSpeed())
         if self.getFrameIndex() >= len(animation):
             self.setFrameIndex(0)
-        self.image = animation[int(self.getFrameIndex())]
-        self.rect = self.image.get_rect(center = self.getHitbox().center)
+        self.setImage(animation[int(self.getFrameIndex())])
+        self.rect = self.getImage().get_rect(center = self.getHitbox().center)
         
     def update(self):
         if self.__weapon is not None:

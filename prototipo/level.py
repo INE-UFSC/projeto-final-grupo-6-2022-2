@@ -132,7 +132,7 @@ class Level:
             self.collision('horizontal', character) # passar colisao para level
             character.getHitbox().y += character.getDirectionY() * character.getSpeed()
             self.collision('vertical', character) # passar colisao para level
-            character.rect.center = character.getHitbox().center
+            character.getRect().center = character.getHitbox().center
 
     def move_projectile(self):
         for proj in list(self.__projectile_sprites):
@@ -143,7 +143,7 @@ class Level:
             proj.getHitbox().x += dirx * speed
             proj.getHitbox().y += diry * speed
             self.projectile_collision(proj)
-            proj.rect.center = proj.getHitbox().center
+            proj.getRect().center = proj.getHitbox().center
 
     def projectile_collision(self, projectile):
         for sprite in self.__enemy_sprites:

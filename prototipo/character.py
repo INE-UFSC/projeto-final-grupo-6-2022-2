@@ -9,9 +9,9 @@ class Character(ABC, pygame.sprite.Sprite):
         self.__health = health
         self.__speed = speed
         self.__have_key = False
-        self.image = AssetController().get_asset(sprite)
-        self.rect = self.image.get_rect(topleft=pos)
-        self.__hitbox = self.rect.inflate(0, -25)
+        self.__image = AssetController().get_asset(sprite)
+        self.__rect = self.__image.get_rect(topleft=pos)
+        self.__hitbox = self.__rect.inflate(0, -25)
         self.__status = 'down'
         self.__frame_index = 0
         self.__animation_speed = 0.15
@@ -26,6 +26,15 @@ class Character(ABC, pygame.sprite.Sprite):
         if self.__attacking:
             if current_time - self.__attack_time > attack_cooldown:
                 self.__attacking = False
+
+    def setImage(self, image):
+        self.__image = image
+
+    def getImage(self):
+        return self.__image
+
+    def getRect(self):
+        return self.__rect
     
     def getHitbox(self):
         return self.__hitbox
