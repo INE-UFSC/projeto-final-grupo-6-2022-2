@@ -10,7 +10,7 @@ class Level:
         # Pegar a tela
         self.__lvl_builder = LevelBuilder()
         self.__dao = LevelDAO()
-        self.__selected_room = 3
+        self.__selected_room = 1
         self.display_surface = pygame.display.get_surface()
         lists = self.__lvl_builder.create_map(self.__selected_room)
         self.__visible_sprites = lists[0]

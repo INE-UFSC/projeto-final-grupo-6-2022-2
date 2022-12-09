@@ -39,7 +39,7 @@ class Hud():
             pygame.draw.rect(self.__display, (0, 0, 255), (2, 15, pilha.getTamanho()[0] - 10, pilha.getTamanho()[1]))
             pygame.draw.rect(self.__display, (0, 255, 0), (2, 15, pilha.getTempoRestante()/6 - 10, pilha.getTamanho()[1]))
         else:
-            pygame.draw.rect(self.__display, (255, 0, 0), (2, 15, pilha.tamanho[0] - 10, pilha.tamanho[1]))
+            pygame.draw.rect(self.__display, (255, 0, 0), (2, 15, pilha.getTamanho()[0] - 10, pilha.getTamanho()[1]))
         
         x_pilha = 0
         y_pilha = 0
